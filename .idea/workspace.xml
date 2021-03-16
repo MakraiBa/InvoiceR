@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="c96ce97b-4699-4db6-b534-044c8ff107ba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Customer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectBuyerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectBuyerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/invoiceStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/invoiceStage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/productSelectStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/productSelectStage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" afterDir="false" />
@@ -165,7 +168,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/invoiceR/styles" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15527344" />
     <property name="project.structure.side.proportion" value="0.2" />
