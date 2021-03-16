@@ -100,12 +100,11 @@ public class SelectProductController implements Initializable {
         productsToAdd.clear();
         connect.getProducts();
         for (int i = 0; i < Connect.productList.size(); i++) {
-            productsToAdd.add(new Product(Connect.productList.get(i).Teszor, Connect.productList.get(i).Stock, Connect.productList.get(i).Id,
-                    Connect.productList.get(i).isService, Connect.productList.get(i).isDiscounted, Connect.productList.get(i).Name,
-                    Connect.productList.get(i).Comment, Connect.productList.get(i).ProductNr, Connect.productList.get(i).productNetPrice,
-                    Connect.productList.get(i).productGrossPrice, Connect.productList.get(i).purchaseNetPrice,
-                    Connect.productList.get(i).purchaseGrossPrice, Connect.productList.get(i).discountNetPrice,
-                    Connect.productList.get(i).discountGrossPrice));
+            productsToAdd.add(new Product(Connect.productList.get(i).Stock, Connect.productList.get(i).Id,
+                    Connect.productList.get(i).isService, Connect.productList.get(i).Name,
+                    Connect.productList.get(i).ProductNr, Connect.productList.get(i).productNetPrice,
+                    Connect.productList.get(i).productGrossPrice, Connect.productList.get(i).discountNetPrice,
+                    Connect.productList.get(i).discountGrossPrice, 1,Connect.productList.get(i).isDiscounted));
         }
         return productsToAdd;
     }

@@ -1,5 +1,6 @@
 package invoiceR;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 
 import java.text.DecimalFormat;
@@ -82,5 +83,30 @@ public class PriceCalculator {
             double discountNetPriceDB = Double.parseDouble(discountnet.getText());
             discountgross.setText((String.valueOf(df.format(discountNetPriceDB * vat).replace(",", "."))));
         }
+    }
+    public Double setSumNetPrice(ObservableList<Product> productlist) {
+        Double netPriceSum = 0.0;
+        for (int i = 0; i < productlist.size(); i++) {
+            if (productlist.get(i).isDiscounted) {
+                netPriceSum = netPriceSum + (Double.valueOf(productlist.get(i).discountNetPrice) * productlist.get(i).productQuantity);
+            } else {
+                netPriceSum = netPriceSum + (Double.valueOf(productlist.get(i).productNetPrice) * productlist.get(i).productQuantity);
+            }
+        }
+        df.format(netPriceSum);
+        return netPriceSum;
+    }
+
+    public Double setSumGrossPrice(ObservableList<Product> productlist) {
+        Double grossPriceSum = 0.0;
+        for (int i = 0; i < productlist.size(); i++) {
+            if (productlist.get(i).isDiscounted) {
+                grossPriceSum = grossPriceSum + (Double.valueOf(productlist.get(i).discountGrossPrice) * productlist.get(i).productQuantity);
+            } else {
+                grossPriceSum= grossPriceSum + (Double.valueOf(productlist.get(i).productGrossPrice) * productlist.get(i).productQuantity);
+            }
+        }
+        df.format(grossPriceSum);
+        return grossPriceSum;
     }
 }

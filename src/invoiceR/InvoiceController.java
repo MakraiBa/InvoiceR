@@ -25,6 +25,8 @@ import java.text.SimpleDateFormat;
 
 public class InvoiceController implements Initializable {
 
+    PriceCalculator calculator = new PriceCalculator();
+
     public static String buyerID;
     ObservableList<String> paymentMethodList = FXCollections.observableArrayList("Készpénz", "Átutalás - 8 nap", "Átutalás - 15 nap", "Átutalás - 30 nap", "Utánvét", "Bankkártya");
     ObservableList<Product> invoiceProductList = FXCollections.observableArrayList();
@@ -160,12 +162,6 @@ public class InvoiceController implements Initializable {
         stage.close();
     }
 
-
-    @FXML
-    void updateQuantity(ActionEvent event) {
-
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sellerInvoiceNameField.setText(Seller.defaultSeller.sellerName);
@@ -186,7 +182,7 @@ public class InvoiceController implements Initializable {
         invoiceDiscountGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("discountGrossPrice"));
         invoiceProductQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("Stock"));
         invoiceProductNumberColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("ProductNr"));
-        boughtQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product,Integer>("productQuantity"));
+        boughtQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("productQuantity"));
         invoiceProductList.addAll(SelectProductController.addedProducts);
         invoiceProductTable.setItems(invoiceProductList);
 
@@ -196,8 +192,15 @@ public class InvoiceController implements Initializable {
         buyerInvoiceBankNumberField.setText(SelectBuyerController.customerBankNumber);
         buyerPhoneField.setText(SelectBuyerController.customerPhone);
         buyerEmailField.setText(SelectBuyerController.customerEmail);
+
+        sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
+        sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
     }
 
+    public void updateQuantity(TableColumn.CellEditEvent editcell) {
+        Product selectedproduct = invoiceProductTable.getSelectionModel().getSelectedItem();
+        selectedproduct.setName(editcell.getNewValue().toString());
+    }
 
     private String setSellerAddress(Seller seller) {
         return seller.sellerPostalCode + " " + seller.sellerCity + ", " + seller.sellerAddress + " " + seller.sellerAddressType + " " + seller.sellerHouseNumber + " " + seller.sellerStairway + " " + seller.sellerFloor;

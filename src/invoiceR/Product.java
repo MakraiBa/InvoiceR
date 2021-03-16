@@ -20,8 +20,21 @@ public class Product {
     String discountGrossPrice;
     int productQuantity;
 
-
-
+    public Product(int stock, String id, boolean isService, String name, String productNr,
+                   String productNetPrice, String productGrossPrice, String discountNetPrice,
+                   String discountGrossPrice, int productQuantity, boolean isDiscounted) {
+        Stock = stock;
+        Id = id;
+        this.isService = isService;
+        Name = name;
+        ProductNr = productNr;
+        this.productNetPrice = productNetPrice;
+        this.productGrossPrice = productGrossPrice;
+        this.discountNetPrice = discountNetPrice;
+        this.discountGrossPrice = discountGrossPrice;
+        this.productQuantity = productQuantity;
+        this.isDiscounted = isDiscounted;
+    }
 
     public Product(String teszor, int stock, String id, boolean isService, boolean isDiscounted, String name,
                    String comment, String productNr, String productNetPrice, String productGrossPrice,
@@ -154,5 +167,13 @@ public class Product {
 
     public void setDiscountGrossPrice(String discountGrossPrice) {
         this.discountGrossPrice = discountGrossPrice;
+    }
+
+    public int getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
     }
 }

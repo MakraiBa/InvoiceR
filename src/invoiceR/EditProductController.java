@@ -32,7 +32,6 @@ public class EditProductController implements Initializable {
 
     Connect connect = new Connect();
     PriceCalculator priceCalculator = new PriceCalculator();
-    MainController mainController = new MainController();
 
     ObservableList<String> editTypeList = FXCollections.observableArrayList("Termék", "Szolgáltatás");
     ObservableList<String> editVATTypeList = FXCollections.observableArrayList("0%", "5%", "18%", "27%");
