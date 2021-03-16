@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class SelectBuyerController implements Initializable {
-    public static String buyerName;
+
     Connect connect = new Connect();
     ObservableList<Customer> customerToInvoice = FXCollections.observableArrayList();
     public static ArrayList<Customer> customerToAdd = new ArrayList<>();
@@ -58,13 +58,13 @@ public class SelectBuyerController implements Initializable {
     void addCustomerToInvoice(MouseEvent event) throws IOException {
         Customer selectedBuyer = customerTable.getSelectionModel().getSelectedItem();
         if (event.getClickCount() == 2) {
-            buyerName=selectedBuyer.billingName;
             customerToAdd.add(new Customer(selectedBuyer.Id, selectedBuyer.billingName, selectedBuyer.billingCity,
                     selectedBuyer.billingPostalCode, selectedBuyer.billingAddress, selectedBuyer.billingAddressType,
                     selectedBuyer.billingHouseNumber, selectedBuyer.billingStairway, selectedBuyer.billingFloor,
                     selectedBuyer.customerVAT, selectedBuyer.phone, selectedBuyer.email, selectedBuyer.bankAccount));
             Stage stage = (Stage) customerTable.getScene().getWindow();
             stage.close();
+            passDataToInvoiceStage();
         }
     }
 
@@ -118,5 +118,19 @@ public class SelectBuyerController implements Initializable {
                         customer.getBillingAddress().toLowerCase().contains(searchText.toLowerCase()) ||
                         customer.getPhone().toLowerCase().contains(searchText.toLowerCase()) ||
                         customer.getEmail().toLowerCase().contains(searchText.toLowerCase());
+    }
+
+    private void passDataToInvoiceStage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/invoiceStage.fxml"));
+            Parent root = loader.load();
+            InvoiceController invoicecontroller = loader.getController();
+            invoicecontroller.setBuyerAddress(customerToAdd.get(0));
+            Stage invoiceStage = new Stage();
+            invoiceStage.setScene(new Scene(root));
+            invoiceStage.show();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
     }
 }

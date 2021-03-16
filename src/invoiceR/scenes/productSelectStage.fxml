@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.SelectProductController">
+   <children>
+      <TextField fx:id="productSearchField" prefHeight="26.0" prefWidth="247.0" promptText="Termék keresése" />
+      <TableView fx:id="productTable" layoutX="31.0" layoutY="43.0" onMouseClicked="#addProduct" prefHeight="513.0" prefWidth="650.0">
+         <placeholder>
+            <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
+         </placeholder>
+         <columns>
+            <TableColumn fx:id="productNameColumn" editable="false" prefWidth="75.0" text="Név" />
+            <TableColumn fx:id="productNetPriceColumn" editable="false" prefWidth="75.0" text="Nettó ár" />
+            <TableColumn fx:id="productGrossPriceColumn" editable="false" prefWidth="75.0" text="Bruttó ár" />
+            <TableColumn fx:id="discountNetPriceColumn" editable="false" prefWidth="75.0" text="Kedvezményes nettó ár" />
+            <TableColumn fx:id="discountGrossPriceColumn" editable="false" prefWidth="75.0" text="Kedvezményes bruttó ár" />
+            <TableColumn fx:id="stockQuantityColumn" editable="false" prefWidth="75.0" text="Raktárkészlet" />
+            <TableColumn fx:id="invoiceProductNumberColumn" editable="false" prefWidth="75.0" text="Cikkszám" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

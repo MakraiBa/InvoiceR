@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.InvoiceController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="750.0">
+         <children>
+            <HBox prefHeight="184.0" prefWidth="750.0">
+               <children>
+                  <AnchorPane prefHeight="150.0" prefWidth="379.0">
+                     <children>
+                        <TextField fx:id="sellerInvoiceNameField" editable="false" layoutY="27.0" promptText="Név" />
+                        <TextField fx:id="sellerInvoiceVATField" editable="false" layoutY="62.0" promptText="Adószám" />
+                        <TextField fx:id="sellerInvoiceAddressField" editable="false" layoutX="190.0" layoutY="27.0" promptText="Cím" />
+                        <TextField fx:id="sellerInvoiceBankNumberField" editable="false" layoutX="190.0" layoutY="75.0" promptText="Bankszámlaszám" />
+                        <TextField fx:id="sellerPhoneField" editable="false" layoutY="110.0" promptText="Telefonszám" />
+                        <TextField fx:id="sellerEmailField" editable="false" layoutX="190.0" layoutY="110.0" promptText="Email cím" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="379.0">
+                     <children>
+                        <TextField fx:id="buyerInvoiceNameField" editable="false" layoutY="27.0" promptText="Vevő neve" />
+                        <TextField fx:id="buyerInvoiceVATField" editable="false" layoutY="62.0" promptText="Vevő adószáma" />
+                        <TextField fx:id="buyerInvoiceAddressField" editable="false" layoutX="190.0" layoutY="27.0" promptText="Vevő címe" />
+                        <TextField fx:id="buyerInvoiceBankNumberField" editable="false" layoutX="190.0" layoutY="75.0" promptText="Vevő bankszámlaszáma" />
+                        <TextField fx:id="buyerPhoneField" editable="false" layoutY="110.0" promptText="Vevő telefonszáma" />
+                        <TextField fx:id="buyerEmailField" editable="false" layoutX="190.0" layoutY="110.0" promptText="Vevő emailcíme" />
+                        <Button fx:id="selectCustomerButton" layoutX="37.0" layoutY="145.0" mnemonicParsing="false" onAction="#selectCustomer" text="Kiválasztás" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <HBox prefHeight="54.0" prefWidth="750.0">
+               <children>
+                  <ComboBox fx:id="selectPaymentMethod" onAction="#changePaymentMethod" prefWidth="150.0" promptText="Fizetési mód" />
+                  <DatePicker fx:id="currentDate" editable="false" />
+                  <DatePicker fx:id="paymentDate" />
+                  <DatePicker fx:id="fulfilmentDate" />
+               </children>
+            </HBox>
+            <TableView fx:id="invoiceProductTable" prefHeight="245.0" prefWidth="750.0">
+               <placeholder>
+                  <Label text="Adj hozzá terméket!" />
+               </placeholder>
+              <columns>
+                <TableColumn fx:id="invoiceProductNameColumn" prefWidth="75.0" text="Név" />
+                <TableColumn fx:id="invoiceProductNetPriceColumn" prefWidth="75.0" text="Nettó ár" />
+                  <TableColumn fx:id="invoiceProductGrossPriceColumn" prefWidth="75.0" text="Bruttó ár" />
+                  <TableColumn fx:id="invoiceDiscountNetPriceColumn" prefWidth="75.0" text="Kedvezményes nettó ár" />
+                  <TableColumn fx:id="invoiceDiscountGrossPriceColumn" prefWidth="75.0" text="Kedvezményes bruttó ár" />
+                  <TableColumn fx:id="invoiceProductQuantityColumn" prefWidth="75.0" text="Darabszám" />
+                  <TableColumn fx:id="invoiceProductNumberColumn" prefWidth="75.0" text="Cikkszám" />
+              </columns>
+            </TableView>
+            <Pane prefHeight="48.0" prefWidth="750.0">
+               <children>
+                  <TextField fx:id="sumGrossPriceField" layoutX="594.0" layoutY="2.0" promptText="Bruttó összár" />
+                  <TextField fx:id="sumNetPriceField" editable="false" layoutX="445.0" layoutY="2.0" promptText="Nettó összár" />
+                  <Button fx:id="addProductToInvoiceButton" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#addProductToInvoice" text="Termék hozzáadása" />
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="494.0" prefHeight="48.0" prefWidth="750.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,48 +1,92 @@
 package invoiceR;
 
-import java.util.UUID;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Product {
-    int Teszor;
+    String Teszor;
     int Stock;
-    int VAT;
-    String ProductId;
+    String Id;
     boolean isService;
-    Currency currency;
-    String ProductName;
-    String ProductDecription;
+    boolean isDiscounted;
+    String Name;
+    String Comment;
     String ProductNr;
-    float NetPrice;
-    float GrossPrice;
-    float Discount;
+    String productNetPrice;
+    String productGrossPrice;
+    String purchaseNetPrice;
+    String purchaseGrossPrice;
+    String discountNetPrice;
+    String discountGrossPrice;
 
     public Product() {
     }
 
-<<<<<<< Updated upstream
-    public Product(int teszor, int stock, boolean isService, String productName, String productDecription, String productNr, float netPrice, float grossPrice, float discount, Currency curr) {
-=======
-    public Product(int teszor, int stock, boolean isService, String name, String decription, String productNr, float netPrice, float grossPrice, float discount, Currency curr) {
->>>>>>> Stashed changes
+    public Product(String teszor, String id, boolean isService, String name, String comment, String productNr,
+                   String productNetPrice, String productGrossPrice, String purchaseNetPrice, String purchaseGrossPrice,
+                   String discountNetPrice, String discountGrossPrice, boolean isDiscounted) {
         Teszor = teszor;
-        currency=curr;
-        Stock = stock;
-        UUID uuid = UUID.randomUUID();
-        ProductId =uuid.toString();
+        Id = id;
+        this.isDiscounted = isDiscounted;
         this.isService = isService;
-        ProductName = productName;
-        ProductDecription = productDecription;
+        Name = name;
+        Comment = comment;
         ProductNr = productNr;
-        NetPrice = netPrice;
-        GrossPrice = grossPrice;
-        Discount = discount;
+        this.productNetPrice = productNetPrice;
+        this.productGrossPrice = productGrossPrice;
+        this.purchaseNetPrice = purchaseNetPrice;
+        this.purchaseGrossPrice = purchaseGrossPrice;
+        this.discountNetPrice = discountNetPrice;
+        this.discountGrossPrice = discountGrossPrice;
     }
 
-    public int getTeszor() {
+    public Product(String id, boolean isService, String name,
+                   String productNr, String productNetPrice, String productGrossPrice,
+                   String discountNetPrice, String discountGrossPrice, int stock) {
+        Stock = stock;
+        Id = id;
+        this.isService = isService;
+        Name = name;
+        ProductNr = productNr;
+        this.productNetPrice = productNetPrice;
+        this.productGrossPrice = productGrossPrice;
+        this.discountNetPrice = discountNetPrice;
+        this.discountGrossPrice = discountGrossPrice;
+    }
+
+    public Product(String teszor, int stock, String id, boolean isService, boolean isDiscounted, String name,
+                   String comment, String productNr, String productNetPrice, String productGrossPrice,
+                   String purchaseNetPrice, String purchaseGrossPrice,
+                   String discountNetPrice, String discountGrossPrice) {
+        Teszor = teszor;
+        Stock = stock;
+        Id = id;
+        this.isService = isService;
+        this.isDiscounted = isDiscounted;
+        Name = name;
+        Comment = comment;
+        ProductNr = productNr;
+        this.productNetPrice = productNetPrice;
+        this.productGrossPrice = productGrossPrice;
+        this.purchaseNetPrice = purchaseNetPrice;
+        this.purchaseGrossPrice = purchaseGrossPrice;
+        this.discountNetPrice = discountNetPrice;
+        this.discountGrossPrice = discountGrossPrice;
+    }
+
+
+    public boolean isDiscounted() {
+        return isDiscounted;
+    }
+
+    public void setDiscounted(boolean discounted) {
+        isDiscounted = discounted;
+    }
+
+    public String getTeszor() {
         return Teszor;
     }
 
-    public void setTeszor(int teszor) {
+    public void setTeszor(String teszor) {
         Teszor = teszor;
     }
 
@@ -54,8 +98,12 @@ public class Product {
         Stock = stock;
     }
 
-    public String getProductId() {
-        return ProductId;
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
     }
 
     public boolean isService() {
@@ -66,20 +114,20 @@ public class Product {
         isService = service;
     }
 
-    public String getProductName() {
-        return ProductName;
+    public String getName() {
+        return Name;
     }
 
-    public void setProductName(String productName) {
-        ProductName = productName;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public String getProductDecription() {
-        return ProductDecription;
+    public String getComment() {
+        return Comment;
     }
 
-    public void setProductDecription(String productDecription) {
-        ProductDecription = productDecription;
+    public void setComment(String comment) {
+        Comment = comment;
     }
 
     public String getProductNr() {
@@ -90,27 +138,51 @@ public class Product {
         ProductNr = productNr;
     }
 
-    public float getNetPrice() {
-        return NetPrice;
+    public String getProductNetPrice() {
+        return productNetPrice;
     }
 
-    public void setNetPrice(float netPrice) {
-        NetPrice = netPrice;
+    public void setProductNetPrice(String productNetPrice) {
+        this.productNetPrice = productNetPrice;
     }
 
-    public float getGrossPrice() {
-        return GrossPrice;
+    public String getProductGrossPrice() {
+        return productGrossPrice;
     }
 
-    public void setGrossPrice(float grossPrice) {
-        GrossPrice = grossPrice;
+    public void setProductGrossPrice(String productGrossPrice) {
+        this.productGrossPrice = productGrossPrice;
     }
 
-    public float getDiscount() {
-        return Discount;
+    public String getPurchaseNetPrice() {
+        return purchaseNetPrice;
     }
 
-    public void setDiscount(float discount) {
-        Discount = discount;
+    public void setPurchaseNetPrice(String purchaseNetPrice) {
+        this.purchaseNetPrice = purchaseNetPrice;
+    }
+
+    public String getPurchaseGrossPrice() {
+        return purchaseGrossPrice;
+    }
+
+    public void setPurchaseGrossPrice(String purchaseGrossPrice) {
+        this.purchaseGrossPrice = purchaseGrossPrice;
+    }
+
+    public String getDiscountNetPrice() {
+        return discountNetPrice;
+    }
+
+    public void setDiscountNetPrice(String discountNetPrice) {
+        this.discountNetPrice = discountNetPrice;
+    }
+
+    public String getDiscountGrossPrice() {
+        return discountGrossPrice;
+    }
+
+    public void setDiscountGrossPrice(String discountGrossPrice) {
+        this.discountGrossPrice = discountGrossPrice;
     }
 }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.MainController">
+   <right>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="newInvoiceButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addNewInvoice" prefHeight="70.0" prefWidth="100.0" text="Új számla" />
+            <Button fx:id="newProductButton" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addNewProduct" prefHeight="70.0" prefWidth="100.0" text="Új termék" />
+            <Button fx:id="newCustomerButton" layoutX="10.0" layoutY="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addNewCustomer" prefHeight="70.0" prefWidth="100.0" text="Új partner" />
+         </children>
+      </VBox>
+   </right>
+   <center>
+      <TabPane fx:id="mainTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab fx:id="InvoiceTab" text="Számlák" />
+            <Tab fx:id="customerTab" text="Partnerek">
+               <content>
+                  <AnchorPane fx:id="customerPane" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="customerSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Partner keresése" />
+                        <TableView fx:id="customerTable" layoutY="57.0" onMouseClicked="#openCustomer" prefHeight="513.0" prefWidth="650.0">
+                           <placeholder>
+                              <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
+                           </placeholder>
+                           <columns>
+                              <TableColumn fx:id="customerNameColumn" editable="false" prefWidth="83.99999696016312" text="Név" />
+                              <TableColumn fx:id="postalCodeColumn" editable="false" prefWidth="100.0" text="Irányítószám" />
+                              <TableColumn fx:id="cityColumn" editable="false" prefWidth="100.0" text="Település" />
+                              <TableColumn fx:id="customerAddressColumn" editable="false" prefWidth="79.99996948242188" text="Cím" />
+                              <TableColumn fx:id="houseNumberColumn" editable="false" prefWidth="79.99996948242188" text="Házszám" />
+                              <TableColumn fx:id="customerEmailColumn" editable="false" prefWidth="97.60003662109375" text="Email cím" />
+                              <TableColumn fx:id="customerPhoneColumn" editable="false" prefWidth="101.5999755859375" text="Telefonszám" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="productTab" text="Termékek">
+               <content>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </content>
+               <content>
+                  <AnchorPane fx:id="productsPane" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="productSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Termék keresése" />
+                        <TableView fx:id="productTable" layoutY="57.0" onMouseClicked="#openProduct" prefHeight="513.0" prefWidth="650.0">
+                            <placeholder>
+                                <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
+                            </placeholder>
+                          <columns>
+                            <TableColumn fx:id="productNameColumn" editable="false" prefWidth="75.0" text="Név" />
+                            <TableColumn fx:id="productNetPriceColumn" editable="false" prefWidth="75.0" text="Nettó ár" />
+                              <TableColumn fx:id="productGrossPriceColumn" editable="false" prefWidth="75.0" text="Bruttó ár" />
+                              <TableColumn fx:id="discountNetPriceColumn" editable="false" prefWidth="75.0" text="Kedvezményes nettó ár" />
+                              <TableColumn fx:id="discountGrossPriceColumn" editable="false" prefWidth="75.0" text="Kedvezményes bruttó ár" />
+                              <TableColumn fx:id="stockQuantityColumn" editable="false" prefWidth="75.0" text="Raktárkészlet" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

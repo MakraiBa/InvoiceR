@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="135.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.ErrorController">
+   <children>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="481.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/database.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="158.0" layoutY="60.0" styleClass="errorLabel" text="Az adatbázishoz való kapcsolódás során hiba lépett fel." />
+      <Button fx:id="dataBaseConnectionErrorButton" layoutX="223.0" layoutY="103.0" mnemonicParsing="false" onAction="#closeDatabaseError" styleClass="okButton" text="Rendben" />
+   </children>
+</Pane>

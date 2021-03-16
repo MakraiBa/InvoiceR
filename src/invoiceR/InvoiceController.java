@@ -179,13 +179,17 @@ public class InvoiceController implements Initializable {
         invoiceProductNumberColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("ProductNr"));
         invoiceProductList.addAll(SelectProductController.addedProducts);
         invoiceProductTable.setItems(invoiceProductList);
-
-        buyerInvoiceNameField.setText(SelectBuyerController.buyerName);
     }
 
 
     private String setSellerAddress(Seller seller) {
         return seller.sellerPostalCode + " " + seller.sellerCity + ", " + seller.sellerAddress + " " + seller.sellerAddressType + " " + seller.sellerHouseNumber + " " + seller.sellerStairway + " " + seller.sellerFloor;
+    }
+
+    public void setBuyerAddress(Customer customer) {
+        System.out.println("bejött ide");
+        String addressToShow = customer.billingPostalCode + " " + customer.billingCity + ", " + customer.billingAddress + " " + customer.billingAddressType + " " + customer.billingHouseNumber + " " + customer.billingStairway + " " + customer.billingFloor;
+        buyerInvoiceNameField.setText(SelectBuyerController.customerToAdd.get(0).billingName);
     }
 
     private LocalDate calculateDays(int daysToAdd) {
