@@ -49,7 +49,7 @@
                   <DatePicker fx:id="fulfilmentDate" />
                </children>
             </HBox>
-            <TableView fx:id="invoiceProductTable" prefHeight="245.0" prefWidth="750.0">
+            <TableView fx:id="invoiceProductTable" editable="true" prefHeight="245.0" prefWidth="750.0">
                <placeholder>
                   <Label text="Adj hozzá terméket!" />
                </placeholder>
@@ -59,8 +59,9 @@
                   <TableColumn fx:id="invoiceProductGrossPriceColumn" prefWidth="75.0" text="Bruttó ár" />
                   <TableColumn fx:id="invoiceDiscountNetPriceColumn" prefWidth="75.0" text="Kedvezményes nettó ár" />
                   <TableColumn fx:id="invoiceDiscountGrossPriceColumn" prefWidth="75.0" text="Kedvezményes bruttó ár" />
-                  <TableColumn fx:id="invoiceProductQuantityColumn" prefWidth="75.0" text="Darabszám" />
+                  <TableColumn fx:id="invoiceProductQuantityColumn" prefWidth="75.0" text="Raktárkészlet" />
                   <TableColumn fx:id="invoiceProductNumberColumn" prefWidth="75.0" text="Cikkszám" />
+                  <TableColumn fx:id="boughtQuantityColumn" onEditCommit="#updateQuantity" prefWidth="152.800048828125" text="Vásárolt mennyiség" />
               </columns>
             </TableView>
             <Pane prefHeight="48.0" prefWidth="750.0">

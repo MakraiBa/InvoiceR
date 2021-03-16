@@ -14,18 +14,24 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class SelectBuyerController implements Initializable {
 
+    public static String customerName;
+    public static String customerFullAddress;
+    public static String customerVAT;
+    public static String customerPhone;
+    public static String customerEmail;
+    public static String customerBankNumber;
+
     Connect connect = new Connect();
     ObservableList<Customer> customerToInvoice = FXCollections.observableArrayList();
-    public static ArrayList<Customer> customerToAdd = new ArrayList<>();
 
     @FXML
     private TextField customerSearchField;
@@ -58,13 +64,23 @@ public class SelectBuyerController implements Initializable {
     void addCustomerToInvoice(MouseEvent event) throws IOException {
         Customer selectedBuyer = customerTable.getSelectionModel().getSelectedItem();
         if (event.getClickCount() == 2) {
-            customerToAdd.add(new Customer(selectedBuyer.Id, selectedBuyer.billingName, selectedBuyer.billingCity,
-                    selectedBuyer.billingPostalCode, selectedBuyer.billingAddress, selectedBuyer.billingAddressType,
-                    selectedBuyer.billingHouseNumber, selectedBuyer.billingStairway, selectedBuyer.billingFloor,
-                    selectedBuyer.customerVAT, selectedBuyer.phone, selectedBuyer.email, selectedBuyer.bankAccount));
+            customerName = selectedBuyer.billingName;
+            customerFullAddress = setBuyerAddress(selectedBuyer.billingPostalCode, selectedBuyer.billingCity,
+                    selectedBuyer.billingAddress, selectedBuyer.billingAddressType, selectedBuyer.billingHouseNumber,
+                    selectedBuyer.billingStairway, selectedBuyer.billingFloor);
+            customerVAT = selectedBuyer.customerVAT;
+            customerPhone = selectedBuyer.phone;
+            customerEmail = selectedBuyer.email;
+            customerBankNumber = selectedBuyer.bankAccount;
+
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
+            Stage invoiceStage = new Stage();
+            invoiceStage.setScene(new Scene(root));
+            invoiceStage.initStyle(StageStyle.UTILITY);
+            invoiceStage.show();
+
             Stage stage = (Stage) customerTable.getScene().getWindow();
             stage.close();
-            passDataToInvoiceStage();
         }
     }
 
@@ -120,17 +136,9 @@ public class SelectBuyerController implements Initializable {
                         customer.getEmail().toLowerCase().contains(searchText.toLowerCase());
     }
 
-    private void passDataToInvoiceStage() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/invoiceStage.fxml"));
-            Parent root = loader.load();
-            InvoiceController invoicecontroller = loader.getController();
-            invoicecontroller.setBuyerAddress(customerToAdd.get(0));
-            Stage invoiceStage = new Stage();
-            invoiceStage.setScene(new Scene(root));
-            invoiceStage.show();
-        } catch (IOException ex) {
-            System.err.println(ex);
-        }
+    private String setBuyerAddress(String postalcode, String city, String address,
+                                   String addresstype, String housenumber,
+                                   String stairway, String floor) {
+        return postalcode + " " + city + ", " + address + " " + addresstype + " " + housenumber + " " + stairway + " " + floor;
     }
 }

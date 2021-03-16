@@ -96,6 +96,9 @@ public class InvoiceController implements Initializable {
     private TableColumn<Product, String> invoiceProductNumberColumn;
 
     @FXML
+    private TableColumn<Product, Integer> boughtQuantityColumn;
+
+    @FXML
     private DatePicker currentDate;
 
     @FXML
@@ -157,6 +160,12 @@ public class InvoiceController implements Initializable {
         stage.close();
     }
 
+
+    @FXML
+    void updateQuantity(ActionEvent event) {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sellerInvoiceNameField.setText(Seller.defaultSeller.sellerName);
@@ -177,19 +186,21 @@ public class InvoiceController implements Initializable {
         invoiceDiscountGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("discountGrossPrice"));
         invoiceProductQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("Stock"));
         invoiceProductNumberColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("ProductNr"));
+        boughtQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product,Integer>("productQuantity"));
         invoiceProductList.addAll(SelectProductController.addedProducts);
         invoiceProductTable.setItems(invoiceProductList);
+
+        buyerInvoiceNameField.setText(SelectBuyerController.customerName);
+        buyerInvoiceAddressField.setText(SelectBuyerController.customerFullAddress);
+        buyerInvoiceVATField.setText(SelectBuyerController.customerVAT);
+        buyerInvoiceBankNumberField.setText(SelectBuyerController.customerBankNumber);
+        buyerPhoneField.setText(SelectBuyerController.customerPhone);
+        buyerEmailField.setText(SelectBuyerController.customerEmail);
     }
 
 
     private String setSellerAddress(Seller seller) {
         return seller.sellerPostalCode + " " + seller.sellerCity + ", " + seller.sellerAddress + " " + seller.sellerAddressType + " " + seller.sellerHouseNumber + " " + seller.sellerStairway + " " + seller.sellerFloor;
-    }
-
-    public void setBuyerAddress(Customer customer) {
-        System.out.println("bejött ide");
-        String addressToShow = customer.billingPostalCode + " " + customer.billingCity + ", " + customer.billingAddress + " " + customer.billingAddressType + " " + customer.billingHouseNumber + " " + customer.billingStairway + " " + customer.billingFloor;
-        buyerInvoiceNameField.setText(SelectBuyerController.customerToAdd.get(0).billingName);
     }
 
     private LocalDate calculateDays(int daysToAdd) {

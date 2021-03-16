@@ -1,6 +1,7 @@
 package invoiceR;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Button;
 
 public class Product {
     String Teszor;
@@ -17,41 +18,10 @@ public class Product {
     String purchaseGrossPrice;
     String discountNetPrice;
     String discountGrossPrice;
+    int productQuantity;
 
-    public Product() {
-    }
 
-    public Product(String teszor, String id, boolean isService, String name, String comment, String productNr,
-                   String productNetPrice, String productGrossPrice, String purchaseNetPrice, String purchaseGrossPrice,
-                   String discountNetPrice, String discountGrossPrice, boolean isDiscounted) {
-        Teszor = teszor;
-        Id = id;
-        this.isDiscounted = isDiscounted;
-        this.isService = isService;
-        Name = name;
-        Comment = comment;
-        ProductNr = productNr;
-        this.productNetPrice = productNetPrice;
-        this.productGrossPrice = productGrossPrice;
-        this.purchaseNetPrice = purchaseNetPrice;
-        this.purchaseGrossPrice = purchaseGrossPrice;
-        this.discountNetPrice = discountNetPrice;
-        this.discountGrossPrice = discountGrossPrice;
-    }
 
-    public Product(String id, boolean isService, String name,
-                   String productNr, String productNetPrice, String productGrossPrice,
-                   String discountNetPrice, String discountGrossPrice, int stock) {
-        Stock = stock;
-        Id = id;
-        this.isService = isService;
-        Name = name;
-        ProductNr = productNr;
-        this.productNetPrice = productNetPrice;
-        this.productGrossPrice = productGrossPrice;
-        this.discountNetPrice = discountNetPrice;
-        this.discountGrossPrice = discountGrossPrice;
-    }
 
     public Product(String teszor, int stock, String id, boolean isService, boolean isDiscounted, String name,
                    String comment, String productNr, String productNetPrice, String productGrossPrice,
