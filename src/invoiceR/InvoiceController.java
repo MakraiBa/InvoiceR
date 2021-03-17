@@ -3,7 +3,6 @@ package invoiceR;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +21,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import java.text.SimpleDateFormat;
@@ -120,6 +120,53 @@ public class InvoiceController implements Initializable {
 
     @FXML
     private Button addProductToInvoiceButton;
+
+    @FXML
+    private Button doneInvoiceButton;
+
+    @FXML
+    private Button cancelInvoiceButton;
+
+
+    @FXML
+    private Button removeProductFromInvoiceListButton;
+
+    @FXML
+    void removeProductFromInvoiceList(ActionEvent event) {
+        Product selectedproduct = invoiceProductTable.getSelectionModel().getSelectedItem();
+        if (!selectedproduct.Name.isEmpty()) {
+            for (int i = 0; i < SelectProductController.addedProducts.size(); i++) {
+                if (SelectProductController.addedProducts.get(i).Name.equals(selectedproduct.Name)) {
+                    SelectProductController.addedProducts.remove(i);
+                }
+            }
+            invoiceProductList.clear();
+            invoiceProductList.addAll(SelectProductController.addedProducts);
+            invoiceProductTable.setItems(invoiceProductList);
+            invoiceProductTable.refresh();
+            
+            sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
+            sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
+        }
+    }
+
+    @FXML
+    void closeInvoice(ActionEvent event) {
+
+    }
+
+    @FXML
+    void cancelInvoice(ActionEvent event) {
+        SelectProductController.addedProducts.clear();
+        SelectBuyerController.customerName = "";
+        SelectBuyerController.customerFullAddress = "";
+        SelectBuyerController.customerVAT = "";
+        SelectBuyerController.customerPhone = "";
+        SelectBuyerController.customerEmail = "";
+        SelectBuyerController.customerBankNumber = "";
+        Stage stage = (Stage) cancelInvoiceButton.getScene().getWindow();
+        stage.close();
+    }
 
     @FXML
     void changePaymentMethod(ActionEvent event) {

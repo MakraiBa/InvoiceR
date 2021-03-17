@@ -120,10 +120,16 @@ public class CustomerController implements Initializable {
                     floorField.getText(), deliveryCityField.getText(), deliveryPostalCodeField.getText(), deliveryAddressField.getText(),
                     deliveryAddressTypeField.getText(), deliveryHouseNumberField.getText(), deliveryStairWayField.getText(),
                     deliveryFloorField.getText(), VATNumberField.getText(), telephoneField.getText(),
-                    emailField.getText(), webPageField.getText(), customerBankAccountField.getText(), customerCommentField.getText(),checkIfHasSameAddress());
+                    emailField.getText(), webPageField.getText(), customerBankAccountField.getText(), customerCommentField.getText(), checkIfHasSameAddress());
 
             Stage stage = (Stage) doneCustomerButton.getScene().getWindow();
             stage.close();
+
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+            Stage mainStage = new Stage();
+            mainStage.setScene(new Scene(root));
+            mainStage.initStyle(StageStyle.UTILITY);
+            mainStage.show();
         }
     }
 

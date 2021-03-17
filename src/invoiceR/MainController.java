@@ -148,6 +148,9 @@ public class MainController implements Initializable {
         newCustomerStage.setScene(new Scene(root));
         newCustomerStage.initStyle(StageStyle.UTILITY);
         newCustomerStage.show();
+
+        Stage stage = (Stage) newCustomerButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -155,7 +158,7 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
         Stage newInvoiceStage = new Stage();
         newInvoiceStage.setScene(new Scene(root));
-        newInvoiceStage.initStyle(StageStyle.UTILITY);
+        newInvoiceStage.initStyle(StageStyle.UNDECORATED);
         newInvoiceStage.show();
     }
 
@@ -166,6 +169,9 @@ public class MainController implements Initializable {
         newProductStage.setScene(new Scene(root));
         newProductStage.initStyle(StageStyle.UTILITY);
         newProductStage.show();
+
+        Stage stage = (Stage) newProductButton.getScene().getWindow();
+        stage.close();
     }
 
     // a termékre való dupla kattintással módosíthatjuk annak tartalmát
@@ -191,6 +197,9 @@ public class MainController implements Initializable {
             editProductStage.setScene(new Scene(root));
             editProductStage.initStyle(StageStyle.UTILITY);
             editProductStage.show();
+
+            Stage stage = (Stage) productTable.getScene().getWindow();
+            stage.close();
         }
     }
 
@@ -226,6 +235,9 @@ public class MainController implements Initializable {
             editCustomerStage.setScene(new Scene(root));
             editCustomerStage.initStyle(StageStyle.UTILITY);
             editCustomerStage.show();
+
+            Stage stage = (Stage) customerTable.getScene().getWindow();
+            stage.close();
         }
     }
 

@@ -134,6 +134,12 @@ public class EditCustomerController implements Initializable {
 
             Stage stage = (Stage) editCustomerDoneButton.getScene().getWindow();
             stage.close();
+
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+            Stage mainStage = new Stage();
+            mainStage.setScene(new Scene(root));
+            mainStage.initStyle(StageStyle.UTILITY);
+            mainStage.show();
         }
     }
 
@@ -187,6 +193,8 @@ public class EditCustomerController implements Initializable {
         editInvoiceAddressCheckBox.setSelected(MainController.hasSameAddress);
         if (MainController.hasSameAddress) {
             editDeliveryAddressPane.setDisable(true);
+        } else {
+            editDeliveryAddressPane.setDisable(false);
         }
     }
 

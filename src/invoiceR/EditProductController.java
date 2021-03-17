@@ -159,8 +159,15 @@ public class EditProductController implements Initializable {
                     editProductNetPrice.getText(), editProductGrossPrice.getText(), editPurchaseNetPrice.getText(),
                     editPurchaseGrossPrice.getText(), editDiscountNetPrice.getText(), editDiscountGrossPrice.getText(),
                     getDiscountedValue(editDiscountCheckbox.isSelected()));
+
             Stage stage = (Stage) editDoneProductButton.getScene().getWindow();
             stage.close();
+
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+            Stage mainStage = new Stage();
+            mainStage.setScene(new Scene(root));
+            mainStage.initStyle(StageStyle.UTILITY);
+            mainStage.show();
         }
     }
 

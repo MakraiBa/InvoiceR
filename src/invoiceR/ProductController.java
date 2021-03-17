@@ -113,6 +113,12 @@ public class ProductController implements Initializable {
 
             Stage stage = (Stage) doneProductButton.getScene().getWindow();
             stage.close();
+
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+            Stage mainStage = new Stage();
+            mainStage.setScene(new Scene(root));
+            mainStage.initStyle(StageStyle.UTILITY);
+            mainStage.show();
         }
     }
 
