@@ -134,7 +134,8 @@ public class InvoiceController implements Initializable {
     @FXML
     void removeProductFromInvoiceList(ActionEvent event) {
         Product selectedproduct = invoiceProductTable.getSelectionModel().getSelectedItem();
-        if (!selectedproduct.Name.isEmpty()) {
+        // if (!selectedproduct.Name.isEmpty()) {
+        try {
             for (int i = 0; i < SelectProductController.addedProducts.size(); i++) {
                 if (SelectProductController.addedProducts.get(i).Name.equals(selectedproduct.Name)) {
                     SelectProductController.addedProducts.remove(i);
@@ -144,9 +145,18 @@ public class InvoiceController implements Initializable {
             invoiceProductList.addAll(SelectProductController.addedProducts);
             invoiceProductTable.setItems(invoiceProductList);
             invoiceProductTable.refresh();
-            
+
             sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
             sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nincs termék kiválasztva");
+            alert.setHeaderText("Nincs termék kiválasztva");
+            alert.setContentText("Válassz ki egy terméket, amit el akarsz távolítani!");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
         }
     }
 

@@ -14,7 +14,6 @@ import java.io.IOException;
 
 
 public class Main extends Application {
-    Stage dbErrorStage = new Stage();
 
     @FXML
     private Button startbutton;
