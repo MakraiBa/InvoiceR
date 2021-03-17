@@ -3,6 +3,7 @@ package invoiceR;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,8 +11,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -162,6 +165,7 @@ public class InvoiceController implements Initializable {
         stage.close();
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sellerInvoiceNameField.setText(Seller.defaultSeller.sellerName);
@@ -175,6 +179,7 @@ public class InvoiceController implements Initializable {
         paymentDate.setValue(calculateDays(0));
         fulfilmentDate.setValue(LocalDate.now());
 
+        invoiceProductTable.setEditable(true);
         invoiceProductNameColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("Name"));
         invoiceProductNetPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productNetPrice"));
         invoiceProductGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productGrossPrice"));
@@ -183,6 +188,7 @@ public class InvoiceController implements Initializable {
         invoiceProductQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("Stock"));
         invoiceProductNumberColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("ProductNr"));
         boughtQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("productQuantity"));
+        boughtQuantityColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         invoiceProductList.addAll(SelectProductController.addedProducts);
         invoiceProductTable.setItems(invoiceProductList);
 
@@ -199,7 +205,9 @@ public class InvoiceController implements Initializable {
 
     public void updateQuantity(TableColumn.CellEditEvent editcell) {
         Product selectedproduct = invoiceProductTable.getSelectionModel().getSelectedItem();
-        selectedproduct.setName(editcell.getNewValue().toString());
+        selectedproduct.setProductQuantity(editcell.getNewValue().hashCode());
+        sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
+        sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
     }
 
     private String setSellerAddress(Seller seller) {

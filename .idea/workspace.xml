@@ -3,17 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c96ce97b-4699-4db6-b534-044c8ff107ba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/EditProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/EditProductController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/PriceCalculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/PriceCalculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/EditProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/EditProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/PriceCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/PriceCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/SelectProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/SelectProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/sample.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/invoiceStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/invoiceStage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -324,6 +316,11 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/InvoiceR$Main.ic" NAME="Main Coverage Results" MODIFIED="1615971873694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>invoiceR.*</FILTER>
+    </SUITE>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
