@@ -44,6 +44,8 @@
                               <TableColumn fx:id="customerPhoneColumn" editable="false" prefWidth="101.5999755859375" text="Telefonszám" />
                            </columns>
                         </TableView>
+                        <Button fx:id="editCustomerButton" layoutX="299.0" layoutY="17.0" mnemonicParsing="false" onAction="#mainEditCustomer" text="Szerkesztés" />
+                        <Button fx:id="mainDeleteCustomerButton" layoutX="398.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Törlés" />
                      </children>
                   </AnchorPane>
                </content>
@@ -74,6 +76,8 @@
                               <TableColumn fx:id="stockQuantityColumn" editable="false" prefWidth="75.0" text="Raktárkészlet" />
                           </columns>
                         </TableView>
+                        <Button fx:id="editProductButton" layoutX="299.0" layoutY="17.0" mnemonicParsing="false" onAction="#mainEditProduct" text="Szerkesztés" />
+                        <Button fx:id="mainDeleteProductButton" layoutX="384.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteProduct" text="Törlés" />
                      </children></AnchorPane>
                </content>
             </Tab>

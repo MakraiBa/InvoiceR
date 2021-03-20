@@ -17,6 +17,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -102,6 +103,18 @@ public class MainController implements Initializable {
     private TableView<Customer> customerTable;
 
     @FXML
+    private Button editCustomerButton;
+
+    @FXML
+    private Button mainDeleteCustomerButton;
+
+    @FXML
+    private Button editProductButton;
+
+    @FXML
+    private Button mainDeleteProductButton;
+
+    @FXML
     private TableColumn<Product, String> productNameColumn;
 
     @FXML
@@ -154,7 +167,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void addNewInvoice(ActionEvent event) throws IOException{
+    void addNewInvoice(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
         Stage newInvoiceStage = new Stage();
         newInvoiceStage.setScene(new Scene(root));
@@ -172,6 +185,146 @@ public class MainController implements Initializable {
 
         Stage stage = (Stage) newProductButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    void deleteCustomer(ActionEvent event) {
+        try {
+            Customer selectedcustomer = customerTable.getSelectionModel().getSelectedItem();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Törlés megerősítése");
+            alert.setHeaderText("A következő partner törlésére készülsz: " + selectedcustomer.billingName);
+            alert.setContentText("Biztos vagy benne?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                connect.deleteCustomer(selectedcustomer.Id);
+            } else {
+                alert.close();
+            }
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nincs ügyfél kiválasztva");
+            alert.setHeaderText("Nincs ügyfél kiválasztva");
+            alert.setContentText("Válassz ki egy ügyfelet a törléshez!");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
+    }
+
+    @FXML
+    void deleteProduct(ActionEvent event) {
+        try {
+            Product selectedproduct = productTable.getSelectionModel().getSelectedItem();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Törlés megerősítése");
+            alert.setHeaderText("A következő termék törlésére készülsz: " + selectedproduct.Name);
+            alert.setContentText("Biztos vagy benne?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                connect.deleteProduct(selectedproduct.Id);
+            } else {
+                alert.close();
+            }
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nincs termék kiválasztva");
+            alert.setHeaderText("Nincs termék kiválasztva");
+            alert.setContentText("Válassz ki egy terméket a törléshez!");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
+    }
+
+    @FXML
+    void mainEditProduct(ActionEvent event) {
+        try {
+            Product selectedproduct = productTable.getSelectionModel().getSelectedItem();
+            productID = selectedproduct.Id;
+            productName = selectedproduct.Name;
+            productNetPrice = selectedproduct.productNetPrice;
+            productGrossPrice = selectedproduct.productGrossPrice;
+            purchaseNetPrice = selectedproduct.purchaseNetPrice;
+            purchaseGrossPrice = selectedproduct.purchaseGrossPrice;
+            discountNetPrice = selectedproduct.discountNetPrice;
+            dicsountGrossPrice = selectedproduct.discountGrossPrice;
+            productCode = selectedproduct.ProductNr;
+            Teszor = selectedproduct.Teszor;
+            productComment = selectedproduct.Comment;
+            isDiscounted = selectedproduct.isDiscounted;
+            isService = selectedproduct.isService;
+
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/editProductStage.fxml"));
+            Stage editProductStage = new Stage();
+            editProductStage.setScene(new Scene(root));
+            editProductStage.initStyle(StageStyle.UTILITY);
+            editProductStage.show();
+
+            Stage stage = (Stage) productTable.getScene().getWindow();
+            stage.close();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nincs termék kiválasztva");
+            alert.setHeaderText("Nincs termék kiválasztva");
+            alert.setContentText("Válassz ki egy terméket a szerkesztéshez!");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
+    }
+
+    @FXML
+    void mainEditCustomer(ActionEvent event) {
+        try {
+            Customer selectedcustomer = customerTable.getSelectionModel().getSelectedItem();
+            customerId = selectedcustomer.Id;
+            customerBillingName = selectedcustomer.billingName;
+            customerBillingCity = selectedcustomer.billingCity;
+            customerBillingPostalCode = selectedcustomer.billingPostalCode;
+            customerBillingAddress = selectedcustomer.billingAddress;
+            customerBillingAddressType = selectedcustomer.billingAddressType;
+            customerBillingHouseNumber = selectedcustomer.billingHouseNumber;
+            customerBillingStairway = selectedcustomer.billingStairway;
+            customerBillingFloor = selectedcustomer.billingFloor;
+            customerDeliveryCity = selectedcustomer.deliveryCity;
+            customerDeliveryPostalCode = selectedcustomer.deliveryPostalCode;
+            customerDeliveryAddress = selectedcustomer.deliveryAddress;
+            customerDeliveryAddressType = selectedcustomer.deliveryAddressType;
+            customerDeliveryHouseNumber = selectedcustomer.deliveryHouseNumber;
+            customerDeliveryStairway = selectedcustomer.deliveryStairway;
+            customerDeliveryFloor = selectedcustomer.deliveryFloor;
+            customerVAT = selectedcustomer.customerVAT;
+            customerPhone = selectedcustomer.phone;
+            customerEmail = selectedcustomer.email;
+            customerWebPage = selectedcustomer.webPage;
+            customerBankAccount = selectedcustomer.bankAccount;
+            customerComment = selectedcustomer.customerComment;
+            hasSameAddress = selectedcustomer.hasSameAddress;
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/editCustomerStage.fxml"));
+            Stage editCustomerStage = new Stage();
+            editCustomerStage.setScene(new Scene(root));
+            editCustomerStage.initStyle(StageStyle.UTILITY);
+            editCustomerStage.show();
+
+            Stage stage = (Stage) customerTable.getScene().getWindow();
+            stage.close();
+
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nincs ügyfél kiválasztva");
+            alert.setHeaderText("Nincs ügyfél kiválasztva");
+            alert.setContentText("Válassz ki egy ügyfelet a szerkesztéshez!");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
     }
 
     // a termékre való dupla kattintással módosíthatjuk annak tartalmát
