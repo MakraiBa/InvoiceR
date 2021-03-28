@@ -101,16 +101,28 @@ public class EditCustomerController implements Initializable {
     private Button cancelEditCustomerButton;
 
     @FXML
-    void closeEditCustomerScene(ActionEvent event) {
+    void closeEditCustomerScene(ActionEvent event) throws IOException {
         Stage stage = (Stage) cancelEditCustomerButton.getScene().getWindow();
         stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage mainStage = new Stage();
+        mainStage.setScene(new Scene(root));
+        mainStage.initStyle(StageStyle.UTILITY);
+        mainStage.show();
     }
 
     @FXML
-    void deleteCustomer(ActionEvent event) {
+    void deleteCustomer(ActionEvent event) throws IOException {
         connect.deleteCustomer(MainController.customerId);
         Stage stage = (Stage) deleteCustomerButton.getScene().getWindow();
         stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage mainStage = new Stage();
+        mainStage.setScene(new Scene(root));
+        mainStage.initStyle(StageStyle.UTILITY);
+        mainStage.show();
     }
 
     @FXML

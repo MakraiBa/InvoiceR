@@ -1,12 +1,5 @@
 package invoiceR;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-
 public class Seller {
     String sellerId;
     String sellerName;
@@ -22,15 +15,15 @@ public class Seller {
     String sellerEmail;
     String sellerBankAccount;
 
-    public static Seller defaultSeller=new Seller("jndsjvnjonr","Makrai Balázs",
-            "Debrecen","4024","Sumen","utca",
-            "7","A","1","212222","+36301712955",
-            "b.makrai@gmail.com","123456789");
+    public static Seller defaultSeller = new Seller("jndsjvnjonr", "Makrai Balázs",
+            "Debrecen", "4024", "Sumen", "utca",
+            "7/", "A", "1 emelet", "212222", "+36301712955",
+            "b.makrai@gmail.com", "123456789");
 
     public Seller() {
     }
 
-    private String setSellerAddress(String postalcode, String city, String address,
+    public String setSellerAddress(String postalcode, String city, String address,
                                    String addresstype, String housenumber,
                                    String stairway, String floor) {
         return postalcode + " " + city + ", " + address + " " + addresstype + " " + housenumber + " " + stairway + " " + floor;

@@ -20,17 +20,20 @@ import java.net.URL;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import java.text.SimpleDateFormat;
+import java.util.UUID;
 
 public class InvoiceController implements Initializable {
 
-    PriceCalculator calculator = new PriceCalculator();
+    PriceCalculator priceCalculator = new PriceCalculator();
+    AlertController alertController = new AlertController();
+    Connect connect = new Connect();
+    Seller seller = new Seller();
 
-    public static String buyerID;
     ObservableList<String> paymentMethodList = FXCollections.observableArrayList("Készpénz", "Átutalás - 8 nap", "Átutalás - 15 nap", "Átutalás - 30 nap", "Utánvét", "Bankkártya");
     ObservableList<Product> invoiceProductList = FXCollections.observableArrayList();
 
@@ -134,7 +137,6 @@ public class InvoiceController implements Initializable {
     @FXML
     void removeProductFromInvoiceList(ActionEvent event) {
         Product selectedproduct = invoiceProductTable.getSelectionModel().getSelectedItem();
-        // if (!selectedproduct.Name.isEmpty()) {
         try {
             for (int i = 0; i < SelectProductController.addedProducts.size(); i++) {
                 if (SelectProductController.addedProducts.get(i).Name.equals(selectedproduct.Name)) {
@@ -146,23 +148,35 @@ public class InvoiceController implements Initializable {
             invoiceProductTable.setItems(invoiceProductList);
             invoiceProductTable.refresh();
 
-            sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
-            sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
+            sumNetPriceField.setText(String.valueOf(priceCalculator.setSumNetPrice(invoiceProductList)));
+            sumGrossPriceField.setText(String.valueOf(priceCalculator.setSumGrossPrice(invoiceProductList)));
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Nincs termék kiválasztva");
-            alert.setHeaderText("Nincs termék kiválasztva");
-            alert.setContentText("Válassz ki egy terméket, amit el akarsz távolítani!");
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-            }
+            alertController.noProductSelectedAlert();
         }
     }
 
     @FXML
     void closeInvoice(ActionEvent event) {
+        UUID uuid = UUID.randomUUID();
+        connect.addNewInvoice(String.valueOf(uuid), SelectBuyerController.customerName,
+                SelectBuyerController.customerFullAddress, SelectBuyerController.customerVAT,
+                SelectBuyerController.customerPhone, SelectBuyerController.customerEmail, Seller.defaultSeller.sellerName,
+                seller.setSellerAddress(
+                        Seller.defaultSeller.sellerPostalCode,
+                        Seller.defaultSeller.sellerCity,
+                        Seller.defaultSeller.sellerAddress,
+                        Seller.defaultSeller.sellerAddressType,
+                        Seller.defaultSeller.sellerHouseNumber,
+                        Seller.defaultSeller.sellerStairway,
+                        Seller.defaultSeller.sellerFloor),
+                Seller.defaultSeller.sellerVAT, Seller.defaultSeller.sellerPhone, Seller.defaultSeller.sellerEmail,
+                sumNetPriceField.getText(), sumGrossPriceField.getText(),
+                currentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                paymentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                SelectBuyerController.buyerId);
 
+        Stage stage = (Stage) doneInvoiceButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -174,6 +188,7 @@ public class InvoiceController implements Initializable {
         SelectBuyerController.customerPhone = "";
         SelectBuyerController.customerEmail = "";
         SelectBuyerController.customerBankNumber = "";
+
         Stage stage = (Stage) cancelInvoiceButton.getScene().getWindow();
         stage.close();
     }
@@ -256,15 +271,15 @@ public class InvoiceController implements Initializable {
         buyerPhoneField.setText(SelectBuyerController.customerPhone);
         buyerEmailField.setText(SelectBuyerController.customerEmail);
 
-        sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
-        sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
+        sumNetPriceField.setText(String.valueOf(priceCalculator.setSumNetPrice(invoiceProductList)));
+        sumGrossPriceField.setText(String.valueOf(priceCalculator.setSumGrossPrice(invoiceProductList)));
     }
 
     public void updateQuantity(TableColumn.CellEditEvent editcell) {
         Product selectedproduct = invoiceProductTable.getSelectionModel().getSelectedItem();
         selectedproduct.setProductQuantity(editcell.getNewValue().hashCode());
-        sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
-        sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
+        sumNetPriceField.setText(String.valueOf(priceCalculator.setSumNetPrice(invoiceProductList)));
+        sumGrossPriceField.setText(String.valueOf(priceCalculator.setSumGrossPrice(invoiceProductList)));
     }
 
     private String setSellerAddress(Seller seller) {

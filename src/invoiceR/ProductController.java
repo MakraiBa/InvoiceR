@@ -78,9 +78,15 @@ public class ProductController implements Initializable {
     private TextField TeszorField;
 
     @FXML
-    void closeProductScene(ActionEvent event) {
+    void closeProductScene(ActionEvent event) throws IOException {
         Stage stage = (Stage) cancelProductButton.getScene().getWindow();
         stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage mainStage = new Stage();
+        mainStage.setScene(new Scene(root));
+        mainStage.initStyle(StageStyle.UTILITY);
+        mainStage.show();
     }
 
     @FXML

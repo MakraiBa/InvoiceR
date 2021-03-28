@@ -23,6 +23,7 @@ import java.util.function.Predicate;
 
 public class SelectBuyerController implements Initializable {
 
+    public static String buyerId;
     public static String customerName;
     public static String customerFullAddress;
     public static String customerVAT;
@@ -64,6 +65,7 @@ public class SelectBuyerController implements Initializable {
     void addCustomerToInvoice(MouseEvent event) throws IOException {
         Customer selectedBuyer = customerTable.getSelectionModel().getSelectedItem();
         if (event.getClickCount() == 2) {
+            buyerId = selectedBuyer.Id;
             customerName = selectedBuyer.billingName;
             customerFullAddress = setBuyerAddress(selectedBuyer.billingPostalCode, selectedBuyer.billingCity,
                     selectedBuyer.billingAddress, selectedBuyer.billingAddressType, selectedBuyer.billingHouseNumber,

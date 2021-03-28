@@ -84,6 +84,7 @@ public class PriceCalculator {
             discountgross.setText((String.valueOf(df.format(discountNetPriceDB * vat).replace(",", "."))));
         }
     }
+
     public Double setSumNetPrice(ObservableList<Product> productlist) {
         Double netPriceSum = 0.0;
         for (int i = 0; i < productlist.size(); i++) {
@@ -103,7 +104,7 @@ public class PriceCalculator {
             if (productlist.get(i).isDiscounted) {
                 grossPriceSum = grossPriceSum + (Double.valueOf(productlist.get(i).discountGrossPrice) * productlist.get(i).productQuantity);
             } else {
-                grossPriceSum= grossPriceSum + (Double.valueOf(productlist.get(i).productGrossPrice) * productlist.get(i).productQuantity);
+                grossPriceSum = grossPriceSum + (Double.valueOf(productlist.get(i).productGrossPrice) * productlist.get(i).productQuantity);
             }
         }
         df.format(grossPriceSum);

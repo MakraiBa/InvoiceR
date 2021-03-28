@@ -189,6 +189,26 @@ public class Connect {
         return customerDataUpdate;
     }
 
+    public Connection addNewInvoice(String invoiceId, String customerInvoiceName, String customerInvoiceAddress,
+                                    String customerInvoiceVAT, String customerInvoicePhone, String customerInvoiceEmail,
+                                    String sellerInvoiceName, String sellerInvoiceAddress, String sellerInvoiceVAT,
+                                    String sellerInvoicePhone, String sellerInvoiceEmail,
+                                    String sumNetPrice, String sumGrossPrice, String invoiceDate, String paymentDate, String buyerId) {
+        Connection addNewInvoice = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            addNewInvoice = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            Statement st;
+            st = addNewInvoice.createStatement();
+            String insert = "INSERT INTO `invoices` ( `invoiceId`,`customerInvoiceName`,`customerInvoiceAddress`,`customerInvoiceVAT`,`customerInvoicePhone`,`customerInvoiceEmail`,`sellerInvoiceName`,`sellerInvoiceAddress`,`sellerInvoiceVAT`,`sellerInvoicePhone`,`sellerInvoiceEmail`,`sumNetPrice`,`sumGrossPrice`,`invoiceDate`,`paymentDate`,`buyerId`) " +
+                    "VALUES ('" + invoiceId + "','" + customerInvoiceName + "','" + customerInvoiceAddress + "','" + customerInvoiceVAT + "','" + customerInvoicePhone + "','" + customerInvoiceEmail + "','" + sellerInvoiceName + "','" + sellerInvoiceAddress + "','" + sellerInvoiceVAT + "','" + sellerInvoicePhone + "','" + sellerInvoiceEmail + "','" + sumNetPrice + "','" + sumGrossPrice + "','" + invoiceDate + "','" + paymentDate + "','" + buyerId + "')";
+            st.executeUpdate(insert);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e);
+        }
+        return addNewInvoice;
+    }
+
     private boolean getServiceBoolean(int isservice) {
         if (isservice == 0) {
             return false;

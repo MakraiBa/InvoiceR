@@ -8,11 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
@@ -32,6 +28,7 @@ public class EditProductController implements Initializable {
 
     Connect connect = new Connect();
     PriceCalculator priceCalculator = new PriceCalculator();
+    AlertController alertController = new AlertController();
 
     ObservableList<String> editTypeList = FXCollections.observableArrayList("Termék", "Szolgáltatás");
     ObservableList<String> editVATTypeList = FXCollections.observableArrayList("0%", "5%", "18%", "27%");
@@ -91,16 +88,29 @@ public class EditProductController implements Initializable {
     private TextField editTeszorField;
 
     @FXML
-    void closeProductScene(ActionEvent event) {
+    void closeProductScene(ActionEvent event) throws IOException {
         Stage stage = (Stage) editCancelProductButton.getScene().getWindow();
         stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage mainStage = new Stage();
+        mainStage.setScene(new Scene(root));
+        mainStage.initStyle(StageStyle.UTILITY);
+        mainStage.show();
+
     }
 
     @FXML
-    void deleteProduct(ActionEvent event) {
-        connect.deleteProduct(MainController.productID);
+    void deleteProduct(ActionEvent event) throws IOException {
+        alertController.deleteProductConfirmAlert(MainController.productID, MainController.productName);
         Stage stage = (Stage) deleteProductButton.getScene().getWindow();
         stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage mainStage = new Stage();
+        mainStage.setScene(new Scene(root));
+        mainStage.initStyle(StageStyle.UTILITY);
+        mainStage.show();
     }
 
     @FXML

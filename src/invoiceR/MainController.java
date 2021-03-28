@@ -24,6 +24,7 @@ import java.util.function.Predicate;
 public class MainController implements Initializable {
 
     Connect connect = new Connect();
+    AlertController alertController = new AlertController();
 
     public MainController() {
     }
@@ -68,6 +69,7 @@ public class MainController implements Initializable {
 
     ObservableList<Product> product = FXCollections.observableArrayList();
     ObservableList<Customer> customer = FXCollections.observableArrayList();
+    ObservableList<Invoice> invoice = FXCollections.observableArrayList();
 
     @FXML
     private Button newInvoiceButton;
@@ -79,7 +81,7 @@ public class MainController implements Initializable {
     private Button newCustomerButton;
 
     @FXML
-    private TabPane mainTabPane;
+    public TabPane mainTabPane = new TabPane();
 
     @FXML
     private Tab InvoiceTab;
@@ -189,55 +191,21 @@ public class MainController implements Initializable {
 
     @FXML
     void deleteCustomer(ActionEvent event) {
+        Customer selectedcustomer = customerTable.getSelectionModel().getSelectedItem();
         try {
-            Customer selectedcustomer = customerTable.getSelectionModel().getSelectedItem();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Törlés megerősítése");
-            alert.setHeaderText("A következő partner törlésére készülsz: " + selectedcustomer.billingName);
-            alert.setContentText("Biztos vagy benne?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                connect.deleteCustomer(selectedcustomer.Id);
-            } else {
-                alert.close();
-            }
+            alertController.deleteCustomerConfirmAlert(selectedcustomer.Id, selectedcustomer.billingName);
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Nincs ügyfél kiválasztva");
-            alert.setHeaderText("Nincs ügyfél kiválasztva");
-            alert.setContentText("Válassz ki egy ügyfelet a törléshez!");
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-            }
+            alertController.noCustomerSelectedAlert();
         }
     }
 
     @FXML
     void deleteProduct(ActionEvent event) {
+        Product selectedproduct = productTable.getSelectionModel().getSelectedItem();
         try {
-            Product selectedproduct = productTable.getSelectionModel().getSelectedItem();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Törlés megerősítése");
-            alert.setHeaderText("A következő termék törlésére készülsz: " + selectedproduct.Name);
-            alert.setContentText("Biztos vagy benne?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                connect.deleteProduct(selectedproduct.Id);
-            } else {
-                alert.close();
-            }
+            alertController.deleteProductConfirmAlert(selectedproduct.Id, selectedproduct.Name);
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Nincs termék kiválasztva");
-            alert.setHeaderText("Nincs termék kiválasztva");
-            alert.setContentText("Válassz ki egy terméket a törléshez!");
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-            }
+            alertController.noProductSelectedAlert();
         }
     }
 
@@ -268,14 +236,7 @@ public class MainController implements Initializable {
             Stage stage = (Stage) productTable.getScene().getWindow();
             stage.close();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Nincs termék kiválasztva");
-            alert.setHeaderText("Nincs termék kiválasztva");
-            alert.setContentText("Válassz ki egy terméket a szerkesztéshez!");
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-            }
+            alertController.noProductSelectedAlert();
         }
     }
 
@@ -316,14 +277,7 @@ public class MainController implements Initializable {
             stage.close();
 
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Nincs ügyfél kiválasztva");
-            alert.setHeaderText("Nincs ügyfél kiválasztva");
-            alert.setContentText("Válassz ki egy ügyfelet a szerkesztéshez!");
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-            }
+            alertController.noCustomerSelectedAlert();
         }
     }
 
@@ -490,5 +444,6 @@ public class MainController implements Initializable {
                         customer.getPhone().toLowerCase().contains(searchText.toLowerCase()) ||
                         customer.getEmail().toLowerCase().contains(searchText.toLowerCase());
     }
+
 }
 
