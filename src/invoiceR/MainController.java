@@ -194,6 +194,14 @@ public class MainController implements Initializable {
         Customer selectedcustomer = customerTable.getSelectionModel().getSelectedItem();
         try {
             alertController.deleteCustomerConfirmAlert(selectedcustomer.Id, selectedcustomer.billingName);
+            getCustomer();
+            FilteredList<Customer> filteredCustomerRefresh = new FilteredList<>(FXCollections.observableList(customer));
+            customerSearchField.textProperty().addListener((observable, oldValue, newValue) ->
+                    filteredCustomerRefresh.setPredicate(createPredicateCustomer(newValue))
+            );
+            customerTable.setItems(filteredCustomerRefresh);
+            customerTable.refresh();
+
         } catch (Exception e) {
             alertController.noCustomerSelectedAlert();
         }
@@ -204,6 +212,13 @@ public class MainController implements Initializable {
         Product selectedproduct = productTable.getSelectionModel().getSelectedItem();
         try {
             alertController.deleteProductConfirmAlert(selectedproduct.Id, selectedproduct.Name);
+            getProduct();
+            FilteredList<Product> filteredProductRefresh = new FilteredList<>(FXCollections.observableList(product));
+            productSearchField.textProperty().addListener((observable, oldValue, newValue) ->
+                    filteredProductRefresh.setPredicate(createPredicateProduct(newValue))
+            );
+            productTable.setItems(product);
+            productTable.refresh();
         } catch (Exception e) {
             alertController.noProductSelectedAlert();
         }
@@ -281,7 +296,6 @@ public class MainController implements Initializable {
         }
     }
 
-    // a termékre való dupla kattintással módosíthatjuk annak tartalmát
     @FXML
     void openProduct(MouseEvent event) throws IOException {
         Product selectedproduct = productTable.getSelectionModel().getSelectedItem();
@@ -371,7 +385,6 @@ public class MainController implements Initializable {
         productSearchField.textProperty().addListener((observable, oldValue, newValue) ->
                 filteredProduct.setPredicate(createPredicateProduct(newValue))
         );
-
         FilteredList<Customer> filteredCustomer = new FilteredList<>(FXCollections.observableList(customer));
         customerSearchField.textProperty().addListener((observable, oldValue, newValue) ->
                 filteredCustomer.setPredicate(createPredicateCustomer(newValue))
@@ -424,7 +437,6 @@ public class MainController implements Initializable {
             return customerSearch(customer, searchText);
         };
     }
-
 
     private boolean productSearch(Product product, String searchText) {
         return

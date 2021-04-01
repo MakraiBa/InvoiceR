@@ -4,6 +4,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class Connect {
 
     public static List<Product> productList = new ArrayList<>();
     public static List<Customer> customerList = new ArrayList<>();
+    public static List<Invoice> invoiceList = new ArrayList<>();
 
 
     public Connection addNewProduct
@@ -45,11 +48,19 @@ public class Connect {
             productList.clear();
             while (productResult.next()) {
                 productList.add(new Product(
-                        productResult.getString("teszor"), productResult.getInt("stock"), productResult.getString("productId"),
-                        getServiceBoolean(productResult.getInt("isservice")), getDiscountedBoolean(productResult.getInt("isdiscounted")),
-                        productResult.getString("name"), productResult.getString("comment"), productResult.getString("productnumber"),
-                        productResult.getString("netprice"), productResult.getString("grossprice"), productResult.getString("purchasenetprice"),
-                        productResult.getString("purchasegrossprice"), productResult.getString("discountnetprice"),
+                        productResult.getString("teszor"),
+                        productResult.getInt("stock"),
+                        productResult.getString("productId"),
+                        getServiceBoolean(productResult.getInt("isservice")),
+                        getDiscountedBoolean(productResult.getInt("isdiscounted")),
+                        productResult.getString("name"),
+                        productResult.getString("comment"),
+                        productResult.getString("productnumber"),
+                        productResult.getString("netprice"),
+                        productResult.getString("grossprice"),
+                        productResult.getString("purchasenetprice"),
+                        productResult.getString("purchasegrossprice"),
+                        productResult.getString("discountnetprice"),
                         productResult.getString("dicountgrossprice")));
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -132,12 +143,29 @@ public class Connect {
             customerList.clear();
             while (customerResult.next()) {
                 customerList.add(new Customer(
-                        customerResult.getString("customerId"), customerResult.getString("billingName"), customerResult.getString("billingCity"), customerResult.getString("billingPostalCode"),
-                        customerResult.getString("billingAddress"), customerResult.getString("billingAddressType"), customerResult.getString("billingHouseNumber"), customerResult.getString("billingStairway"),
-                        customerResult.getString("billingFloor"), customerResult.getString("deliveryCity"), customerResult.getString("deliveryPostalCode"), customerResult.getString("deliveryAddress"),
-                        customerResult.getString("deliveryAddressType"), customerResult.getString("deliveryHouseNumber"), customerResult.getString("deliveryStairway"), customerResult.getString("deliveryFloor"),
-                        customerResult.getString("customerVAT"), customerResult.getString("phone"), customerResult.getString("email"), customerResult.getString("webPage"),
-                        customerResult.getString("bankAccount"), customerResult.getString("contactComment"), hasTheSameAddress(customerResult.getInt("hasSameAddress")))
+                        customerResult.getString("customerId"),
+                        customerResult.getString("billingName"),
+                        customerResult.getString("billingCity"),
+                        customerResult.getString("billingPostalCode"),
+                        customerResult.getString("billingAddress"),
+                        customerResult.getString("billingAddressType"),
+                        customerResult.getString("billingHouseNumber"),
+                        customerResult.getString("billingStairway"),
+                        customerResult.getString("billingFloor"),
+                        customerResult.getString("deliveryCity"),
+                        customerResult.getString("deliveryPostalCode"),
+                        customerResult.getString("deliveryAddress"),
+                        customerResult.getString("deliveryAddressType"),
+                        customerResult.getString("deliveryHouseNumber"),
+                        customerResult.getString("deliveryStairway"),
+                        customerResult.getString("deliveryFloor"),
+                        customerResult.getString("customerVAT"),
+                        customerResult.getString("phone"),
+                        customerResult.getString("email"),
+                        customerResult.getString("webPage"),
+                        customerResult.getString("bankAccount"),
+                        customerResult.getString("contactComment"),
+                        hasTheSameAddress(customerResult.getInt("hasSameAddress")))
                 );
             }
         } catch (ClassNotFoundException | SQLException e) {
@@ -193,20 +221,65 @@ public class Connect {
                                     String customerInvoiceVAT, String customerInvoicePhone, String customerInvoiceEmail,
                                     String sellerInvoiceName, String sellerInvoiceAddress, String sellerInvoiceVAT,
                                     String sellerInvoicePhone, String sellerInvoiceEmail,
-                                    String sumNetPrice, String sumGrossPrice, String invoiceDate, String paymentDate, String buyerId) {
+                                    String sumNetPrice, String sumGrossPrice, String invoiceDate,
+                                    String paymentDate, String buyerId, String fulfilmentDate) {
         Connection addNewInvoice = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             addNewInvoice = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
             Statement st;
             st = addNewInvoice.createStatement();
-            String insert = "INSERT INTO `invoices` ( `invoiceId`,`customerInvoiceName`,`customerInvoiceAddress`,`customerInvoiceVAT`,`customerInvoicePhone`,`customerInvoiceEmail`,`sellerInvoiceName`,`sellerInvoiceAddress`,`sellerInvoiceVAT`,`sellerInvoicePhone`,`sellerInvoiceEmail`,`sumNetPrice`,`sumGrossPrice`,`invoiceDate`,`paymentDate`,`buyerId`) " +
-                    "VALUES ('" + invoiceId + "','" + customerInvoiceName + "','" + customerInvoiceAddress + "','" + customerInvoiceVAT + "','" + customerInvoicePhone + "','" + customerInvoiceEmail + "','" + sellerInvoiceName + "','" + sellerInvoiceAddress + "','" + sellerInvoiceVAT + "','" + sellerInvoicePhone + "','" + sellerInvoiceEmail + "','" + sumNetPrice + "','" + sumGrossPrice + "','" + invoiceDate + "','" + paymentDate + "','" + buyerId + "')";
+            String insert = "INSERT INTO `invoices` ( `invoiceId`,`customerInvoiceName`,`customerInvoiceAddress`,`customerInvoiceVAT`,`customerInvoicePhone`,`customerInvoiceEmail`,`sellerInvoiceName`,`sellerInvoiceAddress`,`sellerInvoiceVAT`,`sellerInvoicePhone`,`sellerInvoiceEmail`,`sumNetPrice`,`sumGrossPrice`,`invoiceDate`,`paymentDate`,`buyerId`,`fulfilmentDate`) " +
+                    "VALUES ('" + invoiceId + "','" + customerInvoiceName + "','" + customerInvoiceAddress + "','" + customerInvoiceVAT + "','" + customerInvoicePhone + "','" + customerInvoiceEmail + "','" + sellerInvoiceName + "','" + sellerInvoiceAddress + "','" + sellerInvoiceVAT + "','" + sellerInvoicePhone + "','" + sellerInvoiceEmail + "','" + sumNetPrice + "','" + sumGrossPrice + "','" + invoiceDate + "','" + paymentDate + "','" + buyerId + "','" + fulfilmentDate + "')";
             st.executeUpdate(insert);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
         return addNewInvoice;
+    }
+
+    public Connection getInvoices() {
+        Connection getInvoices = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String customerQuery = "SELECT * FROM invoices";
+            getInvoices = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            Statement invcs;
+            invcs = getInvoices.createStatement();
+            ResultSet invoiceResult = invcs.executeQuery(customerQuery);
+            invoiceList.clear();
+            while (invoiceResult.next()) {
+                invoiceList.add(new Invoice(
+                        invoiceResult.getString("invoiceId"),
+                        invoiceResult.getString("buyerId"),
+                        invoiceResult.getString("customerInvoiceName"),
+                        invoiceResult.getString("customerInvoiceAddress"),
+                        invoiceResult.getString("customerInvoiceVAT"),
+                        invoiceResult.getString("customerInvoicePhone"),
+                        invoiceResult.getString("customerInvoiceEmail"),
+                        invoiceResult.getString("sellerInvoiceName"),
+                        invoiceResult.getString("sellerInvoiceAddress"),
+                        invoiceResult.getString("sellerInvoiceVAT"),
+                        invoiceResult.getString("sellerInvoicePhone"),
+                        invoiceResult.getString("sellerInvoiceEmail"),
+                        Double.parseDouble(invoiceResult.getString("sumNetPrice")),
+                        Integer.parseInt(invoiceResult.getString("sumGrossPrice")),
+                        new SimpleDateFormat("yyyy-MM-dd").parse(invoiceResult.getString("invoiceDate")),
+                        new SimpleDateFormat("yyyy-MM-dd").parse(invoiceResult.getString("paymentDate")),
+                        new SimpleDateFormat("yyyy-MM-dd").parse(invoiceResult.getString("fulfilmentDate"))
+                ));
+            }
+        } catch (ClassNotFoundException | SQLException | ParseException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Sikertelen csatlakozás");
+            alert.setHeaderText("Az adatbázishoz való csatlakozás sikertelen");
+            alert.setContentText("Próbáld meg később!");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                System.exit(0);
+            }
+        }
+        return getInvoices;
     }
 
     private boolean getServiceBoolean(int isservice) {

@@ -58,7 +58,7 @@ public class AlertController {
             alert.close();
         }
 
-        public void closeInvoiceAlert(String id, String name) {
+       /* public void closeInvoiceAlert(String id, String name) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Törlés megerősítése");
             alert.setHeaderText("A következő termék törlésére készülsz: " + name);
@@ -70,6 +70,6 @@ public class AlertController {
             } else {
                 alert.close();
             }
-        }
+        }*/
     }
 }

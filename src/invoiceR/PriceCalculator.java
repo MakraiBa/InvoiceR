@@ -98,13 +98,13 @@ public class PriceCalculator {
         return netPriceSum;
     }
 
-    public Double setSumGrossPrice(ObservableList<Product> productlist) {
-        Double grossPriceSum = 0.0;
+    public int setSumGrossPrice(ObservableList<Product> productlist) {
+        int grossPriceSum = 0;
         for (int i = 0; i < productlist.size(); i++) {
             if (productlist.get(i).isDiscounted) {
-                grossPriceSum = grossPriceSum + (Double.valueOf(productlist.get(i).discountGrossPrice) * productlist.get(i).productQuantity);
+                grossPriceSum = grossPriceSum + (int) (Double.valueOf(productlist.get(i).discountGrossPrice) * productlist.get(i).productQuantity);
             } else {
-                grossPriceSum = grossPriceSum + (Double.valueOf(productlist.get(i).productGrossPrice) * productlist.get(i).productQuantity);
+                grossPriceSum = grossPriceSum + (int) (Double.valueOf(productlist.get(i).productGrossPrice) * productlist.get(i).productQuantity);
             }
         }
         df.format(grossPriceSum);

@@ -1,7 +1,5 @@
 package invoiceR;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.Button;
 
 public class Product {
     String Teszor;

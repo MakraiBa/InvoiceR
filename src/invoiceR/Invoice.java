@@ -1,51 +1,51 @@
 package invoiceR;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Invoice {
-    public String invoiceNumber;
-    public String buyerId;
-    public String invoiceId;
-    public Date invoicdDate;
-    public Date fullfillmentDate;
-    public String BuyerDetails;
-    public int invoiceNetSum;
-    public int invoiceGrossSum;
+    String invoiceId;
+    String buyerId;
+    String customerName;
+    String customerFullAddress;
+    String customerVAT;
+    String customerPhone;
+    String customerEmail;
+    String sellerName;
+    String sellerFullAddress;
+    String sellerVAT;
+    String sellerPhone;
+    String sellerEmail;
+    Double sumNetPrice;
+    int sumGrossPrice;
+    Date currentDate;
+    Date paymentDate;
+    Date fulfilmentDate;
 
-    public static ArrayList<Invoice> invoiceList = new ArrayList<>();
-    ObservableList<Invoice> invoicesToShow = FXCollections.observableArrayList();
+    public Invoice() {
+    }
 
-
-    public Invoice(String invoiceNumber, String buyerId, String invoiceId, Date invoicdDate,
-                   Date fullfillmentDate, String buyerDetails, int invoiceNetSum, int invoiceGrossSum) {
-        this.invoiceNumber = invoiceNumber;
-        this.buyerId = buyerId;
+    public Invoice(String invoiceId, String buyerId, String customerName, String customerFullAddress,
+                   String customerVAT, String customerPhone, String customerEmail, String sellerName,
+                   String sellerFullAddress, String sellerVAT, String sellerPhone, String sellerEmail,
+                   Double sumNetPrice, int sumGrossPrice, Date currentDate,
+                   Date paymentDate, Date fulfilmentDate) {
         this.invoiceId = invoiceId;
-        this.invoicdDate = invoicdDate;
-        this.fullfillmentDate = fullfillmentDate;
-        BuyerDetails = buyerDetails;
-        this.invoiceNetSum = invoiceNetSum;
-        this.invoiceGrossSum = invoiceGrossSum;
-    }
-
-    public String getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public void setInvoiceNumber(String invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
-    }
-
-    public String getBuyerId() {
-        return buyerId;
-    }
-
-    public void setBuyerId(String buyerId) {
         this.buyerId = buyerId;
+        this.customerName = customerName;
+        this.customerFullAddress = customerFullAddress;
+        this.customerVAT = customerVAT;
+        this.customerPhone = customerPhone;
+        this.customerEmail = customerEmail;
+        this.sellerName = sellerName;
+        this.sellerFullAddress = sellerFullAddress;
+        this.sellerVAT = sellerVAT;
+        this.sellerPhone = sellerPhone;
+        this.sellerEmail = sellerEmail;
+        this.sumNetPrice = sumNetPrice;
+        this.sumGrossPrice = sumGrossPrice;
+        this.currentDate = currentDate;
+        this.paymentDate = paymentDate;
+        this.fulfilmentDate = fulfilmentDate;
     }
 
     public String getInvoiceId() {
@@ -56,43 +56,131 @@ public class Invoice {
         this.invoiceId = invoiceId;
     }
 
-    public Date getInvoicdDate() {
-        return invoicdDate;
+    public String getBuyerId() {
+        return buyerId;
     }
 
-    public void setInvoicdDate(Date invoicdDate) {
-        this.invoicdDate = invoicdDate;
+    public void setBuyerId(String buyerId) {
+        this.buyerId = buyerId;
     }
 
-    public Date getFullfillmentDate() {
-        return fullfillmentDate;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setFullfillmentDate(Date fullfillmentDate) {
-        this.fullfillmentDate = fullfillmentDate;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public String getBuyerDetails() {
-        return BuyerDetails;
+    public String getCustomerFullAddress() {
+        return customerFullAddress;
     }
 
-    public void setBuyerDetails(String buyerDetails) {
-        BuyerDetails = buyerDetails;
+    public void setCustomerFullAddress(String customerFullAddress) {
+        this.customerFullAddress = customerFullAddress;
     }
 
-    public int getInvoiceNetSum() {
-        return invoiceNetSum;
+    public String getCustomerVAT() {
+        return customerVAT;
     }
 
-    public void setInvoiceNetSum(int invoiceNetSum) {
-        this.invoiceNetSum = invoiceNetSum;
+    public void setCustomerVAT(String customerVAT) {
+        this.customerVAT = customerVAT;
     }
 
-    public int getInvoiceGrossSum() {
-        return invoiceGrossSum;
+    public String getCustomerPhone() {
+        return customerPhone;
     }
 
-    public void setInvoiceGrossSum(int invoiceGrossSum) {
-        this.invoiceGrossSum = invoiceGrossSum;
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
+    }
+
+    public String getSellerFullAddress() {
+        return sellerFullAddress;
+    }
+
+    public void setSellerFullAddress(String sellerFullAddress) {
+        this.sellerFullAddress = sellerFullAddress;
+    }
+
+    public String getSellerVAT() {
+        return sellerVAT;
+    }
+
+    public void setSellerVAT(String sellerVAT) {
+        this.sellerVAT = sellerVAT;
+    }
+
+    public String getSellerPhone() {
+        return sellerPhone;
+    }
+
+    public void setSellerPhone(String sellerPhone) {
+        this.sellerPhone = sellerPhone;
+    }
+
+    public String getSellerEmail() {
+        return sellerEmail;
+    }
+
+    public void setSellerEmail(String sellerEmail) {
+        this.sellerEmail = sellerEmail;
+    }
+
+    public Double getSumNetPrice() {
+        return sumNetPrice;
+    }
+
+    public void setSumNetPrice(Double sumNetPrice) {
+        this.sumNetPrice = sumNetPrice;
+    }
+
+    public int getSumGrossPrice() {
+        return sumGrossPrice;
+    }
+
+    public void setSumGrossPrice(int sumGrossPrice) {
+        this.sumGrossPrice = sumGrossPrice;
+    }
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
+    }
+
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public Date getFulfilmentDate() {
+        return fulfilmentDate;
+    }
+
+    public void setFulfilmentDate(Date fulfilmentDate) {
+        this.fulfilmentDate = fulfilmentDate;
     }
 }
