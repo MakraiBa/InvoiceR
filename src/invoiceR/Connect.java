@@ -218,19 +218,15 @@ public class Connect {
     }
 
     public Connection addNewInvoice(String invoiceId, String customerInvoiceName, String customerInvoiceAddress,
-                                    String customerInvoiceVAT, String customerInvoicePhone, String customerInvoiceEmail,
-                                    String sellerInvoiceName, String sellerInvoiceAddress, String sellerInvoiceVAT,
-                                    String sellerInvoicePhone, String sellerInvoiceEmail,
-                                    String sumNetPrice, String sumGrossPrice, String invoiceDate,
-                                    String paymentDate, String buyerId, String fulfilmentDate) {
+                                    String sumNetPrice, String sumGrossPrice, String invoiceDate, String buyerId) {
         Connection addNewInvoice = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             addNewInvoice = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
             Statement st;
             st = addNewInvoice.createStatement();
-            String insert = "INSERT INTO `invoices` ( `invoiceId`,`customerInvoiceName`,`customerInvoiceAddress`,`customerInvoiceVAT`,`customerInvoicePhone`,`customerInvoiceEmail`,`sellerInvoiceName`,`sellerInvoiceAddress`,`sellerInvoiceVAT`,`sellerInvoicePhone`,`sellerInvoiceEmail`,`sumNetPrice`,`sumGrossPrice`,`invoiceDate`,`paymentDate`,`buyerId`,`fulfilmentDate`) " +
-                    "VALUES ('" + invoiceId + "','" + customerInvoiceName + "','" + customerInvoiceAddress + "','" + customerInvoiceVAT + "','" + customerInvoicePhone + "','" + customerInvoiceEmail + "','" + sellerInvoiceName + "','" + sellerInvoiceAddress + "','" + sellerInvoiceVAT + "','" + sellerInvoicePhone + "','" + sellerInvoiceEmail + "','" + sumNetPrice + "','" + sumGrossPrice + "','" + invoiceDate + "','" + paymentDate + "','" + buyerId + "','" + fulfilmentDate + "')";
+            String insert = "INSERT INTO `invoices` ( `invoiceId`,`customerInvoiceName`,`customerInvoiceAddress`,`sumNetPrice`,`sumGrossPrice`,`invoiceDate`,`buyerId`) " +
+                    "VALUES ('" + invoiceId + "','" + customerInvoiceName + "','" + customerInvoiceAddress + "','" + sumNetPrice + "','" + sumGrossPrice + "','" + invoiceDate + "','" + buyerId + "')";
             st.executeUpdate(insert);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
@@ -254,22 +250,12 @@ public class Connect {
                         invoiceResult.getString("buyerId"),
                         invoiceResult.getString("customerInvoiceName"),
                         invoiceResult.getString("customerInvoiceAddress"),
-                        invoiceResult.getString("customerInvoiceVAT"),
-                        invoiceResult.getString("customerInvoicePhone"),
-                        invoiceResult.getString("customerInvoiceEmail"),
-                        invoiceResult.getString("sellerInvoiceName"),
-                        invoiceResult.getString("sellerInvoiceAddress"),
-                        invoiceResult.getString("sellerInvoiceVAT"),
-                        invoiceResult.getString("sellerInvoicePhone"),
-                        invoiceResult.getString("sellerInvoiceEmail"),
                         Double.parseDouble(invoiceResult.getString("sumNetPrice")),
                         Integer.parseInt(invoiceResult.getString("sumGrossPrice")),
-                        new SimpleDateFormat("yyyy-MM-dd").parse(invoiceResult.getString("invoiceDate")),
-                        new SimpleDateFormat("yyyy-MM-dd").parse(invoiceResult.getString("paymentDate")),
-                        new SimpleDateFormat("yyyy-MM-dd").parse(invoiceResult.getString("fulfilmentDate"))
+                        invoiceResult.getString("invoiceDate")
                 ));
             }
-        } catch (ClassNotFoundException | SQLException | ParseException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Sikertelen csatlakozás");
             alert.setHeaderText("Az adatbázishoz való csatlakozás sikertelen");

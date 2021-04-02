@@ -17,7 +17,6 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -84,7 +83,7 @@ public class MainController implements Initializable {
     public TabPane mainTabPane = new TabPane();
 
     @FXML
-    private Tab InvoiceTab;
+    private Tab invoiceTab;
 
     @FXML
     private Tab customerTab;
@@ -99,10 +98,16 @@ public class MainController implements Initializable {
     private TextField customerSearchField;
 
     @FXML
+    private TextField invoiceSearchField;
+
+    @FXML
     private TableView<Product> productTable;
 
     @FXML
     private TableView<Customer> customerTable;
+
+    @FXML
+    private TableView<Invoice> invoiceTable;
 
     @FXML
     private Button editCustomerButton;
@@ -154,6 +159,21 @@ public class MainController implements Initializable {
 
     @FXML
     private TableColumn<Customer, String> cityColumn;
+
+    @FXML
+    private TableColumn<Invoice, String> invoiceCustomerNameColumn;
+
+    @FXML
+    private TableColumn<Invoice, String> invoiceCustomerAddressColumn;
+
+    @FXML
+    private TableColumn<Invoice, String> invoiceDateColumn;
+
+    @FXML
+    private TableColumn<Invoice, String> invoiceSumNetPriceColumn;
+
+    @FXML
+    private TableColumn<Invoice, String> invoiceSumGrossPriceColumn;
 
 
     @FXML
@@ -381,6 +401,13 @@ public class MainController implements Initializable {
         cityColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("billingCity"));
         getCustomer();
 
+        invoiceCustomerNameColumn.setCellValueFactory(new PropertyValueFactory<Invoice, String>("invoiceCustomerName"));
+        invoiceCustomerAddressColumn.setCellValueFactory(new PropertyValueFactory<Invoice, String>("customerFullAddress"));
+        invoiceDateColumn.setCellValueFactory(new PropertyValueFactory<Invoice, String>("currentDate"));
+        invoiceSumNetPriceColumn.setCellValueFactory(new PropertyValueFactory<Invoice, String>("sumNetPrice"));
+        invoiceSumGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<Invoice, String>("sumGrossPrice"));
+        getInvoice();
+
         FilteredList<Product> filteredProduct = new FilteredList<>(FXCollections.observableList(product));
         productSearchField.textProperty().addListener((observable, oldValue, newValue) ->
                 filteredProduct.setPredicate(createPredicateProduct(newValue))
@@ -392,17 +419,29 @@ public class MainController implements Initializable {
 
         productTable.setItems(filteredProduct);
         customerTable.setItems(filteredCustomer);
+        invoiceTable.setItems(invoice);
+
     }
+
 
     public ObservableList<Product> getProduct() {
         product.clear();
         connect.getProducts();
         for (int i = 0; i < Connect.productList.size(); i++) {
-            product.add(new Product(Connect.productList.get(i).Teszor, Connect.productList.get(i).Stock, Connect.productList.get(i).Id,
-                    Connect.productList.get(i).isService, Connect.productList.get(i).isDiscounted, Connect.productList.get(i).Name,
-                    Connect.productList.get(i).Comment, Connect.productList.get(i).ProductNr, Connect.productList.get(i).productNetPrice,
-                    Connect.productList.get(i).productGrossPrice, Connect.productList.get(i).purchaseNetPrice,
-                    Connect.productList.get(i).purchaseGrossPrice, Connect.productList.get(i).discountNetPrice,
+            product.add(new Product(
+                    Connect.productList.get(i).Teszor,
+                    Connect.productList.get(i).Stock,
+                    Connect.productList.get(i).Id,
+                    Connect.productList.get(i).isService,
+                    Connect.productList.get(i).isDiscounted,
+                    Connect.productList.get(i).Name,
+                    Connect.productList.get(i).Comment,
+                    Connect.productList.get(i).ProductNr,
+                    Connect.productList.get(i).productNetPrice,
+                    Connect.productList.get(i).productGrossPrice,
+                    Connect.productList.get(i).purchaseNetPrice,
+                    Connect.productList.get(i).purchaseGrossPrice,
+                    Connect.productList.get(i).discountNetPrice,
                     Connect.productList.get(i).discountGrossPrice));
         }
         return product;
@@ -412,16 +451,49 @@ public class MainController implements Initializable {
         customer.clear();
         connect.getCustomers();
         for (int i = 0; i < Connect.customerList.size(); i++) {
-            customer.add(new Customer(Connect.customerList.get(i).Id, Connect.customerList.get(i).billingName, Connect.customerList.get(i).billingCity,
-                    Connect.customerList.get(i).billingPostalCode, Connect.customerList.get(i).billingAddress, Connect.customerList.get(i).billingAddressType,
-                    Connect.customerList.get(i).billingHouseNumber, Connect.customerList.get(i).billingStairway, Connect.customerList.get(i).billingFloor,
-                    Connect.customerList.get(i).deliveryCity, Connect.customerList.get(i).deliveryPostalCode, Connect.customerList.get(i).deliveryAddress,
-                    Connect.customerList.get(i).deliveryAddressType, Connect.customerList.get(i).deliveryHouseNumber, Connect.customerList.get(i).deliveryStairway,
-                    Connect.customerList.get(i).deliveryFloor, Connect.customerList.get(i).customerVAT, Connect.customerList.get(i).phone,
-                    Connect.customerList.get(i).email, Connect.customerList.get(i).webPage, Connect.customerList.get(i).bankAccount,
-                    Connect.customerList.get(i).customerComment, Connect.customerList.get(i).hasSameAddress));
+            customer.add(new Customer(
+                    Connect.customerList.get(i).Id,
+                    Connect.customerList.get(i).billingName,
+                    Connect.customerList.get(i).billingCity,
+                    Connect.customerList.get(i).billingPostalCode,
+                    Connect.customerList.get(i).billingAddress,
+                    Connect.customerList.get(i).billingAddressType,
+                    Connect.customerList.get(i).billingHouseNumber,
+                    Connect.customerList.get(i).billingStairway,
+                    Connect.customerList.get(i).billingFloor,
+                    Connect.customerList.get(i).deliveryCity,
+                    Connect.customerList.get(i).deliveryPostalCode,
+                    Connect.customerList.get(i).deliveryAddress,
+                    Connect.customerList.get(i).deliveryAddressType,
+                    Connect.customerList.get(i).deliveryHouseNumber,
+                    Connect.customerList.get(i).deliveryStairway,
+                    Connect.customerList.get(i).deliveryFloor,
+                    Connect.customerList.get(i).customerVAT,
+                    Connect.customerList.get(i).phone,
+                    Connect.customerList.get(i).email,
+                    Connect.customerList.get(i).webPage,
+                    Connect.customerList.get(i).bankAccount,
+                    Connect.customerList.get(i).customerComment,
+                    Connect.customerList.get(i).hasSameAddress));
         }
         return customer;
+    }
+
+    public ObservableList<Invoice> getInvoice() {
+        invoice.clear();
+        connect.getInvoices();
+        for (int i = 0; i < Connect.invoiceList.size(); i++) {
+            invoice.add(new Invoice(
+                    Connect.invoiceList.get(i).invoiceId,
+                    Connect.invoiceList.get(i).buyerId,
+                    Connect.invoiceList.get(i).invoiceCustomerName,
+                    Connect.invoiceList.get(i).customerFullAddress,
+                    Connect.invoiceList.get(i).sumNetPrice,
+                    Connect.invoiceList.get(i).sumGrossPrice,
+                    Connect.invoiceList.get(i).currentDate
+            ));
+        }
+        return invoice;
     }
 
     private Predicate<Product> createPredicateProduct(String searchText) {

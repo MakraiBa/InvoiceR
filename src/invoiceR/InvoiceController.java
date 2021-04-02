@@ -159,36 +159,18 @@ public class InvoiceController implements Initializable {
     }
 
     @FXML
-    void closeInvoice(ActionEvent event) throws ParseException {
+    void closeInvoice(ActionEvent event) {
         UUID uuid = UUID.randomUUID();
         String invoiceInvoiceId = String.valueOf(uuid);
         String invoiceBuyerId = SelectBuyerController.buyerId;
         String invoiceCustomerName = SelectBuyerController.customerName;
         String invoiceCustomerFullAddress = SelectBuyerController.customerFullAddress;
-        String invoiceCustomerVAT = SelectBuyerController.customerVAT;
-        String invoiceCustomerPhone = SelectBuyerController.customerPhone;
-        String invoiceCustomerEmail = SelectBuyerController.customerEmail;
-        String invoiceSellerName = Seller.defaultSeller.sellerName;
-
-        String invoiceSellerFullAddress = seller.setSellerAddress(
-                Seller.defaultSeller.sellerPostalCode, Seller.defaultSeller.sellerCity, Seller.defaultSeller.sellerAddress,
-                Seller.defaultSeller.sellerAddressType, Seller.defaultSeller.sellerHouseNumber,
-                Seller.defaultSeller.sellerStairway, Seller.defaultSeller.sellerFloor);
-
-        String invoiceSellerVAT = Seller.defaultSeller.sellerVAT;
-        String invoiceSellerPhone = Seller.defaultSeller.sellerPhone;
-        String invoiceSellerEmail = Seller.defaultSeller.sellerEmail;
         String invoiceSumNetPriceString = sumNetPriceField.getText();
         String invoiceGrossNetPriceString = sumGrossPriceField.getText();
         String invoiceCurrentDateString = currentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String invoicePaymentDateString = paymentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String invoiceFulfilmentDateString = fulfilmentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         connect.addNewInvoice(invoiceInvoiceId, invoiceCustomerName, invoiceCustomerFullAddress,
-                invoiceCustomerVAT, invoiceCustomerPhone, invoiceCustomerEmail, invoiceSellerName,
-                invoiceSellerFullAddress, invoiceSellerVAT, invoiceSellerPhone, invoiceSellerEmail,
-                invoiceSumNetPriceString, invoiceGrossNetPriceString, invoiceCurrentDateString,
-                invoicePaymentDateString, invoiceBuyerId, invoiceFulfilmentDateString);
+                invoiceSumNetPriceString, invoiceGrossNetPriceString, invoiceCurrentDateString, invoiceBuyerId);
 
         Stage stage = (Stage) doneInvoiceButton.getScene().getWindow();
         stage.close();

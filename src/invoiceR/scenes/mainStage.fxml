@@ -24,7 +24,6 @@
    <center>
       <TabPane fx:id="mainTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab fx:id="InvoiceTab" text="Számlák" />
             <Tab fx:id="customerTab" text="Partnerek">
                <content>
                   <AnchorPane fx:id="customerPane" prefHeight="200.0" prefWidth="200.0">
@@ -79,6 +78,27 @@
                         <Button fx:id="editProductButton" layoutX="299.0" layoutY="17.0" mnemonicParsing="false" onAction="#mainEditProduct" text="Szerkesztés" />
                         <Button fx:id="mainDeleteProductButton" layoutX="384.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteProduct" text="Törlés" />
                      </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="invoiceTab" text="Számlák">
+               <content>
+                  <AnchorPane fx:id="invoicePane" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="invoiceSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Számla keresése" />
+                        <TableView fx:id="invoiceTable" layoutY="57.0" onMouseClicked="#openCustomer" prefHeight="513.0" prefWidth="650.0">
+                           <placeholder>
+                              <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
+                           </placeholder>
+                           <columns>
+                              <TableColumn fx:id="invoiceCustomerNameColumn" editable="false" prefWidth="83.99999696016312" text="Vevő neve" />
+                              <TableColumn fx:id="invoiceCustomerAddressColumn" editable="false" prefWidth="235.1999969482422" text="Vevő címe" />
+                              <TableColumn fx:id="invoiceDateColumn" editable="false" prefWidth="120.79998779296875" text="Kiállítás dátuma" />
+                              <TableColumn fx:id="invoiceSumNetPriceColumn" editable="false" prefWidth="96.79998779296875" text="Nettó érték" />
+                              <TableColumn fx:id="invoiceSumGrossPriceColumn" editable="false" prefWidth="113.60003662109375" text="Bruttó érték" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
                </content>
             </Tab>
         </tabs>
