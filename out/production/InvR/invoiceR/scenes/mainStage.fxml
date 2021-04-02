@@ -18,6 +18,7 @@
             <Button fx:id="newInvoiceButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addNewInvoice" prefHeight="70.0" prefWidth="100.0" text="Új számla" />
             <Button fx:id="newProductButton" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addNewProduct" prefHeight="70.0" prefWidth="100.0" text="Új termék" />
             <Button fx:id="newCustomerButton" layoutX="10.0" layoutY="80.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addNewCustomer" prefHeight="70.0" prefWidth="100.0" text="Új partner" />
+            <Button fx:id="newIncomingDocButton" layoutX="10.0" layoutY="151.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#addNewIncomingDoc" prefHeight="70.0" prefWidth="100.0" text="Új bevételi bizonylat" />
          </children>
       </VBox>
    </right>
@@ -95,6 +96,27 @@
                               <TableColumn fx:id="invoiceDateColumn" editable="false" prefWidth="120.79998779296875" text="Kiállítás dátuma" />
                               <TableColumn fx:id="invoiceSumNetPriceColumn" editable="false" prefWidth="96.79998779296875" text="Nettó érték" />
                               <TableColumn fx:id="invoiceSumGrossPriceColumn" editable="false" prefWidth="113.60003662109375" text="Bruttó érték" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="incomingTab" text="Bevételi bizonylatok">
+               <content>
+                  <AnchorPane fx:id="incomingPane" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="incomingSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Bizonylat keresése" />
+                        <TableView fx:id="incomingTable" layoutY="57.0" onMouseClicked="#openCustomer" prefHeight="513.0" prefWidth="650.0">
+                           <placeholder>
+                              <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
+                           </placeholder>
+                           <columns>
+                              <TableColumn fx:id="incomingCustomerNameColumn" editable="false" prefWidth="83.99999696016312" text="Szállító neve" />
+                              <TableColumn fx:id="incomingCustomerAddressColumn" editable="false" prefWidth="235.1999969482422" text="Szállító címe" />
+                              <TableColumn fx:id="incomingDateColumn" editable="false" prefWidth="120.79998779296875" text="Kiállítás dátuma" />
+                              <TableColumn fx:id="incomingSumNetPriceColumn" editable="false" prefWidth="96.79998779296875" text="Nettó érték" />
+                              <TableColumn fx:id="incomingSumGrossPriceColumn" editable="false" prefWidth="113.60003662109375" text="Bruttó érték" />
                            </columns>
                         </TableView>
                      </children>

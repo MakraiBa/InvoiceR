@@ -1,8 +1,5 @@
 package invoiceR;
 
-
-import java.util.Date;
-
 public class Invoice {
     String invoiceId;
     String buyerId;

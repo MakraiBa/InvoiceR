@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c96ce97b-4699-4db6-b534-044c8ff107ba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Connect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Connect.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Invoice.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Invoice.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/MainController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/mainStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/mainStage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Connect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Invoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/mainStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/mainStage.fxml" afterDir="false" />
     </list>

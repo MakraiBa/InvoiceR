@@ -74,6 +74,10 @@ public class MainController implements Initializable {
     private Button newInvoiceButton;
 
     @FXML
+    private Button newReceiveNoteButton;
+
+
+    @FXML
     private Button newProductButton;
 
     @FXML
@@ -92,6 +96,9 @@ public class MainController implements Initializable {
     private Tab productTab;
 
     @FXML
+    private Tab receiveNoteTab;
+
+    @FXML
     private TextField productSearchField;
 
     @FXML
@@ -101,6 +108,9 @@ public class MainController implements Initializable {
     private TextField invoiceSearchField;
 
     @FXML
+    private TextField receiveNoteSearchField;
+
+    @FXML
     private TableView<Product> productTable;
 
     @FXML
@@ -108,6 +118,9 @@ public class MainController implements Initializable {
 
     @FXML
     private TableView<Invoice> invoiceTable;
+
+    @FXML
+    private TableView<?> receiveNoteTable;
 
     @FXML
     private Button editCustomerButton;
@@ -175,6 +188,25 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Invoice, String> invoiceSumGrossPriceColumn;
 
+    @FXML
+    private TableColumn<?, ?> receiveNoteCustomerNameColumn;
+
+    @FXML
+    private TableColumn<?, ?> receiveNoteCustomerAddressColumn;
+
+    @FXML
+    private TableColumn<?, ?> receiveNoteDateColumn;
+
+    @FXML
+    private TableColumn<?, ?> receiveNoteSumNetPriceColumn;
+
+    @FXML
+    private TableColumn<?, ?> receiveNoteSumGrossPriceColumn;
+
+    @FXML
+    void addNewReceiveNote(ActionEvent event) {
+
+    }
 
     @FXML
     void addNewCustomer(ActionEvent event) throws IOException {
@@ -416,11 +448,14 @@ public class MainController implements Initializable {
         customerSearchField.textProperty().addListener((observable, oldValue, newValue) ->
                 filteredCustomer.setPredicate(createPredicateCustomer(newValue))
         );
+        FilteredList<Invoice> filteredInvoice = new FilteredList<>(FXCollections.observableList(invoice));
+        invoiceSearchField.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredInvoice.setPredicate(createPredicateInvoice(newValue))
+        );
 
         productTable.setItems(filteredProduct);
         customerTable.setItems(filteredCustomer);
-        invoiceTable.setItems(invoice);
-
+        invoiceTable.setItems(filteredInvoice);
     }
 
 
@@ -510,6 +545,13 @@ public class MainController implements Initializable {
         };
     }
 
+    private Predicate<Invoice> createPredicateInvoice(String searchText) {
+        return invoice -> {
+            if (searchText == null || searchText.isEmpty()) return true;
+            return invoiceSearch(invoice, searchText);
+        };
+    }
+
     private boolean productSearch(Product product, String searchText) {
         return
                 product.getName().toLowerCase().contains(searchText.toLowerCase()) ||
@@ -529,5 +571,11 @@ public class MainController implements Initializable {
                         customer.getEmail().toLowerCase().contains(searchText.toLowerCase());
     }
 
+    private boolean invoiceSearch(Invoice invoice, String searchText) {
+        return
+                invoice.getInvoiceCustomerName().toLowerCase().contains(searchText.toLowerCase()) ||
+                        invoice.getCurrentDate().toLowerCase().contains(searchText.toLowerCase()) ||
+                        invoice.getCustomerFullAddress().toLowerCase().contains(searchText.toLowerCase());
+    }
 }
 

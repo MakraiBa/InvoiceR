@@ -268,6 +268,23 @@ public class Connect {
         return getInvoices;
     }
 
+    public Connection addNew(String invoiceId, String customerInvoiceName, String customerInvoiceAddress,
+                                    String sumNetPrice, String sumGrossPrice, String invoiceDate, String buyerId) {
+        Connection addNewInvoice = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            addNewInvoice = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            Statement st;
+            st = addNewInvoice.createStatement();
+            String insert = "INSERT INTO `invoices` ( `invoiceId`,`customerInvoiceName`,`customerInvoiceAddress`,`sumNetPrice`,`sumGrossPrice`,`invoiceDate`,`buyerId`) " +
+                    "VALUES ('" + invoiceId + "','" + customerInvoiceName + "','" + customerInvoiceAddress + "','" + sumNetPrice + "','" + sumGrossPrice + "','" + invoiceDate + "','" + buyerId + "')";
+            st.executeUpdate(insert);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e);
+        }
+        return addNewInvoice;
+    }
+
     private boolean getServiceBoolean(int isservice) {
         if (isservice == 0) {
             return false;
