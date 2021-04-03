@@ -4,8 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class Connect {
         Connection newProductToAdd = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            newProductToAdd = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            newProductToAdd = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement add;
             add = newProductToAdd.createStatement();
             String insert = "INSERT INTO `products` ( `productID`,`teszor`,`isservice`,`name`, `comment`, `productnumber`, `netprice`, `grossprice`, `purchasenetprice`, `purchasegrossprice`, `discountnetprice`, `dicountgrossprice`,`isdiscounted`) " +
@@ -42,7 +41,7 @@ public class Connect {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String productsQuery = "SELECT * FROM products";
-            getProducts = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            getProducts = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement prdct;
             prdct = getProducts.createStatement();
             ResultSet productResult = prdct.executeQuery(productsQuery);
@@ -81,7 +80,7 @@ public class Connect {
         Connection removeProduct = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            removeProduct = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            removeProduct = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement delete;
             delete = removeProduct.createStatement();
             String dltProduct = "DELETE FROM `products` WHERE `products`.`productID` = '" + id + "'";
@@ -99,7 +98,7 @@ public class Connect {
         Connection productDataUpdate = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            productDataUpdate = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            productDataUpdate = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement st;
             st = productDataUpdate.createStatement();
             String updatePrd = "UPDATE `products` SET `teszor` = '" + Teszor + "', `isservice` = '" + isService + "', `name` = '" + Name + "', `comment` = '" + Comment + "', `productnumber` = '" + productNr + "', `netprice` = '" + productNetPrice + "', `grossprice` = '" + productGrossPrice + "', `purchasenetprice` = '" + purchaseNetPrice + "', `purchasegrossprice` = '" + purchaseGrossPrice + "', `discountnetprice` = '" + discountNetPrice + "', `dicountgrossprice` = '" + discountGrossPrice + "', `isdiscounted` = '" + isDiscounted + "' WHERE `products`.`productID` = '" + Id + "'";
@@ -119,7 +118,7 @@ public class Connect {
         Connection newCustomerToAdd = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            newCustomerToAdd = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            newCustomerToAdd = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement add;
             add = newCustomerToAdd.createStatement();
             String insert = "INSERT INTO `customers` ( `customerId`,`billingName`,`billingCity`,`billingPostalCode`,`billingAddress`, `billingAddressType`, `billingHouseNumber`, `billingStairway`, `billingFloor`, `deliveryCity`, `deliveryPostalCode`, `deliveryAddress`, `deliveryAddressType`, `deliveryHouseNumber`, `deliveryStairway`, `deliveryFloor`, `customerVAT`, `phone`, `email`, `webPage`, `bankAccount`, `contactComment` ,`hasSameAddress`) " +
@@ -137,7 +136,7 @@ public class Connect {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String customerQuery = "SELECT * FROM customers";
-            getCustomers = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            getCustomers = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement cstmer;
             cstmer = getCustomers.createStatement();
             ResultSet customerResult = cstmer.executeQuery(customerQuery);
@@ -186,7 +185,7 @@ public class Connect {
         Connection removeCustomer = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            removeCustomer = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            removeCustomer = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement delete;
             delete = removeCustomer.createStatement();
             String dltCustomer = "DELETE FROM `customers` WHERE `customers`.`customerId` = '" + id + "'";
@@ -207,7 +206,7 @@ public class Connect {
         Connection customerDataUpdate = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            customerDataUpdate = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            customerDataUpdate = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement st;
             st = customerDataUpdate.createStatement();
             String updateCstmr = "UPDATE `customers` SET `billingName` = '" + billingName + "', `billingCity` = '" + billingCity + "', `billingPostalCode` = '" + billingPostalCode + "', `billingAddress` = '" + billingAddress + "', `billingAddressType` = '" + billingAddressType + "', `billingHouseNumber` = '" + billingHouseNumber + "', `billingStairway` = '" + billingStairway + "', `billingFloor` = '" + billingFloor + "', `deliveryCity` = '" + deliveryCity + "', `deliveryPostalCode` = '" + deliveryPostalCode + "', `deliveryAddress` = '" + deliveryAddress + "',`deliveryAddress` = '" + deliveryAddress + "',`deliveryAddressType` = '" + deliveryAddressType + "',`deliveryHouseNumber` = '" + deliveryHouseNumber + "',`deliveryStairway` = '" + deliveryStairway + "',`deliveryFloor` = '" + deliveryFloor + "',`customerVAT` = '" + customerVAT + "',`phone` = '" + phone + "',`email` = '" + email + "',`webPage` = '" + webPage + "',`bankAccount` = '" + bankAccount + "',`contactComment` = '" + customerComment + "', `hasSameAddress` = '" + hasSameAddress + "' WHERE `customers`.`customerId` = '" + Id + "'";
@@ -223,7 +222,7 @@ public class Connect {
         Connection addNewInvoice = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            addNewInvoice = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            addNewInvoice = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement st;
             st = addNewInvoice.createStatement();
             String insert = "INSERT INTO `invoices` ( `invoiceId`,`customerInvoiceName`,`customerInvoiceAddress`,`sumNetPrice`,`sumGrossPrice`,`invoiceDate`,`buyerId`) " +
@@ -240,7 +239,7 @@ public class Connect {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String customerQuery = "SELECT * FROM invoices";
-            getInvoices = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            getInvoices = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement invcs;
             invcs = getInvoices.createStatement();
             ResultSet invoiceResult = invcs.executeQuery(customerQuery);
@@ -275,7 +274,7 @@ public class Connect {
         Connection addNewReceiveNote = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            addNewReceiveNote = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            addNewReceiveNote = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement st;
             st = addNewReceiveNote.createStatement();
             String insert = "INSERT INTO `receivenotes` ( `receivenoteid `,`sellerid`,`receivenotename`,`fulladdress`,`sumnetprice`,`sumgrossprice`,`receivenotedate`) " +
@@ -292,7 +291,7 @@ public class Connect {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String customerQuery = "SELECT * FROM receivenotes";
-            getReceiveNotes = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            getReceiveNotes = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement rcnts;
             rcnts = getReceiveNotes.createStatement();
             ResultSet receivenoteResult = rcnts.executeQuery(customerQuery);

@@ -471,7 +471,7 @@ public class MainController implements Initializable {
     }
 
 
-    public ObservableList<Product> getProduct() {
+   public ObservableList<Product> getProduct() {
         product.clear();
         connect.getProducts();
         for (int i = 0; i < Connect.productList.size(); i++) {
