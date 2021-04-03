@@ -26,7 +26,7 @@ public class ProductController implements Initializable {
     ObservableList<String> VATType = FXCollections.observableArrayList("0%", "5%", "18%", "27%");
 
     Connect productConnect = new Connect();
-    PriceCalculator calculator = new PriceCalculator();
+    Calculator calculator = new Calculator();
 
 
     @FXML

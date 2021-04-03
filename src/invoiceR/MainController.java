@@ -65,6 +65,7 @@ public class MainController implements Initializable {
     public static String customerBankAccount;
     public static String customerComment;
     public static boolean hasSameAddress;
+    public static boolean isItInvoice;
 
     ObservableList<Product> product = FXCollections.observableArrayList();
     ObservableList<Customer> customer = FXCollections.observableArrayList();
@@ -75,7 +76,6 @@ public class MainController implements Initializable {
 
     @FXML
     private Button newReceiveNoteButton;
-
 
     @FXML
     private Button newProductButton;
@@ -204,8 +204,16 @@ public class MainController implements Initializable {
     private TableColumn<?, ?> receiveNoteSumGrossPriceColumn;
 
     @FXML
-    void addNewReceiveNote(ActionEvent event) {
+    void addNewReceiveNote(ActionEvent event) throws IOException {
+        isItInvoice=false;
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/receiveNoteStage.fxml"));
+        Stage newCustomerStage = new Stage();
+        newCustomerStage.setScene(new Scene(root));
+        newCustomerStage.initStyle(StageStyle.UTILITY);
+        newCustomerStage.show();
 
+        Stage stage = (Stage) newReceiveNoteButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -222,11 +230,15 @@ public class MainController implements Initializable {
 
     @FXML
     void addNewInvoice(ActionEvent event) throws IOException {
+        isItInvoice=true;
         Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
         Stage newInvoiceStage = new Stage();
         newInvoiceStage.setScene(new Scene(root));
         newInvoiceStage.initStyle(StageStyle.UNDECORATED);
         newInvoiceStage.show();
+
+        Stage stage = (Stage) newInvoiceButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

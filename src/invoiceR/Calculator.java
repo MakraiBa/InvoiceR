@@ -4,12 +4,17 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 
-public class PriceCalculator {
+public class Calculator {
     String formatter = "#.##";
     DecimalFormat df = new DecimalFormat(formatter);
 
-    public PriceCalculator() {
+    public Calculator() {
     }
 
     public String getFormatter() {
@@ -109,5 +114,40 @@ public class PriceCalculator {
         }
         df.format(grossPriceSum);
         return grossPriceSum;
+    }
+
+    public LocalDate calculateDays(int daysToAdd) {
+        String today = String.valueOf(LocalDate.now());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(today));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        c.add(Calendar.DAY_OF_MONTH, daysToAdd);
+        LocalDate localDate = LocalDateTime.ofInstant(c.toInstant(), c.getTimeZone().toZoneId()).toLocalDate();
+        return localDate;
+    }
+
+    public int calculateDaysToAdd(String paymentString) {
+        int daystoadd = 0;
+        switch (paymentString) {
+            case "Átutalás - 8 nap":
+                daystoadd = 8;
+                break;
+            case "Átutalás - 15 nap":
+                daystoadd = 15;
+                break;
+            case "Átutalás - 30 nap":
+                daystoadd = 30;
+                break;
+            case "Utánvét":
+                daystoadd = 8;
+                break;
+            default:
+                daystoadd = 0;
+        }
+        return daystoadd;
     }
 }

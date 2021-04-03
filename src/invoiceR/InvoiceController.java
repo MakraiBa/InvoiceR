@@ -22,7 +22,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import java.text.SimpleDateFormat;
@@ -31,11 +30,10 @@ import java.util.UUID;
 
 public class InvoiceController implements Initializable {
 
-    PriceCalculator priceCalculator = new PriceCalculator();
+    Calculator calculator = new Calculator();
     AlertController alertController = new AlertController();
     Connect connect = new Connect();
     Seller seller = new Seller();
-    Invoice invoice = new Invoice();
 
     ObservableList<String> paymentMethodList = FXCollections.observableArrayList("Készpénz", "Átutalás - 8 nap", "Átutalás - 15 nap", "Átutalás - 30 nap", "Utánvét", "Bankkártya");
     ObservableList<Product> invoiceProductList = FXCollections.observableArrayList();
@@ -151,8 +149,8 @@ public class InvoiceController implements Initializable {
             invoiceProductTable.setItems(invoiceProductList);
             invoiceProductTable.refresh();
 
-            sumNetPriceField.setText(String.valueOf(priceCalculator.setSumNetPrice(invoiceProductList)));
-            sumGrossPriceField.setText(String.valueOf(priceCalculator.setSumGrossPrice(invoiceProductList)));
+            sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
+            sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
         } catch (Exception e) {
             alertController.noProductSelectedAlert();
         }
@@ -193,24 +191,7 @@ public class InvoiceController implements Initializable {
     @FXML
     void changePaymentMethod(ActionEvent event) {
         String paymentString = (String) selectPaymentMethod.getSelectionModel().getSelectedItem();
-        int daystoadd = 0;
-        switch (paymentString) {
-            case "Átutalás - 8 nap":
-                daystoadd = 8;
-                break;
-            case "Átutalás - 15 nap":
-                daystoadd = 15;
-                break;
-            case "Átutalás - 30 nap":
-                daystoadd = 30;
-                break;
-            case "Utánvét":
-                daystoadd = 8;
-                break;
-            default:
-                daystoadd = 0;
-        }
-        paymentDate.setValue(calculateDays(daystoadd));
+        paymentDate.setValue(calculator.calculateDays(calculator.calculateDaysToAdd(paymentString)));
     }
 
     @FXML
@@ -230,6 +211,7 @@ public class InvoiceController implements Initializable {
         Stage buyerSelectStage = new Stage();
         buyerSelectStage.setScene(new Scene(root));
         buyerSelectStage.show();
+
         Stage stage = (Stage) sumGrossPriceField.getScene().getWindow();
         stage.close();
     }
@@ -238,14 +220,19 @@ public class InvoiceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sellerInvoiceNameField.setText(Seller.defaultSeller.sellerName);
-        sellerInvoiceAddressField.setText(setSellerAddress(Seller.defaultSeller));
+        sellerInvoiceAddressField.setText(seller.setSellerAddress(
+                Seller.defaultSeller.getSellerPostalCode(), Seller.defaultSeller.getSellerCity(),
+                Seller.defaultSeller.getSellerAddress(), Seller.defaultSeller.getSellerAddressType(),
+                Seller.defaultSeller.getSellerHouseNumber(), Seller.defaultSeller.getSellerStairway(),
+                Seller.defaultSeller.getSellerFloor()
+        ));
         sellerEmailField.setText(Seller.defaultSeller.sellerEmail);
         sellerInvoiceVATField.setText(Seller.defaultSeller.sellerVAT);
         sellerPhoneField.setText(Seller.defaultSeller.sellerPhone);
         sellerInvoiceBankNumberField.setText(Seller.defaultSeller.sellerBankAccount);
         selectPaymentMethod.setItems(paymentMethodList);
         currentDate.setValue(LocalDate.now());
-        paymentDate.setValue(calculateDays(0));
+        paymentDate.setValue(calculator.calculateDays(0));
         fulfilmentDate.setValue(LocalDate.now());
 
         invoiceProductTable.setEditable(true);
@@ -268,32 +255,15 @@ public class InvoiceController implements Initializable {
         buyerPhoneField.setText(SelectBuyerController.customerPhone);
         buyerEmailField.setText(SelectBuyerController.customerEmail);
 
-        sumNetPriceField.setText(String.valueOf(priceCalculator.setSumNetPrice(invoiceProductList)));
-        sumGrossPriceField.setText(String.valueOf(priceCalculator.setSumGrossPrice(invoiceProductList)));
+        sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
+        sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
     }
 
     public void updateQuantity(TableColumn.CellEditEvent editcell) {
         Product selectedproduct = invoiceProductTable.getSelectionModel().getSelectedItem();
         selectedproduct.setProductQuantity(editcell.getNewValue().hashCode());
-        sumNetPriceField.setText(String.valueOf(priceCalculator.setSumNetPrice(invoiceProductList)));
-        sumGrossPriceField.setText(String.valueOf(priceCalculator.setSumGrossPrice(invoiceProductList)));
+        sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
+        sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
     }
 
-    private String setSellerAddress(Seller seller) {
-        return seller.sellerPostalCode + " " + seller.sellerCity + ", " + seller.sellerAddress + " " + seller.sellerAddressType + " " + seller.sellerHouseNumber + " " + seller.sellerStairway + " " + seller.sellerFloor;
-    }
-
-    private LocalDate calculateDays(int daysToAdd) {
-        String today = String.valueOf(LocalDate.now());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar c = Calendar.getInstance();
-        try {
-            c.setTime(sdf.parse(today));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        c.add(Calendar.DAY_OF_MONTH, daysToAdd);
-        LocalDate localDate = LocalDateTime.ofInstant(c.toInstant(), c.getTimeZone().toZoneId()).toLocalDate();
-        return localDate;
-    }
 }

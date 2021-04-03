@@ -14,6 +14,7 @@ public class Connect {
     public static List<Product> productList = new ArrayList<>();
     public static List<Customer> customerList = new ArrayList<>();
     public static List<Invoice> invoiceList = new ArrayList<>();
+    public static List<ReceiveNote> receiveNoteList = new ArrayList<>();
 
 
     public Connection addNewProduct
@@ -268,21 +269,56 @@ public class Connect {
         return getInvoices;
     }
 
-    public Connection addNew(String invoiceId, String customerInvoiceName, String customerInvoiceAddress,
-                                    String sumNetPrice, String sumGrossPrice, String invoiceDate, String buyerId) {
-        Connection addNewInvoice = null;
+    public Connection addNewReceiveNote(String receiveNoteId, String sellerId, String receiveNoteName,
+                                        String receiveNoteFullAddress, String receiveNoteSumNetPrice,
+                                        String receiveNoteSumGrossPrice, String receiveNoteCurrentDate) {
+        Connection addNewReceiveNote = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            addNewInvoice = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            addNewReceiveNote = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
             Statement st;
-            st = addNewInvoice.createStatement();
-            String insert = "INSERT INTO `invoices` ( `invoiceId`,`customerInvoiceName`,`customerInvoiceAddress`,`sumNetPrice`,`sumGrossPrice`,`invoiceDate`,`buyerId`) " +
-                    "VALUES ('" + invoiceId + "','" + customerInvoiceName + "','" + customerInvoiceAddress + "','" + sumNetPrice + "','" + sumGrossPrice + "','" + invoiceDate + "','" + buyerId + "')";
+            st = addNewReceiveNote.createStatement();
+            String insert = "INSERT INTO `receivenotes` ( `receivenoteid `,`sellerid`,`receivenotename`,`fulladdress`,`sumnetprice`,`sumgrossprice`,`receivenotedate`) " +
+                    "VALUES ('" + receiveNoteId + "','" + sellerId + "','" + receiveNoteName + "','" + receiveNoteFullAddress + "','" + receiveNoteSumNetPrice + "','" + receiveNoteSumGrossPrice + "','" + receiveNoteCurrentDate + "')";
             st.executeUpdate(insert);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
-        return addNewInvoice;
+        return addNewReceiveNote;
+    }
+
+    public Connection getReceiveNotes() {
+        Connection getReceiveNotes = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String customerQuery = "SELECT * FROM receivenotes";
+            getReceiveNotes = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicer", "admin", "admin");
+            Statement rcnts;
+            rcnts = getReceiveNotes.createStatement();
+            ResultSet receivenoteResult = rcnts.executeQuery(customerQuery);
+            receiveNoteList.clear();
+            while (receivenoteResult.next()) {
+                receiveNoteList.add(new ReceiveNote(
+                        receivenoteResult.getString("receivenoteid"),
+                        receivenoteResult.getString("sellerid"),
+                        receivenoteResult.getString("receivenotename"),
+                        receivenoteResult.getString("fulladdress"),
+                        Double.parseDouble(receivenoteResult.getString("sumnetprice")),
+                        Integer.parseInt(receivenoteResult.getString("sumgrossprice")),
+                        receivenoteResult.getString("receivenotedate")
+                ));
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Sikertelen csatlakozás");
+            alert.setHeaderText("Az adatbázishoz való csatlakozás sikertelen");
+            alert.setContentText("Próbáld meg később!");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                System.exit(0);
+            }
+        }
+        return getReceiveNotes;
     }
 
     private boolean getServiceBoolean(int isservice) {

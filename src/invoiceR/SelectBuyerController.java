@@ -30,6 +30,7 @@ public class SelectBuyerController implements Initializable {
     public static String customerPhone;
     public static String customerEmail;
     public static String customerBankNumber;
+    private String stageToOpen;
 
     Connect connect = new Connect();
     ObservableList<Customer> customerToInvoice = FXCollections.observableArrayList();
@@ -75,7 +76,13 @@ public class SelectBuyerController implements Initializable {
             customerEmail = selectedBuyer.email;
             customerBankNumber = selectedBuyer.bankAccount;
 
-            Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
+            if (MainController.isItInvoice) {
+                stageToOpen = "scenes/invoiceStage.fxml";
+            } else {
+                stageToOpen = "scenes/receiveNoteStage.fxml";
+            }
+
+            Parent root = FXMLLoader.load(getClass().getResource(stageToOpen));
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
             invoiceStage.initStyle(StageStyle.UTILITY);

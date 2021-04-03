@@ -27,7 +27,7 @@ public class EditProductController implements Initializable {
     Double VAT;
 
     Connect connect = new Connect();
-    PriceCalculator priceCalculator = new PriceCalculator();
+    Calculator calculator = new Calculator();
     AlertController alertController = new AlertController();
 
     ObservableList<String> editTypeList = FXCollections.observableArrayList("Termék", "Szolgáltatás");
@@ -126,32 +126,32 @@ public class EditProductController implements Initializable {
 
     @FXML
     void editCalculateDiscountGrossPrice(KeyEvent event) {
-        priceCalculator.calculateGrossPrices(editDiscountNetPrice, editDiscountGrossPrice, VAT);
+        calculator.calculateGrossPrices(editDiscountNetPrice, editDiscountGrossPrice, VAT);
     }
 
     @FXML
     void editCalculateDiscountNetPrice(KeyEvent event) {
-        priceCalculator.calculateNetPrices(editDiscountGrossPrice, editDiscountNetPrice, VAT);
+        calculator.calculateNetPrices(editDiscountGrossPrice, editDiscountNetPrice, VAT);
     }
 
     @FXML
     void editCalculateGross(KeyEvent event) {
-        priceCalculator.calculateGrossPrices(editProductNetPrice, editProductGrossPrice, VAT);
+        calculator.calculateGrossPrices(editProductNetPrice, editProductGrossPrice, VAT);
     }
 
     @FXML
     void editCalculateNet(KeyEvent event) {
-        priceCalculator.calculateNetPrices(editProductGrossPrice, editProductNetPrice, VAT);
+        calculator.calculateNetPrices(editProductGrossPrice, editProductNetPrice, VAT);
     }
 
     @FXML
     void editCalculatePurchaseGross(KeyEvent event) {
-        priceCalculator.calculateGrossPrices(editPurchaseNetPrice, editPurchaseGrossPrice, VAT);
+        calculator.calculateGrossPrices(editPurchaseNetPrice, editPurchaseGrossPrice, VAT);
     }
 
     @FXML
     void editCalculatePurchaseNet(KeyEvent event) {
-        priceCalculator.calculateNetPrices(editPurchaseGrossPrice, editPurchaseNetPrice, VAT);
+        calculator.calculateNetPrices(editPurchaseGrossPrice, editPurchaseNetPrice, VAT);
     }
 
     @FXML
@@ -202,7 +202,7 @@ public class EditProductController implements Initializable {
             default:
                 VAT = 1.27;
         }
-        priceCalculator.updateGrossPrices(VAT, editProductNetPrice, editProductGrossPrice, editPurchaseNetPrice,
+        calculator.updateGrossPrices(VAT, editProductNetPrice, editProductGrossPrice, editPurchaseNetPrice,
                 editPurchaseGrossPrice, editDiscountNetPrice, editDiscountGrossPrice);
     }
 
