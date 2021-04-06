@@ -17,14 +17,10 @@ import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 
-import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 
@@ -201,6 +197,7 @@ public class InvoiceController implements Initializable {
         addProductToInvoice.setScene(new Scene(root));
         addProductToInvoice.initStyle(StageStyle.UTILITY);
         addProductToInvoice.show();
+
         Stage stage = (Stage) sumGrossPriceField.getScene().getWindow();
         stage.close();
     }

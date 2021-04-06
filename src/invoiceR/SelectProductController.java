@@ -23,6 +23,9 @@ import java.util.function.Predicate;
 
 public class SelectProductController implements Initializable {
 
+
+    private String stageToOpen;
+
     Connect connect = new Connect();
     ObservableList<Product> productsToAdd = FXCollections.observableArrayList();
     public static ArrayList<Product> addedProducts = new ArrayList<>();
@@ -69,7 +72,13 @@ public class SelectProductController implements Initializable {
             if (addProduct) {
                 addedProducts.add(selectedproduct);
             }
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/invoiceStage.fxml"));
+
+            if (MainController.isItInvoice) {
+                stageToOpen = "scenes/invoiceStage.fxml";
+            } else {
+                stageToOpen = "scenes/receiveNoteStage.fxml";
+            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(stageToOpen));
             Parent root = loader.load();
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));

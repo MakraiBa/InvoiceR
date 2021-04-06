@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -84,25 +85,25 @@ public class ReceiveNoteController implements Initializable {
     private DatePicker fulfilmentDate;
 
     @FXML
-    private TableView<?> receiveNoteProductTable;
+    private TableView<Product> receiveNoteProductTable;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteProductNameColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteProductNameColumn;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteProductNetPriceColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteProductNetPriceColumn;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteProductGrossPriceColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteProductGrossPriceColumn;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteProductQuantityColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteProductQuantityColumn;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteProductNumberColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteProductNumberColumn;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteBoughtQuantityColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteBoughtQuantityColumn;
 
     @FXML
     private TextField sumGrossPriceField;
@@ -123,8 +124,15 @@ public class ReceiveNoteController implements Initializable {
     private Button cancelReceiveNoteButton;
 
     @FXML
-    void addProductToReceiveNote(ActionEvent event) {
+    void addProductToReceiveNote(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/productSelectStage.fxml"));
+        Stage addProductToInvoice = new Stage();
+        addProductToInvoice.setScene(new Scene(root));
+        addProductToInvoice.initStyle(StageStyle.UTILITY);
+        addProductToInvoice.show();
 
+        Stage stage = (Stage) addProductToReceiveNoteButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -201,6 +209,9 @@ public class ReceiveNoteController implements Initializable {
         sellerBankNumberField.setText(SelectBuyerController.customerBankNumber);
         sellerPhoneField.setText(SelectBuyerController.customerPhone);
         sellerEmailField.setText(SelectBuyerController.customerEmail);
+
+        receiveNoteProductList.addAll(SelectProductController.addedProducts);
+        receiveNoteProductTable.setItems(receiveNoteProductList);
 
         sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(receiveNoteProductList)));
         sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(receiveNoteProductList)));

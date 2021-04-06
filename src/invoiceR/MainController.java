@@ -70,6 +70,7 @@ public class MainController implements Initializable {
     ObservableList<Product> product = FXCollections.observableArrayList();
     ObservableList<Customer> customer = FXCollections.observableArrayList();
     ObservableList<Invoice> invoice = FXCollections.observableArrayList();
+    ObservableList<ReceiveNote> receivenote = FXCollections.observableArrayList();
 
     @FXML
     private Button newInvoiceButton;
@@ -120,7 +121,7 @@ public class MainController implements Initializable {
     private TableView<Invoice> invoiceTable;
 
     @FXML
-    private TableView<?> receiveNoteTable;
+    private TableView<ReceiveNote> receiveNoteTable;
 
     @FXML
     private Button editCustomerButton;
@@ -189,23 +190,23 @@ public class MainController implements Initializable {
     private TableColumn<Invoice, String> invoiceSumGrossPriceColumn;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteCustomerNameColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteCustomerNameColumn;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteCustomerAddressColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteCustomerAddressColumn;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteDateColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteDateColumn;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteSumNetPriceColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteSumNetPriceColumn;
 
     @FXML
-    private TableColumn<?, ?> receiveNoteSumGrossPriceColumn;
+    private TableColumn<ReceiveNote, String> receiveNoteSumGrossPriceColumn;
 
     @FXML
     void addNewReceiveNote(ActionEvent event) throws IOException {
-        isItInvoice=false;
+        isItInvoice = false;
         Parent root = FXMLLoader.load(getClass().getResource("scenes/receiveNoteStage.fxml"));
         Stage newCustomerStage = new Stage();
         newCustomerStage.setScene(new Scene(root));
@@ -230,7 +231,7 @@ public class MainController implements Initializable {
 
     @FXML
     void addNewInvoice(ActionEvent event) throws IOException {
-        isItInvoice=true;
+        isItInvoice = true;
         Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
         Stage newInvoiceStage = new Stage();
         newInvoiceStage.setScene(new Scene(root));
@@ -452,6 +453,13 @@ public class MainController implements Initializable {
         invoiceSumGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<Invoice, String>("sumGrossPrice"));
         getInvoice();
 
+        receiveNoteCustomerNameColumn.setCellValueFactory(new PropertyValueFactory<ReceiveNote, String>("receiveNoteName"));
+        receiveNoteCustomerAddressColumn.setCellValueFactory(new PropertyValueFactory<ReceiveNote, String>("receiveNoteFullAddress"));
+        receiveNoteDateColumn.setCellValueFactory(new PropertyValueFactory<ReceiveNote, String>("receiveNoteCurrentDate"));
+        receiveNoteSumNetPriceColumn.setCellValueFactory(new PropertyValueFactory<ReceiveNote, String>("receiveNoteSumNetPrice"));
+        receiveNoteSumGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<ReceiveNote, String>("receiveNoteSumGrossPrice"));
+        getReceiveNote();
+
         FilteredList<Product> filteredProduct = new FilteredList<>(FXCollections.observableList(product));
         productSearchField.textProperty().addListener((observable, oldValue, newValue) ->
                 filteredProduct.setPredicate(createPredicateProduct(newValue))
@@ -464,14 +472,19 @@ public class MainController implements Initializable {
         invoiceSearchField.textProperty().addListener((observable, oldValue, newValue) ->
                 filteredInvoice.setPredicate(createPredicateInvoice(newValue))
         );
+        FilteredList<ReceiveNote> filteredReceiveNote = new FilteredList<>(FXCollections.observableList(receivenote));
+        receiveNoteSearchField.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredReceiveNote.setPredicate(createPredicateReceiveNote(newValue))
+        );
 
         productTable.setItems(filteredProduct);
         customerTable.setItems(filteredCustomer);
         invoiceTable.setItems(filteredInvoice);
+        receiveNoteTable.setItems(filteredReceiveNote);
     }
 
 
-   public ObservableList<Product> getProduct() {
+    public ObservableList<Product> getProduct() {
         product.clear();
         connect.getProducts();
         for (int i = 0; i < Connect.productList.size(); i++) {
@@ -543,6 +556,23 @@ public class MainController implements Initializable {
         return invoice;
     }
 
+    public ObservableList<ReceiveNote> getReceiveNote() {
+        receivenote.clear();
+        connect.getReceiveNotes();
+        for (int i = 0; i < Connect.receiveNoteList.size(); i++) {
+            receivenote.add(new ReceiveNote(
+                    Connect.receiveNoteList.get(i).receiveNoteId,
+                    Connect.receiveNoteList.get(i).sellerId,
+                    Connect.receiveNoteList.get(i).receiveNoteName,
+                    Connect.receiveNoteList.get(i).receiveNoteFullAddress,
+                    Connect.receiveNoteList.get(i).receiveNoteSumNetPrice,
+                    Connect.receiveNoteList.get(i).receiveNoteSumGrossPrice,
+                    Connect.receiveNoteList.get(i).receiveNoteCurrentDate
+            ));
+        }
+        return receivenote;
+    }
+
     private Predicate<Product> createPredicateProduct(String searchText) {
         return product -> {
             if (searchText == null || searchText.isEmpty()) return true;
@@ -561,6 +591,13 @@ public class MainController implements Initializable {
         return invoice -> {
             if (searchText == null || searchText.isEmpty()) return true;
             return invoiceSearch(invoice, searchText);
+        };
+    }
+
+    private Predicate<ReceiveNote> createPredicateReceiveNote(String searchText) {
+        return receivenote -> {
+            if (searchText == null || searchText.isEmpty()) return true;
+            return receivenoteSearch(receivenote, searchText);
         };
     }
 
@@ -588,6 +625,13 @@ public class MainController implements Initializable {
                 invoice.getInvoiceCustomerName().toLowerCase().contains(searchText.toLowerCase()) ||
                         invoice.getCurrentDate().toLowerCase().contains(searchText.toLowerCase()) ||
                         invoice.getCustomerFullAddress().toLowerCase().contains(searchText.toLowerCase());
+    }
+
+    private boolean receivenoteSearch(ReceiveNote receivenote, String searchText) {
+        return
+                receivenote.receiveNoteName.toLowerCase().contains(searchText.toLowerCase()) ||
+                        receivenote.receiveNoteCurrentDate.toLowerCase().contains(searchText.toLowerCase()) ||
+                        receivenote.receiveNoteFullAddress.toLowerCase().contains(searchText.toLowerCase());
     }
 }
 

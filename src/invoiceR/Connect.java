@@ -277,9 +277,10 @@ public class Connect {
             addNewReceiveNote = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement st;
             st = addNewReceiveNote.createStatement();
-            String insert = "INSERT INTO `receivenotes` ( `receivenoteid `,`sellerid`,`receivenotename`,`fulladdress`,`sumnetprice`,`sumgrossprice`,`receivenotedate`) " +
+            String insert = "INSERT INTO `receivenotes` ( `receivenoteid`,`sellerid`,`receivenotename`,`fulladdress`,`sumnetprice`,`sumgrossprice`,`receivenotedate`) " +
                     "VALUES ('" + receiveNoteId + "','" + sellerId + "','" + receiveNoteName + "','" + receiveNoteFullAddress + "','" + receiveNoteSumNetPrice + "','" + receiveNoteSumGrossPrice + "','" + receiveNoteCurrentDate + "')";
             st.executeUpdate(insert);
+            System.out.println("ddssdd");
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
