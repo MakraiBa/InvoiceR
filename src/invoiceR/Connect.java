@@ -1,5 +1,6 @@
 package invoiceR;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -321,6 +322,45 @@ public class Connect {
         return getReceiveNotes;
     }
 
+    public Connection reduceStockQuantity(ObservableList<Product> list) {
+        Connection reduceStock = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            reduceStock = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
+            Statement rdc;
+            rdc = reduceStock.createStatement();
+            for (int i = 0; i < list.size(); i++) {
+                int reducedStock = list.get(i).getStock() - list.get(i).getProductQuantity();
+                String updatereducestock = "UPDATE `products` SET `stock` ='" + reducedStock + "' WHERE `productID` ='" + list.get(i).Id + "'";
+                rdc.executeUpdate(updatereducestock);
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e);
+        }
+        return reduceStock;
+    }
+
+    public Connection increaseStockQuantity(ObservableList<Product> list) {
+        Connection increaseStock = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            increaseStock = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
+            Statement incr;
+            incr = increaseStock.createStatement();
+            for (int i = 0; i < list.size(); i++) {
+                int increasedStock = list.get(i).getStock() + list.get(i).getProductQuantity();
+                String updatereducestock = "UPDATE `products` SET `stock` ='" + increasedStock + "' WHERE `productID` ='" + list.get(i).Id + "'";
+                incr.executeUpdate(updatereducestock);
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e);
+        }
+        return increaseStock;
+    }
     private boolean getServiceBoolean(int isservice) {
         if (isservice == 0) {
             return false;

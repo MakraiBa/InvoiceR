@@ -14,8 +14,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -88,22 +91,22 @@ public class ReceiveNoteController implements Initializable {
     private TableView<Product> receiveNoteProductTable;
 
     @FXML
-    private TableColumn<ReceiveNote, String> receiveNoteProductNameColumn;
+    private TableColumn<Product, String> receiveNoteProductNameColumn;
 
     @FXML
-    private TableColumn<ReceiveNote, String> receiveNoteProductNetPriceColumn;
+    private TableColumn<Product, String> receiveNoteProductNetPriceColumn;
 
     @FXML
-    private TableColumn<ReceiveNote, String> receiveNoteProductGrossPriceColumn;
+    private TableColumn<Product, String> receiveNoteProductGrossPriceColumn;
 
     @FXML
-    private TableColumn<ReceiveNote, String> receiveNoteProductQuantityColumn;
+    private TableColumn<Product, String> receiveNoteProductQuantityColumn;
 
     @FXML
-    private TableColumn<ReceiveNote, String> receiveNoteProductNumberColumn;
+    private TableColumn<Product, String> receiveNoteProductNumberColumn;
 
     @FXML
-    private TableColumn<ReceiveNote, String> receiveNoteBoughtQuantityColumn;
+    private TableColumn<Product, Integer> receiveNoteBoughtQuantityColumn;
 
     @FXML
     private TextField sumGrossPriceField;
@@ -160,6 +163,8 @@ public class ReceiveNoteController implements Initializable {
         connect.addNewReceiveNote(receiveNoteId, sellerId, receiveNoteName,
                 receiveNoteFullAddress, receiveNoteSumNetPrice, receiveNoteSumGrossPrice, receiveNoteCurrentDateString);
 
+        connect.increaseStockQuantity(receiveNoteProductList);
+
         Stage stage = (Stage) doneReceiveNoteButton.getScene().getWindow();
         stage.close();
     }
@@ -178,11 +183,6 @@ public class ReceiveNoteController implements Initializable {
 
         Stage stage = (Stage) sumGrossPriceField.getScene().getWindow();
         stage.close();
-    }
-
-    @FXML
-    void updateQuantity(ActionEvent event) {
-
     }
 
     @Override
@@ -210,9 +210,25 @@ public class ReceiveNoteController implements Initializable {
         sellerPhoneField.setText(SelectBuyerController.customerPhone);
         sellerEmailField.setText(SelectBuyerController.customerEmail);
 
+        receiveNoteProductTable.setEditable(true);
+        receiveNoteProductNameColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("Name"));
+        receiveNoteProductNetPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productNetPrice"));
+        receiveNoteProductGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productGrossPrice"));
+        receiveNoteProductQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("Stock"));
+        receiveNoteProductNumberColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("ProductNr"));
+        receiveNoteBoughtQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("productQuantity"));
+        receiveNoteBoughtQuantityColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
         receiveNoteProductList.addAll(SelectProductController.addedProducts);
         receiveNoteProductTable.setItems(receiveNoteProductList);
 
+        sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(receiveNoteProductList)));
+        sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(receiveNoteProductList)));
+    }
+
+    public void updateQuantity(TableColumn.CellEditEvent editcell) {
+        Product selectedproduct = receiveNoteProductTable.getSelectionModel().getSelectedItem();
+        selectedproduct.setProductQuantity(editcell.getNewValue().hashCode());
         sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(receiveNoteProductList)));
         sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(receiveNoteProductList)));
     }

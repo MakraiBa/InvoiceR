@@ -3,11 +3,13 @@ package invoiceR;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -35,6 +37,8 @@ public class SelectBuyerController implements Initializable {
     Connect connect = new Connect();
     ObservableList<Customer> customerToInvoice = FXCollections.observableArrayList();
 
+    AlertController alertController = new AlertController();
+
     @FXML
     private TextField customerSearchField;
 
@@ -61,6 +65,42 @@ public class SelectBuyerController implements Initializable {
 
     @FXML
     private TableColumn<Customer, String> customerPhoneColumn;
+
+    @FXML
+    private Button addCustomerButton;
+
+    @FXML
+    void addCustomerViaButton(ActionEvent event) throws IOException {
+        try {
+            Customer selectedBuyer = customerTable.getSelectionModel().getSelectedItem();
+            buyerId = selectedBuyer.Id;
+            customerName = selectedBuyer.billingName;
+            customerFullAddress = setBuyerAddress(selectedBuyer.billingPostalCode, selectedBuyer.billingCity,
+                    selectedBuyer.billingAddress, selectedBuyer.billingAddressType, selectedBuyer.billingHouseNumber,
+                    selectedBuyer.billingStairway, selectedBuyer.billingFloor);
+            customerVAT = selectedBuyer.customerVAT;
+            customerPhone = selectedBuyer.phone;
+            customerEmail = selectedBuyer.email;
+            customerBankNumber = selectedBuyer.bankAccount;
+
+            if (MainController.isItInvoice) {
+                stageToOpen = "scenes/invoiceStage.fxml";
+            } else {
+                stageToOpen = "scenes/receiveNoteStage.fxml";
+            }
+
+            Parent root = FXMLLoader.load(getClass().getResource(stageToOpen));
+            Stage invoiceStage = new Stage();
+            invoiceStage.setScene(new Scene(root));
+            invoiceStage.initStyle(StageStyle.UTILITY);
+            invoiceStage.show();
+
+            Stage stage = (Stage) customerTable.getScene().getWindow();
+            stage.close();
+        } catch (Exception e) {
+            alertController.noCustomerSelectedAlert();
+        }
+    }
 
     @FXML
     void addCustomerToInvoice(MouseEvent event) throws IOException {

@@ -3,11 +3,13 @@ package invoiceR;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -23,10 +25,11 @@ import java.util.function.Predicate;
 
 public class SelectProductController implements Initializable {
 
-
     private String stageToOpen;
 
     Connect connect = new Connect();
+    AlertController alertController = new AlertController();
+
     ObservableList<Product> productsToAdd = FXCollections.observableArrayList();
     public static ArrayList<Product> addedProducts = new ArrayList<>();
 
@@ -35,6 +38,9 @@ public class SelectProductController implements Initializable {
 
     @FXML
     private TableView<Product> productTable;
+
+    @FXML
+    private Button selectProductButton;
 
     @FXML
     private TableColumn<Product, String> productNameColumn;
@@ -56,6 +62,40 @@ public class SelectProductController implements Initializable {
 
     @FXML
     private TableColumn<Product, String> invoiceProductNumberColumn;
+
+    @FXML
+    void selectProductViaButton(ActionEvent event) throws IOException {
+        boolean addProduct = true;
+        try {
+            Product selectedproduct = productTable.getSelectionModel().getSelectedItem();
+            for (int i = 0; i < addedProducts.size(); i++) {
+                if (addedProducts.get(i).Id.equals(selectedproduct.Id)) {
+                    addProduct = false;
+                }
+            }
+            if (addProduct) {
+                addedProducts.add(selectedproduct);
+            }
+
+            if (MainController.isItInvoice) {
+                stageToOpen = "scenes/invoiceStage.fxml";
+            } else {
+                stageToOpen = "scenes/receiveNoteStage.fxml";
+            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(stageToOpen));
+            Parent root = loader.load();
+            Stage invoiceStage = new Stage();
+            invoiceStage.setScene(new Scene(root));
+            invoiceStage.show();
+
+            Stage stage = (Stage) productSearchField.getScene().getWindow();
+            stage.close();
+
+        } catch (Exception e) {
+            alertController.noProductSelectedAlert();
+        }
+    }
+
 
     @FXML
     void addProduct(MouseEvent event) throws IOException {
@@ -113,7 +153,7 @@ public class SelectProductController implements Initializable {
                     Connect.productList.get(i).isService, Connect.productList.get(i).Name,
                     Connect.productList.get(i).ProductNr, Connect.productList.get(i).productNetPrice,
                     Connect.productList.get(i).productGrossPrice, Connect.productList.get(i).discountNetPrice,
-                    Connect.productList.get(i).discountGrossPrice, 1,Connect.productList.get(i).isDiscounted));
+                    Connect.productList.get(i).discountGrossPrice, 1, Connect.productList.get(i).isDiscounted));
         }
         return productsToAdd;
     }

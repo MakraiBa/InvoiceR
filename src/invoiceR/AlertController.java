@@ -41,7 +41,7 @@ public class AlertController {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Nincs termék kiválasztva");
         alert.setHeaderText("Nincs termék kiválasztva");
-        alert.setContentText("Válassz ki egy terméket a szerkesztéshez!");
+        alert.setContentText("Válassz ki egy terméket!");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             alert.close();
@@ -52,12 +52,23 @@ public class AlertController {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Nincs ügyfél kiválasztva");
         alert.setHeaderText("Nincs ügyfél kiválasztva");
-        alert.setContentText("Válassz ki egy ügyfelet a szerkesztéshez!");
+        alert.setContentText("Válassz ki egy ügyfelet!");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             alert.close();
         }
+    }
 
+    public void stockAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Raktárkészlet hiba");
+        alert.setHeaderText("A vásárolni kívánt mennyiség nagyobb, mint a raktárkészleten lévő mennyiség!");
+        alert.setContentText("Folytathatjuk?");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
        /* public void closeInvoiceAlert(String id, String name) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Törlés megerősítése");
@@ -71,5 +82,5 @@ public class AlertController {
                 alert.close();
             }
         }*/
-    }
 }
+

@@ -166,6 +166,8 @@ public class InvoiceController implements Initializable {
         connect.addNewInvoice(invoiceInvoiceId, invoiceCustomerName, invoiceCustomerFullAddress,
                 invoiceSumNetPriceString, invoiceGrossNetPriceString, invoiceCurrentDateString, invoiceBuyerId);
 
+        connect.reduceStockQuantity(invoiceProductList);
+
         Stage stage = (Stage) doneInvoiceButton.getScene().getWindow();
         stage.close();
     }
@@ -258,6 +260,11 @@ public class InvoiceController implements Initializable {
 
     public void updateQuantity(TableColumn.CellEditEvent editcell) {
         Product selectedproduct = invoiceProductTable.getSelectionModel().getSelectedItem();
+        int stock = selectedproduct.getProductQuantity();
+        int boughtQuantity = selectedproduct.getStock();
+        if (boughtQuantity > stock) {
+            alertController.stockAlert();
+        }
         selectedproduct.setProductQuantity(editcell.getNewValue().hashCode());
         sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
         sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));

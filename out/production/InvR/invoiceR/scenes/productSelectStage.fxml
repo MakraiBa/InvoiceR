@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -8,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.SelectProductController">
    <children>
-      <TextField fx:id="productSearchField" prefHeight="26.0" prefWidth="247.0" promptText="Termék keresése" />
+      <TextField fx:id="productSearchField" layoutX="24.0" layoutY="14.0" prefHeight="26.0" prefWidth="247.0" promptText="Termék keresése" />
       <TableView fx:id="productTable" layoutX="31.0" layoutY="43.0" onMouseClicked="#addProduct" prefHeight="513.0" prefWidth="650.0">
          <placeholder>
             <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
@@ -23,5 +24,6 @@
             <TableColumn fx:id="invoiceProductNumberColumn" editable="false" prefWidth="75.0" text="Cikkszám" />
          </columns>
       </TableView>
+      <Button fx:id="selectProductButton" layoutX="593.0" layoutY="557.0" mnemonicParsing="false" onAction="#selectProductViaButton" text="Termék kiválasztása" />
    </children>
 </AnchorPane>
