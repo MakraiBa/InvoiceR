@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import java.util.UUID;
@@ -260,14 +261,15 @@ public class InvoiceController implements Initializable {
 
     public void updateQuantity(TableColumn.CellEditEvent editcell) {
         Product selectedproduct = invoiceProductTable.getSelectionModel().getSelectedItem();
-        int stock = selectedproduct.getProductQuantity();
-        int boughtQuantity = selectedproduct.getStock();
-        if (boughtQuantity > stock) {
-            alertController.stockAlert();
-        }
         selectedproduct.setProductQuantity(editcell.getNewValue().hashCode());
+        int stock = selectedproduct.getStock();
+        int boughtQuantity = selectedproduct.productQuantity;
+        if (!selectedproduct.isService) {
+            if (boughtQuantity > stock) {
+                alertController.stockAlert();
+            }
+        }
         sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
         sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
     }
-
 }

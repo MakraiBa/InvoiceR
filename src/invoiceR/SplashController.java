@@ -53,6 +53,7 @@ public class SplashController implements Initializable {
                     }
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
+                    stage.setMaximized(true);
                     stage.show();
                     loadingPane.getScene().getWindow().hide();
                 });

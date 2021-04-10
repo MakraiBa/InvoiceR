@@ -30,7 +30,7 @@
                   <AnchorPane fx:id="customerPane" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="customerSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Partner keresése" />
-                        <TableView fx:id="customerTable" layoutY="57.0" onMouseClicked="#openCustomer" prefHeight="513.0" prefWidth="650.0">
+                        <TableView fx:id="customerTable" layoutY="57.0" onMouseClicked="#openCustomer" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                            <placeholder>
                               <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
                            </placeholder>
