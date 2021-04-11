@@ -235,7 +235,6 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
         Stage newInvoiceStage = new Stage();
         newInvoiceStage.setScene(new Scene(root));
-        newInvoiceStage.initStyle(StageStyle.UNDECORATED);
         newInvoiceStage.show();
 
         Stage stage = (Stage) newInvoiceButton.getScene().getWindow();

@@ -1,5 +1,6 @@
 package invoiceR;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,6 +35,9 @@ public class InvoiceController implements Initializable {
 
     ObservableList<String> paymentMethodList = FXCollections.observableArrayList("Készpénz", "Átutalás - 8 nap", "Átutalás - 15 nap", "Átutalás - 30 nap", "Utánvét", "Bankkártya");
     ObservableList<Product> invoiceProductList = FXCollections.observableArrayList();
+
+    @FXML
+    private JFXComboBox<String> selectPaymentMethod;
 
     @FXML
     public TextField sellerInvoiceNameField;
@@ -73,9 +77,6 @@ public class InvoiceController implements Initializable {
 
     @FXML
     private Button selectCustomerButton;
-
-    @FXML
-    private ComboBox selectPaymentMethod;
 
     @FXML
     private TableView<Product> invoiceProductTable;
@@ -230,7 +231,7 @@ public class InvoiceController implements Initializable {
         sellerInvoiceVATField.setText(Seller.defaultSeller.sellerVAT);
         sellerPhoneField.setText(Seller.defaultSeller.sellerPhone);
         sellerInvoiceBankNumberField.setText(Seller.defaultSeller.sellerBankAccount);
-        selectPaymentMethod.setItems(paymentMethodList);
+        selectPaymentMethod.getItems().addAll(paymentMethodList);
         currentDate.setValue(LocalDate.now());
         paymentDate.setValue(calculator.calculateDays(0));
         fulfilmentDate.setValue(LocalDate.now());
