@@ -1,6 +1,7 @@
 package invoiceR;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,7 +38,7 @@ public class InvoiceController implements Initializable {
     ObservableList<Product> invoiceProductList = FXCollections.observableArrayList();
 
     @FXML
-    private JFXComboBox<String> selectPaymentMethod;
+    private ComboBox<String> selectPaymentMethod;
 
     @FXML
     public TextField sellerInvoiceNameField;

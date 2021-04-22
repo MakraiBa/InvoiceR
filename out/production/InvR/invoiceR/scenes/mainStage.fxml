@@ -30,7 +30,7 @@
                   <AnchorPane fx:id="customerPane" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="customerSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Partner keresése" />
-                        <TableView fx:id="customerTable" layoutY="57.0" onMouseClicked="#openCustomer" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
+                        <TableView fx:id="customerTable" layoutY="57.0" onMouseClicked="#openCustomer" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                            <placeholder>
                               <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
                            </placeholder>
@@ -44,8 +44,8 @@
                               <TableColumn fx:id="customerPhoneColumn" editable="false" prefWidth="101.5999755859375" text="Telefonszám" />
                            </columns>
                         </TableView>
-                        <Button fx:id="editCustomerButton" layoutX="299.0" layoutY="17.0" mnemonicParsing="false" onAction="#mainEditCustomer" text="Szerkesztés" />
-                        <Button fx:id="mainDeleteCustomerButton" layoutX="398.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Törlés" />
+                        <Button fx:id="editCustomerButton" layoutX="299.0" layoutY="17.0" mnemonicParsing="false" onAction="#mainEditCustomer" text="Szerkesztés" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="15.0" />
+                        <Button fx:id="mainDeleteCustomerButton" layoutX="398.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Törlés" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="15.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -63,7 +63,7 @@
                   <AnchorPane fx:id="productsPane" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="productSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Termék keresése" />
-                        <TableView fx:id="productTable" layoutY="57.0" onMouseClicked="#openProduct" prefHeight="513.0" prefWidth="650.0">
+                        <TableView fx:id="productTable" layoutY="57.0" onMouseClicked="#openProduct" prefHeight="513.0" prefWidth="650.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                             <placeholder>
                                 <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
                             </placeholder>
@@ -76,8 +76,8 @@
                               <TableColumn fx:id="stockQuantityColumn" editable="false" prefWidth="75.0" text="Raktárkészlet" />
                           </columns>
                         </TableView>
-                        <Button fx:id="editProductButton" layoutX="299.0" layoutY="17.0" mnemonicParsing="false" onAction="#mainEditProduct" text="Szerkesztés" />
-                        <Button fx:id="mainDeleteProductButton" layoutX="384.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteProduct" text="Törlés" />
+                        <Button fx:id="editProductButton" layoutX="299.0" layoutY="17.0" mnemonicParsing="false" onAction="#mainEditProduct" text="Szerkesztés" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="15.0" />
+                        <Button fx:id="mainDeleteProductButton" layoutX="384.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteProduct" text="Törlés" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="15.0" />
                      </children></AnchorPane>
                </content>
             </Tab>
@@ -86,7 +86,7 @@
                   <AnchorPane fx:id="invoicePane" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="invoiceSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Számla keresése" />
-                        <TableView fx:id="invoiceTable" layoutY="57.0" onMouseClicked="#openCustomer" prefHeight="513.0" prefWidth="650.0">
+                        <TableView fx:id="invoiceTable" layoutY="57.0" onMouseClicked="#openCustomer" prefHeight="513.0" prefWidth="650.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                            <placeholder>
                               <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
                            </placeholder>
@@ -107,7 +107,7 @@
                   <AnchorPane fx:id="incomingPane" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="receiveNoteSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Bizonylat keresése" />
-                        <TableView fx:id="receiveNoteTable" layoutY="57.0" onMouseClicked="#openCustomer" prefHeight="513.0" prefWidth="650.0">
+                        <TableView fx:id="receiveNoteTable" layoutY="57.0" onMouseClicked="#openCustomer" prefHeight="513.0" prefWidth="650.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                            <placeholder>
                               <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
                            </placeholder>
