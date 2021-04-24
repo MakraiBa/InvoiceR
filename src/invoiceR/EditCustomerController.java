@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -109,6 +110,8 @@ public class EditCustomerController implements Initializable {
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
         mainStage.initStyle(StageStyle.UNDECORATED);
+        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        mainStage.getIcons().add(icon);
         mainStage.setMaximized(true);
         mainStage.show();
     }
@@ -120,6 +123,8 @@ public class EditCustomerController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
+        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        mainStage.getIcons().add(icon);
         mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setMaximized(true);
         mainStage.show();
@@ -146,6 +151,8 @@ public class EditCustomerController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));
+            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            mainStage.getIcons().add(icon);
             mainStage.initStyle(StageStyle.UNDECORATED);
             mainStage.setMaximized(true);
             mainStage.show();

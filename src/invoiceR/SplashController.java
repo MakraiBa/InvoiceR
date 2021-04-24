@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -22,22 +23,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SplashController implements Initializable {
-    Connect loadData= new Connect();
+    Connect loadData = new Connect();
 
     @FXML
     private AnchorPane loadingPane;
 
     @FXML
     private Label loadingLabel;
-
-    @FXML
-    private Button closeSplashSceneButton;
-
-    @FXML
-    void closeSplashScreen(ActionEvent event) {
-        Stage stage = (Stage) closeSplashSceneButton.getScene().getWindow();
-        System.exit(0);
-    }
 
     class ShowSplashScreen extends Thread {
         @Override
@@ -55,6 +47,8 @@ public class SplashController implements Initializable {
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
                     stage.setMaximized(true);
+                    Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+                    stage.getIcons().add(icon);
                     stage.initStyle(StageStyle.UNDECORATED);
                     stage.setMaximized(true);
                     stage.show();

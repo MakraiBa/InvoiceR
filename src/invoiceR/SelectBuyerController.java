@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -81,6 +82,8 @@ public class SelectBuyerController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
         Stage returnToInvoice = new Stage();
         returnToInvoice.setScene(new Scene(root));
+        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        returnToInvoice.getIcons().add(icon);
         returnToInvoice.initStyle(StageStyle.UNDECORATED);
         returnToInvoice.show();
     }
@@ -109,6 +112,8 @@ public class SelectBuyerController implements Initializable {
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
             invoiceStage.show();
+            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            invoiceStage.getIcons().add(icon);
             invoiceStage.initStyle(StageStyle.UNDECORATED);
 
             Stage stage = (Stage) customerTable.getScene().getWindow();
@@ -141,6 +146,8 @@ public class SelectBuyerController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource(stageToOpen));
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
+            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            invoiceStage.getIcons().add(icon);
             invoiceStage.initStyle(StageStyle.UNDECORATED);
             invoiceStage.show();
 

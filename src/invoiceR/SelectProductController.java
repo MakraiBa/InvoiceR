@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -76,6 +77,8 @@ public class SelectProductController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
         Stage returnToInvoice = new Stage();
         returnToInvoice.setScene(new Scene(root));
+        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        returnToInvoice.getIcons().add(icon);
         returnToInvoice.initStyle(StageStyle.UNDECORATED);
         returnToInvoice.setMaximized(true);
         returnToInvoice.show();
@@ -104,8 +107,10 @@ public class SelectProductController implements Initializable {
             Parent root = loader.load();
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
-            invoiceStage.show();
+            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            invoiceStage.getIcons().add(icon);
             invoiceStage.initStyle(StageStyle.UNDECORATED);
+            invoiceStage.show();
 
             Stage stage = (Stage) productSearchField.getScene().getWindow();
             stage.close();
@@ -141,6 +146,8 @@ public class SelectProductController implements Initializable {
             Parent root = loader.load();
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
+            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            invoiceStage.getIcons().add(icon);
             invoiceStage.initStyle(StageStyle.UNDECORATED);
             invoiceStage.setMaximized(true);
             invoiceStage.show();
@@ -192,8 +199,6 @@ public class SelectProductController implements Initializable {
         return
                 product.getName().toLowerCase().contains(searchText.toLowerCase()) ||
                         product.getProductNetPrice().toLowerCase().contains(searchText.toLowerCase()) ||
-                        product.getProductNetPrice().toLowerCase().contains(searchText.toLowerCase()) ||
-                        product.getProductNr().toLowerCase().contains(searchText.toLowerCase()) ||
-                        product.getComment().toLowerCase().contains(searchText.toLowerCase());
+                        product.getProductGrossPrice().toLowerCase().contains(searchText.toLowerCase());
     }
 }

@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -99,7 +100,16 @@ public class CustomerController implements Initializable {
     private Pane deliveryAddressPane;
 
     @FXML
-    void closeCustomerScene(ActionEvent event) {
+    void closeCustomerScene(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage mainStage = new Stage();
+        mainStage.setScene(new Scene(root));
+        mainStage.setMaximized(true);
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
+        mainStage.getIcons().add(icon);
+        mainStage.initStyle(StageStyle.UNDECORATED);
+        mainStage.show();
+
         Stage stage = (Stage) cancelCustomerButton.getScene().getWindow();
         stage.close();
     }
@@ -126,6 +136,8 @@ public class CustomerController implements Initializable {
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));
             mainStage.setMaximized(true);
+            Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
+            mainStage.getIcons().add(icon);
             mainStage.initStyle(StageStyle.UNDECORATED);
             mainStage.show();
         }

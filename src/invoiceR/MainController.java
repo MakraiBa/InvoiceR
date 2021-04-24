@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -242,6 +243,8 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/receiveNoteStage.fxml"));
         Stage newCustomerStage = new Stage();
         newCustomerStage.setScene(new Scene(root));
+        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        newCustomerStage.getIcons().add(icon);
         newCustomerStage.initStyle(StageStyle.UNDECORATED);
         newCustomerStage.show();
 
@@ -254,6 +257,8 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/customerStage.fxml"));
         Stage newCustomerStage = new Stage();
         newCustomerStage.setScene(new Scene(root));
+        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        newCustomerStage.getIcons().add(icon);
         newCustomerStage.initStyle(StageStyle.UNDECORATED);
         newCustomerStage.show();
 
@@ -267,6 +272,8 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
         Stage newInvoiceStage = new Stage();
         newInvoiceStage.setScene(new Scene(root));
+        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        newInvoiceStage.getIcons().add(icon);
         newInvoiceStage.initStyle(StageStyle.UNDECORATED);
         newInvoiceStage.show();
 
@@ -279,6 +286,8 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/productStage.fxml"));
         Stage newProductStage = new Stage();
         newProductStage.setScene(new Scene(root));
+        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        newProductStage.getIcons().add(icon);
         newProductStage.initStyle(StageStyle.UNDECORATED);
         newProductStage.show();
 
@@ -342,6 +351,8 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/editProductStage.fxml"));
             Stage editProductStage = new Stage();
             editProductStage.setScene(new Scene(root));
+            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            editProductStage.getIcons().add(icon);
             editProductStage.initStyle(StageStyle.UNDECORATED);
             editProductStage.show();
 
@@ -383,6 +394,8 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/editCustomerStage.fxml"));
             Stage editCustomerStage = new Stage();
             editCustomerStage.setScene(new Scene(root));
+            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            editCustomerStage.getIcons().add(icon);
             editCustomerStage.initStyle(StageStyle.UNDECORATED);
             editCustomerStage.show();
 
@@ -415,6 +428,8 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/editProductStage.fxml"));
             Stage editProductStage = new Stage();
             editProductStage.setScene(new Scene(root));
+            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            editProductStage.getIcons().add(icon);
             editProductStage.initStyle(StageStyle.UNDECORATED);
             editProductStage.show();
 
@@ -453,6 +468,8 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/editCustomerStage.fxml"));
             Stage editCustomerStage = new Stage();
             editCustomerStage.setScene(new Scene(root));
+            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            editCustomerStage.getIcons().add(icon);
             editCustomerStage.initStyle(StageStyle.UNDECORATED);
             editCustomerStage.show();
 

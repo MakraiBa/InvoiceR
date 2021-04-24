@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -87,6 +88,8 @@ public class ProductController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
+        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        mainStage.getIcons().add(icon);
         mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setMaximized(true);
         mainStage.show();
@@ -122,6 +125,8 @@ public class ProductController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));
+            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            mainStage.getIcons().add(icon);
             mainStage.initStyle(StageStyle.UNDECORATED);
             mainStage.setMaximized(true);
             mainStage.show();

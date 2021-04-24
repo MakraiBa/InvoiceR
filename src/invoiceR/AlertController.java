@@ -1,6 +1,7 @@
 package invoiceR;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 
 import java.util.Optional;
@@ -9,14 +10,17 @@ public class AlertController {
 
     Connect connect = new Connect();
 
+    ButtonType Cancel = new ButtonType("Mégse", ButtonBar.ButtonData.CANCEL_CLOSE);
+    ButtonType Confirm= new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+
     public void deleteProductConfirmAlert(String id, String name) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",Cancel,Confirm);
         alert.setTitle("Törlés megerősítése");
         alert.setHeaderText("A következő termék törlésére készülsz: " + name);
         alert.setContentText("Biztos vagy benne?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
+        if (result.get() == Confirm) {
             connect.deleteProduct(id);
         } else {
             alert.close();
@@ -24,13 +28,13 @@ public class AlertController {
     }
 
     public void deleteCustomerConfirmAlert(String id, String name) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",Cancel,Confirm);
         alert.setTitle("Törlés megerősítése");
         alert.setHeaderText("A következő partner törlésére készülsz: " + name);
         alert.setContentText("Biztos vagy benne?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
+        if (result.get() == Confirm) {
             connect.deleteCustomer(id);
         } else {
             alert.close();
