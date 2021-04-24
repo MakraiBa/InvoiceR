@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -8,49 +9,98 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.ReceiveNoteController">
+<AnchorPane maxHeight="700.0" maxWidth="-Infinity" minWidth="900.0" stylesheets="@../style/mainStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.ReceiveNoteController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="750.0">
+      <HBox AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
          <children>
-            <HBox prefHeight="184.0" prefWidth="750.0">
+            <ImageView fx:id="minimizeSceneButton" fitHeight="25.0" fitWidth="14.0" onMouseClicked="#minimizeScene" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/minimize.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="maximizeSceneButton" fitHeight="25.0" fitWidth="14.0" onMouseClicked="#maximizeScene" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/reduce.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="closeAndReturnButton" fitHeight="20.0" fitWidth="14.0" onMouseClicked="#cancelAndReturn" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" styleClass="header" text="Új bejövő bizonylat" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
+      <VBox AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
+         <children>
+            <HBox>
                <children>
-                  <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="379.0">
+                  <AnchorPane layoutX="10.0" layoutY="10.0" minWidth="400.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <TextField fx:id="sellerNameField" editable="false" layoutY="27.0" promptText="Szállító neve" />
-                        <TextField fx:id="sellerVATField" editable="false" layoutY="62.0" promptText="Szállító adószááma" />
-                        <TextField fx:id="sellerAddressField" editable="false" layoutX="190.0" layoutY="27.0" promptText="Szállító címe" />
-                        <TextField fx:id="sellerBankNumberField" editable="false" layoutX="190.0" layoutY="75.0" promptText="Szállító bankszámlaszáma" />
-                        <TextField fx:id="sellerPhoneField" editable="false" layoutY="110.0" promptText="Szállító telefonszáma" />
-                        <TextField fx:id="sellerEmailField" editable="false" layoutX="190.0" layoutY="110.0" promptText="Szállító emailcíme" />
-                        <Button fx:id="selectSellerButton" layoutX="37.0" layoutY="145.0" mnemonicParsing="false" onAction="#selectSeller" text="Kiválasztás" />
+                        <TextField fx:id="sellerNameField" editable="false" layoutY="27.0" promptText="Szállító neve" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
+                        <TextField fx:id="sellerVATField" editable="false" layoutY="62.0" promptText="Szállító adószááma" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="230.0" />
+                        <TextField fx:id="sellerAddressField" editable="false" layoutX="190.0" layoutY="27.0" promptText="Szállító címe" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0" />
+                        <TextField fx:id="sellerBankNumberField" editable="false" layoutX="190.0" layoutY="75.0" promptText="Szállító bankszámlaszáma" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="150.0" />
+                        <TextField fx:id="sellerPhoneField" editable="false" layoutY="110.0" promptText="Szállító telefonszáma" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="110.0" />
+                        <TextField fx:id="sellerEmailField" editable="false" layoutX="190.0" layoutY="110.0" promptText="Szállító emailcíme" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="190.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane prefHeight="150.0" prefWidth="379.0">
+                  <AnchorPane minWidth="400.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <TextField fx:id="receiveNoteNameField" editable="false" layoutY="27.0" promptText="Név" />
-                        <TextField fx:id="receiveNoteVATField" editable="false" layoutY="62.0" promptText="Adószám" />
-                        <TextField fx:id="receiveNoteAddressField" editable="false" layoutX="190.0" layoutY="27.0" promptText="Cím" />
-                        <TextField fx:id="receiveNoteBankNumberField" editable="false" layoutX="190.0" layoutY="75.0" promptText="Bankszámlaszám" />
-                        <TextField fx:id="receiveNotePhoneField" editable="false" layoutY="110.0" promptText="Telefonszám" />
-                        <TextField fx:id="receiveNoteEmailField" editable="false" layoutX="190.0" layoutY="110.0" promptText="Email cím" />
+                        <TextField fx:id="receiveNoteNameField" editable="false" layoutY="27.0" promptText="Név" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
+                        <TextField fx:id="receiveNoteVATField" editable="false" layoutY="62.0" promptText="Adószám" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="230.0" />
+                        <TextField fx:id="receiveNoteAddressField" editable="false" layoutX="190.0" layoutY="27.0" promptText="Cím" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0" />
+                        <TextField fx:id="receiveNoteBankNumberField" editable="false" layoutX="190.0" layoutY="75.0" promptText="Bankszámlaszám" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="150.0" />
+                        <TextField fx:id="receiveNotePhoneField" editable="false" layoutY="110.0" promptText="Telefonszám" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="110.0" />
+                        <TextField fx:id="receiveNoteEmailField" editable="false" layoutX="190.0" layoutY="110.0" promptText="Email cím" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="190.0" />
                      </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
                   </AnchorPane>
                </children>
             </HBox>
-            <HBox prefHeight="54.0" prefWidth="750.0">
+            <AnchorPane>
                <children>
-                  <ComboBox fx:id="selectPaymentMethod" onAction="#changePaymentMethod" prefWidth="150.0" promptText="Fizetési mód" />
-                  <DatePicker fx:id="currentDate" editable="false" />
-                  <DatePicker fx:id="paymentDate" />
-                  <DatePicker fx:id="fulfilmentDate" />
+                  <HBox prefHeight="54.0" prefWidth="750.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0">
+                     <children>
+                        <ComboBox fx:id="selectPaymentMethod" onAction="#changePaymentMethod" prefWidth="150.0" promptText="Fizetési mód">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <DatePicker fx:id="currentDate" editable="false">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </DatePicker>
+                        <DatePicker fx:id="paymentDate">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </DatePicker>
+                        <DatePicker fx:id="fulfilmentDate" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="selectSellerButton" mnemonicParsing="false" onAction="#selectSeller" styleClass="buttons" text="Szállító kiválasztása" AnchorPane.leftAnchor="15.0" />
                </children>
-            </HBox>
-            <TableView fx:id="receiveNoteProductTable" prefHeight="245.0" prefWidth="750.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </AnchorPane>
+            <TableView fx:id="receiveNoteProductTable" maxHeight="300.0">
                <placeholder>
                   <Label text="Adj hozzá terméket!" />
                </placeholder>
@@ -66,19 +116,24 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </TableView>
-            <Pane prefHeight="48.0" prefWidth="750.0">
+            <AnchorPane minHeight="100.0">
                <children>
-                  <TextField fx:id="sumGrossPriceField" layoutX="594.0" layoutY="2.0" promptText="Bruttó összár" />
-                  <TextField fx:id="sumNetPriceField" editable="false" layoutX="445.0" layoutY="2.0" promptText="Nettó összár" />
-                  <Button fx:id="addProductToReceiveNoteButton" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#addProductToReceiveNote" text="Termék hozzáadása" />
-                  <Button fx:id="removeProductFromReceiveNoteListButton" layoutX="145.0" layoutY="2.0" mnemonicParsing="false" onAction="#removeProductReceiveNoteList" text="Termék eltávolítása" />
+                  <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                     <children>
+                        <TextField fx:id="sumGrossPriceField" promptText="Bruttó összár" styleClass="textField" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="5.0" />
+                        <TextField fx:id="sumNetPriceField" editable="false" promptText="Nettó összár" styleClass="textField" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="5.0" />
+                        <Button fx:id="addProductToReceiveNoteButton" mnemonicParsing="false" onAction="#addProductToReceiveNote" styleClass="buttons" text="Termék hozzáadása" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="5.0" />
+                        <Button fx:id="removeProductFromReceiveNoteListButton" mnemonicParsing="false" onAction="#removeProductReceiveNoteList" styleClass="buttons" text="Termék eltávolítása" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="50.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Button fx:id="doneReceiveNoteButton" mnemonicParsing="false" onAction="#closeReceiveNote" styleClass="buttons" text="Bevételezési bizonylat lezárása" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="15.0" />
+                        <Button fx:id="cancelReceiveNoteButton" mnemonicParsing="false" onAction="#cancelReceiveNote" styleClass="buttons" text="Mégse" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="250.0" />
+                     </children>
+                  </AnchorPane>
                </children>
-            </Pane>
-            <Pane layoutX="10.0" layoutY="494.0" prefHeight="48.0" prefWidth="750.0">
-               <children>
-                  <Button fx:id="doneReceiveNoteButton" layoutX="456.0" layoutY="2.0" mnemonicParsing="false" onAction="#closeReceiveNote" text="Bevételezési bizonylat lezárása" />
-                  <Button fx:id="cancelReceiveNoteButton" layoutX="665.0" layoutY="2.0" mnemonicParsing="false" onAction="#cancelReceiveNote" text="Mégse" />
-               </children></Pane>
+            </AnchorPane>
          </children>
       </VBox>
    </children>

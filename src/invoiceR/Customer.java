@@ -56,25 +56,6 @@ public class Customer {
         this.hasSameAddress = hasSameAddress;
     }
 
-    public Customer(String id, String billingName, String billingCity, String billingPostalCode,
-                    String billingAddress, String billingAddressType, String billingHouseNumber,
-                    String billingStairway, String billingFloor, String customerVAT, String phone,
-                    String email, String bankAccount) {
-        Id = id;
-        this.billingName = billingName;
-        this.billingCity = billingCity;
-        this.billingPostalCode = billingPostalCode;
-        this.billingAddress = billingAddress;
-        this.billingAddressType = billingAddressType;
-        this.billingHouseNumber = billingHouseNumber;
-        this.billingStairway = billingStairway;
-        this.billingFloor = billingFloor;
-        this.customerVAT = customerVAT;
-        this.phone = phone;
-        this.email = email;
-        this.bankAccount = bankAccount;
-    }
-
     public String getId() {
         return Id;
     }

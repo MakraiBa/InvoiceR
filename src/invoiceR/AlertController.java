@@ -39,7 +39,7 @@ public class AlertController {
 
     public void noProductSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Nincs termék kiválasztva");
+        alert.setTitle("Hiba!");
         alert.setHeaderText("Nincs termék kiválasztva");
         alert.setContentText("Válassz ki egy terméket!");
         alert.showAndWait();
@@ -50,7 +50,7 @@ public class AlertController {
 
     public void noCustomerSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Nincs ügyfél kiválasztva");
+        alert.setTitle("Hiba!");
         alert.setHeaderText("Nincs ügyfél kiválasztva");
         alert.setContentText("Válassz ki egy ügyfelet!");
         alert.showAndWait();
@@ -69,18 +69,25 @@ public class AlertController {
             alert.close();
         }
     }
-       /* public void closeInvoiceAlert(String id, String name) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Törlés megerősítése");
-            alert.setHeaderText("A következő termék törlésére készülsz: " + name);
-            alert.setContentText("Biztos vagy benne?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                connect.deleteProduct(id);
-            } else {
-                alert.close();
-            }
-        }*/
+    public void emptyTextAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Hiba!");
+        alert.setHeaderText("A csillaggal jelölt mezők kitöltése kötelező!");
+        alert.setContentText("Töltsd ki a szükséges mezőket!");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
+    public void emptyFieldAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Hiba!");
+        alert.setHeaderText("A dokumentum nincs teljesen kitöltve!");
+        alert.setContentText("Töltsd ki a szükséges mezőket!");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
 }
 

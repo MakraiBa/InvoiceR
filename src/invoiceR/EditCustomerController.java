@@ -16,11 +16,11 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 public class EditCustomerController implements Initializable {
 
     Connect connect = new Connect();
+    AlertController alert = new AlertController();
 
     @FXML
     private TextField editCustomerNameField;
@@ -108,20 +108,20 @@ public class EditCustomerController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
-        mainStage.initStyle(StageStyle.UTILITY);
+        mainStage.initStyle(StageStyle.UNDECORATED);
+        mainStage.setMaximized(true);
         mainStage.show();
     }
 
     @FXML
     void deleteCustomer(ActionEvent event) throws IOException {
-        connect.deleteCustomer(MainController.customerId);
-        Stage stage = (Stage) deleteCustomerButton.getScene().getWindow();
-        stage.close();
+        alert.deleteCustomerConfirmAlert(MainController.customerId, MainController.customerBillingName);
 
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
-        mainStage.initStyle(StageStyle.UTILITY);
+        mainStage.initStyle(StageStyle.UNDECORATED);
+        mainStage.setMaximized(true);
         mainStage.show();
     }
 
@@ -129,11 +129,7 @@ public class EditCustomerController implements Initializable {
     void doneEditCustomer(ActionEvent event) throws IOException {
         if (editCustomerNameField.getText().isEmpty() || editAddressField.getText().isEmpty()
                 || editPostalCodeField.getText().isEmpty() || editCityField.getText().isEmpty()) {
-            Parent root = FXMLLoader.load(getClass().getResource("scenes/emptyFieldErrorStage.fxml"));
-            Stage missingErrorStage = new Stage();
-            missingErrorStage.setScene(new Scene(root));
-            missingErrorStage.initStyle(StageStyle.UTILITY);
-            missingErrorStage.show();
+            alert.emptyTextAlert();
         } else {
             connect.updateCustomerDetails(
                     MainController.customerId, editCustomerNameField.getText(), editCityField.getText(), editPostalCodeField.getText(),
@@ -150,7 +146,8 @@ public class EditCustomerController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));
-            mainStage.initStyle(StageStyle.UTILITY);
+            mainStage.initStyle(StageStyle.UNDECORATED);
+            mainStage.setMaximized(true);
             mainStage.show();
         }
     }

@@ -2,13 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c96ce97b-4699-4db6-b534-044c8ff107ba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/invoiceR/style/mainStyle.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvR.iml" beforeDir="false" afterPath="$PROJECT_DIR$/InvR.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/AlertController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/AlertController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Connect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Connect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Customer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/CustomerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/EditCustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/EditCustomerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/EditProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/EditProductController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/ProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/ReceiveNoteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/ReceiveNoteController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectBuyerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectBuyerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SplashController$ShowSplashScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SplashController$ShowSplashScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SplashController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SplashController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/buyerSelectStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/buyerSelectStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/customerStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/customerStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/editCustomerStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/editCustomerStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/editProductStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/editProductStage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/invoiceStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/invoiceStage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/mainStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/mainStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/mainscene.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/productSelectStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/productSelectStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/productStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/productStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/receiveNoteStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/receiveNoteStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/splashStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/scenes/splashStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/styles/mainStyle.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/AlertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/AlertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Connect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/EditCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/EditCustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/EditProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/EditProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/ReceiveNoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/ReceiveNoteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/SelectBuyerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/SelectBuyerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/SelectProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/SelectProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/SplashController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/SplashController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/buyerSelectStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/buyerSelectStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/customerStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/customerStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/databaseErrorStage.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/editCustomerStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/editCustomerStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/editProductStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/editProductStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/emptyFieldErrorStage.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/invoiceStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/invoiceStage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/mainStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/mainStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/mainscene.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/productSelectStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/productSelectStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/productStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/productStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/receiveNoteStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/receiveNoteStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/splashStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/splashStage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/styles/mainStyle.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +210,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../jfoenix-9.0.10.jar" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15527344" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />

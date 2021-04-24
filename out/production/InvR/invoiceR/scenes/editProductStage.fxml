@@ -5,30 +5,32 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.EditProductController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="400.0" stylesheets="@../style/mainStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.EditProductController">
     <children>
         <HBox alignment="CENTER" layoutY="84.0" prefHeight="50.0" prefWidth="400.0" spacing="30.0">
             <children>
                 <ComboBox fx:id="editVATtype" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#editSetVATValue" prefHeight="25.0" prefWidth="150.0" promptText="Áfa mértéke" />
-                <ComboBox fx:id="editSelectType" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#editSetType" prefHeight="25.0" prefWidth="150.0" promptText="Típus">
+                <ComboBox fx:id="editSelectType" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" promptText="Típus">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
                 </ComboBox>
             </children>
         </HBox>
-        <ButtonBar layoutY="596.0" prefHeight="40.0" prefWidth="400.0">
+        <ButtonBar layoutY="606.0" prefHeight="40.0" prefWidth="400.0">
             <buttons>
-                <Button fx:id="editDoneProductButton" mnemonicParsing="false" onAction="#editDoneAddProduct" prefWidth="12.0" text="Módosítás" />
-                <Button fx:id="deleteProductButton" layoutX="229.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteProduct" text="Törlés" />
-                <Button fx:id="editCancelProductButton" mnemonicParsing="false" onAction="#closeProductScene" text="Mégse" />
+                <Button fx:id="editDoneProductButton" mnemonicParsing="false" onAction="#editDoneAddProduct" prefHeight="30.0" prefWidth="131.0" styleClass="buttons" text="Módosítás" />
+                <Button fx:id="deleteProductButton" layoutX="229.0" layoutY="17.0" mnemonicParsing="false" onAction="#deleteProduct" styleClass="buttons" text="Törlés" />
+                <Button fx:id="editCancelProductButton" mnemonicParsing="false" onAction="#closeProductScene" styleClass="buttons" text="Mégse" />
             </buttons>
             <padding>
                 <Insets right="20.0" />
@@ -38,12 +40,12 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="100.0" prefWidth="180.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nettó eladási ár*">
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Nettó eladási ár*">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </Text>
-                        <TextField fx:id="editProductNetPrice" onKeyReleased="#editCalculateGross" promptText="0 Ft">
+                        <TextField fx:id="editProductNetPrice" onKeyReleased="#editCalculateGross" promptText="0 Ft" styleClass="textField">
                             <VBox.margin>
                                 <Insets left="10.0" />
                             </VBox.margin>
@@ -52,12 +54,12 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="180.0" HBox.hgrow="ALWAYS">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bruttó eladási ár*" textAlignment="RIGHT">
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Bruttó eladási ár*" textAlignment="RIGHT">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </Text>
-                        <TextField fx:id="editProductGrossPrice" onKeyReleased="#editCalculateNet" promptText="0 Ft">
+                        <TextField fx:id="editProductGrossPrice" onKeyReleased="#editCalculateNet" promptText="0 Ft" styleClass="textField">
                             <VBox.margin>
                                 <Insets right="10.0" />
                             </VBox.margin>
@@ -73,12 +75,12 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="100.0" prefWidth="180.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nettó beszerzési ár">
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Nettó beszerzési ár">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </Text>
-                        <TextField fx:id="editPurchaseNetPrice" onKeyReleased="#editCalculatePurchaseGross" promptText="0 Ft">
+                        <TextField fx:id="editPurchaseNetPrice" onKeyReleased="#editCalculatePurchaseGross" promptText="0 Ft" styleClass="textField">
                             <VBox.margin>
                                 <Insets left="10.0" />
                             </VBox.margin>
@@ -87,12 +89,12 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="180.0" HBox.hgrow="ALWAYS">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bruttó beszerzési ár" textAlignment="RIGHT">
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Bruttó beszerzési ár" textAlignment="RIGHT">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </Text>
-                        <TextField fx:id="editPurchaseGrossPrice" onKeyReleased="#editCalculatePurchaseNet" promptText="0 Ft">
+                        <TextField fx:id="editPurchaseGrossPrice" onKeyReleased="#editCalculatePurchaseNet" promptText="0 Ft" styleClass="textField">
                             <VBox.margin>
                                 <Insets right="10.0" />
                             </VBox.margin>
@@ -108,12 +110,12 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="60.0" prefWidth="180.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nettó kedvezményes ár">
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Nettó kedvezményes ár">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </Text>
-                        <TextField fx:id="editDiscountNetPrice" onKeyReleased="#editCalculateDiscountGrossPrice" promptText="0 Ft">
+                        <TextField fx:id="editDiscountNetPrice" onKeyReleased="#editCalculateDiscountGrossPrice" promptText="0 Ft" styleClass="textField">
                             <VBox.margin>
                                 <Insets left="10.0" />
                             </VBox.margin>
@@ -122,12 +124,12 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="180.0" HBox.hgrow="ALWAYS">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bruttó kedvezményes ár" textAlignment="RIGHT">
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Bruttó kedvezményes ár" textAlignment="RIGHT">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </Text>
-                        <TextField fx:id="editDiscountGrossPrice" onKeyReleased="#editCalculateDiscountNetPrice" promptText="0 Ft">
+                        <TextField fx:id="editDiscountGrossPrice" onKeyReleased="#editCalculateDiscountNetPrice" promptText="0 Ft" styleClass="textField">
                             <VBox.margin>
                                 <Insets right="10.0" />
                             </VBox.margin>
@@ -139,14 +141,14 @@
                 <Insets />
             </opaqueInsets>
         </HBox>
-        <VBox layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="400.0">
+        <VBox layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0">
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Név*" textAlignment="CENTER" wrappingWidth="400.5367431640625">
+                <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Név*" textAlignment="CENTER" wrappingWidth="400.5367431640625">
                     <VBox.margin>
-                        <Insets bottom="20.0" />
+                        <Insets top="20.0" />
                     </VBox.margin>
                 </Text>
-                <TextField fx:id="editProductNameField" maxWidth="380.0" minWidth="380.0" prefWidth="380.0" promptText="Termék/szolgáltatás neve">
+                <TextField fx:id="editProductNameField" maxWidth="380.0" minWidth="380.0" prefWidth="380.0" promptText="Termék/szolgáltatás neve" styleClass="textField">
                     <VBox.margin>
                         <Insets left="10.0" />
                     </VBox.margin>
@@ -162,24 +164,30 @@
                 </CheckBox>
             </children>
         </Pane>
-        <HBox alignment="CENTER" layoutY="500.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="400.0" spacing="20.0">
+        <HBox alignment="CENTER" layoutY="513.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="400.0" spacing="20.0">
             <children>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="180.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Megjegyzés" textAlignment="RIGHT">
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Megjegyzés" textAlignment="RIGHT">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </Text>
-                        <TextArea fx:id="editProductCommentField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" wrapText="true">
+                        <TextArea fx:id="editProductCommentField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" styleClass="textField" wrapText="true">
                             <VBox.margin>
                                 <Insets right="10.0" />
                             </VBox.margin>
                         </TextArea>
                     </children>
                 </VBox>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Készlet:" wrappingWidth="61.2034912109375" />
-                <Text fx:id="storageQuantity" layoutX="305.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 db" />
+                <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Készlet:" wrappingWidth="61.2034912109375">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Text>
+                <Text fx:id="storageQuantity" fill="#4c93d7" layoutX="305.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0 db">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font></Text>
             </children>
             <opaqueInsets>
                 <Insets />
@@ -189,12 +197,12 @@
             <children>
                 <VBox alignment="CENTER" prefHeight="60.0" prefWidth="180.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cikkszám">
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Cikkszám">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </Text>
-                        <TextField fx:id="editProductCodeField">
+                        <TextField fx:id="editProductCodeField" styleClass="textField">
                             <VBox.margin>
                                 <Insets left="10.0" />
                             </VBox.margin>
@@ -203,12 +211,12 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="180.0" HBox.hgrow="ALWAYS">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TESZOR" textAlignment="RIGHT">
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="TESZOR" textAlignment="RIGHT">
                             <VBox.margin>
                                 <Insets bottom="10.0" />
                             </VBox.margin>
                         </Text>
-                        <TextField fx:id="editTeszorField">
+                        <TextField fx:id="editTeszorField" styleClass="textField">
                             <VBox.margin>
                                 <Insets right="10.0" />
                             </VBox.margin>
@@ -220,5 +228,10 @@
                 <Insets />
             </opaqueInsets>
         </HBox>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="400.0" styleClass="header" text="Termék szerkesztése" textAlignment="CENTER">
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </Label>
     </children>
 </Pane>

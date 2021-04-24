@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -70,6 +71,21 @@ public class SelectBuyerController implements Initializable {
     private Button addCustomerButton;
 
     @FXML
+    private ImageView closeAndReturnButton;
+
+    @FXML
+    void cancelStage(MouseEvent event) throws IOException {
+        Stage stage = (Stage) closeAndReturnButton.getScene().getWindow();
+        stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
+        Stage returnToInvoice = new Stage();
+        returnToInvoice.setScene(new Scene(root));
+        returnToInvoice.initStyle(StageStyle.UNDECORATED);
+        returnToInvoice.show();
+    }
+
+    @FXML
     void addCustomerViaButton(ActionEvent event) throws IOException {
         try {
             Customer selectedBuyer = customerTable.getSelectionModel().getSelectedItem();
@@ -92,8 +108,8 @@ public class SelectBuyerController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource(stageToOpen));
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
-            invoiceStage.initStyle(StageStyle.UTILITY);
             invoiceStage.show();
+            invoiceStage.initStyle(StageStyle.UNDECORATED);
 
             Stage stage = (Stage) customerTable.getScene().getWindow();
             stage.close();
@@ -125,7 +141,7 @@ public class SelectBuyerController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource(stageToOpen));
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
-            invoiceStage.initStyle(StageStyle.UTILITY);
+            invoiceStage.initStyle(StageStyle.UNDECORATED);
             invoiceStage.show();
 
             Stage stage = (Stage) customerTable.getScene().getWindow();

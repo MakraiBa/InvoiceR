@@ -16,6 +16,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.converter.IntegerStringConverter;
@@ -32,6 +34,7 @@ public class ReceiveNoteController implements Initializable {
     Connect connect = new Connect();
     Calculator calculator = new Calculator();
     Seller seller = new Seller();
+    AlertController alertController = new AlertController();
 
     ObservableList<String> paymentMethodList = FXCollections.observableArrayList("Készpénz", "Átutalás - 8 nap", "Átutalás - 15 nap", "Átutalás - 30 nap", "Utánvét", "Bankkártya");
     ObservableList<Product> receiveNoteProductList = FXCollections.observableArrayList();
@@ -127,20 +130,72 @@ public class ReceiveNoteController implements Initializable {
     private Button cancelReceiveNoteButton;
 
     @FXML
+    private ImageView maximizeSceneButton;
+
+    @FXML
+    private ImageView closeAndReturnButton;
+
+    @FXML
+    private ImageView minimizeSceneButton;
+
+    @FXML
+    void maximizeScene(MouseEvent event) {
+        Stage stage = (Stage) cancelReceiveNoteButton.getScene().getWindow();
+        if (stage.isMaximized()) {
+            stage.setMaximized(false);
+        } else {
+            stage.setMaximized(true);
+        }
+    }
+
+    @FXML
+    void minimizeScene(MouseEvent event) {
+        Stage stage = (Stage) minimizeSceneButton.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    @FXML
+    void cancelAndReturn(MouseEvent event) throws IOException {
+        SelectBuyerController.customerBankNumber = "";
+        SelectBuyerController.customerName = "";
+        SelectBuyerController.customerEmail = "";
+        SelectBuyerController.customerFullAddress = "";
+        SelectBuyerController.customerPhone = "";
+        SelectBuyerController.customerVAT = "";
+        Stage stage = (Stage) closeAndReturnButton.getScene().getWindow();
+        stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage returnToMain = new Stage();
+        returnToMain.setScene(new Scene(root));
+        returnToMain.initStyle(StageStyle.UNDECORATED);
+        returnToMain.setMaximized(true);
+        returnToMain.show();
+    }
+
+    @FXML
+    void cancelReceiveNote(ActionEvent event) throws IOException {
+        Stage stage = (Stage) closeAndReturnButton.getScene().getWindow();
+        stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage returnToMain = new Stage();
+        returnToMain.setScene(new Scene(root));
+        returnToMain.initStyle(StageStyle.UNDECORATED);
+        returnToMain.setMaximized(true);
+        returnToMain.show();
+    }
+
+    @FXML
     void addProductToReceiveNote(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/productSelectStage.fxml"));
         Stage addProductToInvoice = new Stage();
         addProductToInvoice.setScene(new Scene(root));
-        addProductToInvoice.initStyle(StageStyle.UTILITY);
+        addProductToInvoice.initStyle(StageStyle.UNDECORATED);
         addProductToInvoice.show();
 
         Stage stage = (Stage) addProductToReceiveNoteButton.getScene().getWindow();
         stage.close();
-    }
-
-    @FXML
-    void cancelReceiveNote(ActionEvent event) {
-
     }
 
     @FXML
@@ -150,7 +205,7 @@ public class ReceiveNoteController implements Initializable {
     }
 
     @FXML
-    void closeReceiveNote(ActionEvent event) {
+    void closeReceiveNote(ActionEvent event) throws IOException {
         UUID uuid = UUID.randomUUID();
         String receiveNoteId = String.valueOf(uuid);
         String sellerId = SelectBuyerController.buyerId;
@@ -159,15 +214,26 @@ public class ReceiveNoteController implements Initializable {
         String receiveNoteSumNetPrice = sumNetPriceField.getText();
         String receiveNoteSumGrossPrice = sumGrossPriceField.getText();
         String receiveNoteCurrentDateString = currentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        if (receiveNoteName == null || receiveNoteProductList.isEmpty()) {
+            alertController.emptyFieldAlert();
+        } else {
+            connect.addNewReceiveNote(receiveNoteId, sellerId, receiveNoteName,
+                    receiveNoteFullAddress, receiveNoteSumNetPrice, receiveNoteSumGrossPrice, receiveNoteCurrentDateString);
 
-        connect.addNewReceiveNote(receiveNoteId, sellerId, receiveNoteName,
-                receiveNoteFullAddress, receiveNoteSumNetPrice, receiveNoteSumGrossPrice, receiveNoteCurrentDateString);
+            connect.increaseStockQuantity(receiveNoteProductList);
 
-        connect.increaseStockQuantity(receiveNoteProductList);
+            Stage stage = (Stage) doneReceiveNoteButton.getScene().getWindow();
+            stage.close();
 
-        Stage stage = (Stage) doneReceiveNoteButton.getScene().getWindow();
-        stage.close();
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+            Stage returnToMain = new Stage();
+            returnToMain.setScene(new Scene(root));
+            returnToMain.initStyle(StageStyle.UNDECORATED);
+            returnToMain.setMaximized(true);
+            returnToMain.show();
+        }
     }
+
 
     @FXML
     void removeProductReceiveNoteList(ActionEvent event) {
@@ -224,6 +290,8 @@ public class ReceiveNoteController implements Initializable {
 
         sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(receiveNoteProductList)));
         sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(receiveNoteProductList)));
+
+        receiveNoteProductTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public void updateQuantity(TableColumn.CellEditEvent editcell) {

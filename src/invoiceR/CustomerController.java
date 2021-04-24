@@ -21,6 +21,7 @@ import java.util.UUID;
 public class CustomerController implements Initializable {
 
     Connect customerConnect = new Connect();
+    AlertController alert = new AlertController();
 
     @FXML
     private TextField customerNameField;
@@ -108,11 +109,7 @@ public class CustomerController implements Initializable {
         UUID uuid = UUID.randomUUID();
         if (customerNameField.getText().isEmpty() || addressField.getText().isEmpty()
                 || postalCodeField.getText().isEmpty() || cityField.getText().isEmpty()) {
-            Parent root = FXMLLoader.load(getClass().getResource("scenes/emptyFieldErrorStage.fxml"));
-            Stage missingErrorStage = new Stage();
-            missingErrorStage.setScene(new Scene(root));
-            missingErrorStage.initStyle(StageStyle.UTILITY);
-            missingErrorStage.show();
+            alert.emptyTextAlert();
         } else {
             customerConnect.addNewCustomer(
                     String.valueOf(uuid), customerNameField.getText(), cityField.getText(), postalCodeField.getText(),
@@ -128,7 +125,8 @@ public class CustomerController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));
-            mainStage.initStyle(StageStyle.UTILITY);
+            mainStage.setMaximized(true);
+            mainStage.initStyle(StageStyle.UNDECORATED);
             mainStage.show();
         }
     }

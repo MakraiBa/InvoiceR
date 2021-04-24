@@ -1,10 +1,10 @@
 package invoiceR;
 
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.converter.IntegerStringConverter;
@@ -21,7 +23,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import java.util.UUID;
@@ -130,9 +131,38 @@ public class InvoiceController implements Initializable {
     @FXML
     private Button cancelInvoiceButton;
 
-
     @FXML
     private Button removeProductFromInvoiceListButton;
+
+    @FXML
+    private ImageView maximizeSceneButton;
+
+    @FXML
+    private ImageView closeAndReturnButton;
+
+    @FXML
+    private ImageView minimizeSceneButton;
+
+    @FXML
+    void invoiceCancel(MouseEvent event) throws IOException {
+        SelectProductController.addedProducts.clear();
+        SelectBuyerController.customerName = "";
+        SelectBuyerController.customerFullAddress = "";
+        SelectBuyerController.customerVAT = "";
+        SelectBuyerController.customerPhone = "";
+        SelectBuyerController.customerEmail = "";
+        SelectBuyerController.customerBankNumber = "";
+
+        Stage stage = (Stage) closeAndReturnButton.getScene().getWindow();
+        stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage returnToMain = new Stage();
+        returnToMain.setScene(new Scene(root));
+        returnToMain.initStyle(StageStyle.UNDECORATED);
+        returnToMain.setMaximized(true);
+        returnToMain.show();
+    }
 
     @FXML
     void removeProductFromInvoiceList(ActionEvent event) {
@@ -156,7 +186,7 @@ public class InvoiceController implements Initializable {
     }
 
     @FXML
-    void closeInvoice(ActionEvent event) {
+    void closeInvoice(ActionEvent event) throws IOException {
         UUID uuid = UUID.randomUUID();
         String invoiceInvoiceId = String.valueOf(uuid);
         String invoiceBuyerId = SelectBuyerController.buyerId;
@@ -165,18 +195,27 @@ public class InvoiceController implements Initializable {
         String invoiceSumNetPriceString = sumNetPriceField.getText();
         String invoiceGrossNetPriceString = sumGrossPriceField.getText();
         String invoiceCurrentDateString = currentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        if (invoiceProductList.isEmpty() || invoiceCustomerName == null) {
+            alertController.emptyFieldAlert();
+        } else {
+            connect.addNewInvoice(invoiceInvoiceId, invoiceCustomerName, invoiceCustomerFullAddress,
+                    invoiceSumNetPriceString, invoiceGrossNetPriceString, invoiceCurrentDateString, invoiceBuyerId);
 
-        connect.addNewInvoice(invoiceInvoiceId, invoiceCustomerName, invoiceCustomerFullAddress,
-                invoiceSumNetPriceString, invoiceGrossNetPriceString, invoiceCurrentDateString, invoiceBuyerId);
+            connect.reduceStockQuantity(invoiceProductList);
+            Stage stage = (Stage) doneInvoiceButton.getScene().getWindow();
+            stage.close();
 
-        connect.reduceStockQuantity(invoiceProductList);
-
-        Stage stage = (Stage) doneInvoiceButton.getScene().getWindow();
-        stage.close();
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+            Stage returnToMain = new Stage();
+            returnToMain.setScene(new Scene(root));
+            returnToMain.initStyle(StageStyle.UNDECORATED);
+            returnToMain.setMaximized(true);
+            returnToMain.show();
+        }
     }
 
     @FXML
-    void cancelInvoice(ActionEvent event) {
+    void cancelInvoice(ActionEvent event) throws IOException {
         SelectProductController.addedProducts.clear();
         SelectBuyerController.customerName = "";
         SelectBuyerController.customerFullAddress = "";
@@ -187,6 +226,13 @@ public class InvoiceController implements Initializable {
 
         Stage stage = (Stage) cancelInvoiceButton.getScene().getWindow();
         stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage returnToMain = new Stage();
+        returnToMain.setScene(new Scene(root));
+        returnToMain.initStyle(StageStyle.UNDECORATED);
+        returnToMain.setMaximized(true);
+        returnToMain.show();
     }
 
     @FXML
@@ -200,7 +246,7 @@ public class InvoiceController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/productSelectStage.fxml"));
         Stage addProductToInvoice = new Stage();
         addProductToInvoice.setScene(new Scene(root));
-        addProductToInvoice.initStyle(StageStyle.UTILITY);
+        addProductToInvoice.initStyle(StageStyle.UNDECORATED);
         addProductToInvoice.show();
 
         Stage stage = (Stage) sumGrossPriceField.getScene().getWindow();
@@ -212,12 +258,28 @@ public class InvoiceController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/buyerSelectStage.fxml"));
         Stage buyerSelectStage = new Stage();
         buyerSelectStage.setScene(new Scene(root));
+        buyerSelectStage.initStyle(StageStyle.UNDECORATED);
         buyerSelectStage.show();
 
         Stage stage = (Stage) sumGrossPriceField.getScene().getWindow();
         stage.close();
     }
 
+    @FXML
+    void maximizeScene(MouseEvent event) {
+        Stage stage = (Stage) selectCustomerButton.getScene().getWindow();
+        if (stage.isMaximized()) {
+            stage.setMaximized(false);
+        } else {
+            stage.setMaximized(true);
+        }
+    }
+
+    @FXML
+    void minimizeScene(MouseEvent event) {
+        Stage stage = (Stage) minimizeSceneButton.getScene().getWindow();
+        stage.setIconified(true);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -228,6 +290,7 @@ public class InvoiceController implements Initializable {
                 Seller.defaultSeller.getSellerHouseNumber(), Seller.defaultSeller.getSellerStairway(),
                 Seller.defaultSeller.getSellerFloor()
         ));
+
         sellerEmailField.setText(Seller.defaultSeller.sellerEmail);
         sellerInvoiceVATField.setText(Seller.defaultSeller.sellerVAT);
         sellerPhoneField.setText(Seller.defaultSeller.sellerPhone);
@@ -249,6 +312,8 @@ public class InvoiceController implements Initializable {
         boughtQuantityColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         invoiceProductList.addAll(SelectProductController.addedProducts);
         invoiceProductTable.setItems(invoiceProductList);
+
+        invoiceProductTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         buyerInvoiceNameField.setText(SelectBuyerController.customerName);
         buyerInvoiceAddressField.setText(SelectBuyerController.customerFullAddress);

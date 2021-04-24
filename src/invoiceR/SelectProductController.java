@@ -14,8 +14,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,6 +66,22 @@ public class SelectProductController implements Initializable {
     private TableColumn<Product, String> invoiceProductNumberColumn;
 
     @FXML
+    private ImageView closeAndReturnButton;
+
+    @FXML
+    void cancelStage(MouseEvent event) throws IOException {
+        Stage stage = (Stage) closeAndReturnButton.getScene().getWindow();
+        stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
+        Stage returnToInvoice = new Stage();
+        returnToInvoice.setScene(new Scene(root));
+        returnToInvoice.initStyle(StageStyle.UNDECORATED);
+        returnToInvoice.setMaximized(true);
+        returnToInvoice.show();
+    }
+
+    @FXML
     void selectProductViaButton(ActionEvent event) throws IOException {
         boolean addProduct = true;
         try {
@@ -87,6 +105,7 @@ public class SelectProductController implements Initializable {
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
             invoiceStage.show();
+            invoiceStage.initStyle(StageStyle.UNDECORATED);
 
             Stage stage = (Stage) productSearchField.getScene().getWindow();
             stage.close();
@@ -122,6 +141,8 @@ public class SelectProductController implements Initializable {
             Parent root = loader.load();
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
+            invoiceStage.initStyle(StageStyle.UNDECORATED);
+            invoiceStage.setMaximized(true);
             invoiceStage.show();
         }
     }
@@ -136,6 +157,8 @@ public class SelectProductController implements Initializable {
         stockQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("Stock"));
         invoiceProductNumberColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("ProductNr"));
         getSelectedProductList();
+
+        productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         FilteredList<Product> filteredProduct = new FilteredList<>(FXCollections.observableList(productsToAdd));
         productSearchField.textProperty().addListener((observable, oldValue, newValue) ->

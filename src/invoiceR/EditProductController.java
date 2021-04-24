@@ -95,7 +95,8 @@ public class EditProductController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
-        mainStage.initStyle(StageStyle.UTILITY);
+        mainStage.initStyle(StageStyle.UNDECORATED);
+        mainStage.setMaximized(true);
         mainStage.show();
 
     }
@@ -109,7 +110,8 @@ public class EditProductController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
-        mainStage.initStyle(StageStyle.UTILITY);
+        mainStage.initStyle(StageStyle.UNDECORATED);
+        mainStage.setMaximized(true);
         mainStage.show();
     }
 
@@ -157,11 +159,7 @@ public class EditProductController implements Initializable {
     @FXML
     void editDoneAddProduct(ActionEvent event) throws IOException {
         if (editProductNameField.getText().isEmpty() || editProductNetPrice.getText().isEmpty() || editProductGrossPrice.getText().isEmpty()) {
-            Parent root = FXMLLoader.load(getClass().getResource("scenes/emptyFieldErrorStage.fxml"));
-            Stage missingErrorStage = new Stage();
-            missingErrorStage.setScene(new Scene(root));
-            missingErrorStage.initStyle(StageStyle.UTILITY);
-            missingErrorStage.show();
+            alertController.emptyTextAlert();
         } else {
             connect.updateProductDetails(editTeszorField.getText(), MainController.productID,
                     getServiceValueFromString((String) editSelectType.getSelectionModel().getSelectedItem()),
@@ -176,14 +174,10 @@ public class EditProductController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));
-            mainStage.initStyle(StageStyle.UTILITY);
+            mainStage.initStyle(StageStyle.UNDECORATED);
+            mainStage.setMaximized(true);
             mainStage.show();
         }
-    }
-
-    @FXML
-    void editSetType(ActionEvent event) {
-
     }
 
     @FXML
@@ -222,6 +216,7 @@ public class EditProductController implements Initializable {
         editTeszorField.setText(MainController.Teszor);
         editDiscountCheckbox.setSelected(MainController.isDiscounted);
         editSelectType.getSelectionModel().select(getServiceValue(MainController.isService));
+        storageQuantity.setText(String.valueOf(MainController.productQuantity) + " db");
         editVATtype.getSelectionModel().select(getVATValue(MainController.productNetPrice, MainController.productGrossPrice));
         if (MainController.isDiscounted) {
             editDiscountPriceHBox.setDisable(false);

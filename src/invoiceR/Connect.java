@@ -5,7 +5,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.sql.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -281,7 +280,6 @@ public class Connect {
             String insert = "INSERT INTO `receivenotes` ( `receivenoteid`,`sellerid`,`receivenotename`,`fulladdress`,`sumnetprice`,`sumgrossprice`,`receivenotedate`) " +
                     "VALUES ('" + receiveNoteId + "','" + sellerId + "','" + receiveNoteName + "','" + receiveNoteFullAddress + "','" + receiveNoteSumNetPrice + "','" + receiveNoteSumGrossPrice + "','" + receiveNoteCurrentDate + "')";
             st.executeUpdate(insert);
-            System.out.println("ddssdd");
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }

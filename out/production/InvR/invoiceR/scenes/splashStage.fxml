@@ -16,7 +16,7 @@
             <Image url="@../images/splashBackGround.jpg" />
          </image>
       </ImageView>
-      <Pane layoutY="287.0" prefHeight="114.0" prefWidth="600.0" styleClass="shadowBackground" stylesheets="@../styles/mainStyle.css">
+      <Pane layoutY="287.0" prefHeight="114.0" prefWidth="600.0" styleClass="shadowBackground" stylesheets="@../style/mainStyle.css">
          <children>
             <Label fx:id="loadingLabel" layoutX="14.0" layoutY="57.0" text="Az alkalmazás betöltése..." textFill="WHITE">
                <font>
@@ -29,7 +29,7 @@
          <font>
             <Font name="Bodoni MT" size="50.0" />
          </font></Label>
-      <Button id="splashSceneCloseButton" fx:id="closeSplashSceneButton" alignment="TOP_LEFT" layoutX="560.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeSplashScreen" prefHeight="40.0" prefWidth="40.0" stylesheets="@../styles/mainStyle.css" text="X" textAlignment="CENTER" textFill="WHITE">
+      <Button id="splashSceneCloseButton" fx:id="closeSplashSceneButton" alignment="TOP_LEFT" layoutX="560.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeSplashScreen" prefHeight="40.0" prefWidth="40.0" stylesheets="@../style/mainStyle.css" text="X" textAlignment="CENTER" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

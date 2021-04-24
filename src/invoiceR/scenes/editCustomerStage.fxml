@@ -4,12 +4,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.EditCustomerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" stylesheets="@../style/mainStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.EditCustomerController">
    <children>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" spacing="20.0">
          <children>
@@ -18,20 +19,20 @@
                   <Insets top="20.0" />
                </VBox.margin>
                <children>
-                  <Text layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ügyfél adatok*" textAlignment="CENTER" wrappingWidth="401.2554931640625" />
-                  <TextField fx:id="editCustomerNameField" layoutX="20.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="360.0" promptText="Név" />
+                  <Text fill="#4c93d7" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ügyfél adatok*" textAlignment="CENTER" wrappingWidth="401.2554931640625" />
+                  <TextField fx:id="editCustomerNameField" layoutX="20.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="360.0" promptText="Név" styleClass="textField" />
                </children>
             </Pane>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="400.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Számlázási cím" textAlignment="CENTER" wrappingWidth="401.2554931640625" />
-                  <TextField fx:id="editCityField" layoutX="205.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Város*" />
-                  <TextField fx:id="editPostalCodeField" layoutX="20.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Irányítószám*" />
-                  <TextField fx:id="editAddressField" layoutX="20.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Közterület neve*" />
-                  <TextField fx:id="editAddressTypeField" layoutX="290.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Típus" />
-                  <TextField fx:id="editHouseNumberField" layoutX="20.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Házszám/Hrsz" />
-                  <TextField fx:id="editStairWayField" layoutX="130.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Épület/Lépcsőház" />
-                  <TextField fx:id="editFloorField" layoutX="240.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Emelet/Ajtó" />
+                  <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Számlázási cím" textAlignment="CENTER" wrappingWidth="401.2554931640625" />
+                  <TextField fx:id="editCityField" layoutX="205.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Város*" styleClass="textField" />
+                  <TextField fx:id="editPostalCodeField" layoutX="20.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Irányítószám*" styleClass="textField" />
+                  <TextField fx:id="editAddressField" layoutX="20.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Közterület neve*" styleClass="textField" />
+                  <TextField fx:id="editAddressTypeField" layoutX="290.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Típus" styleClass="textField" />
+                  <TextField fx:id="editHouseNumberField" layoutX="20.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Házszám/Hrsz" styleClass="textField" />
+                  <TextField fx:id="editStairWayField" layoutX="130.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Épület/Lépcsőház" styleClass="textField" />
+                  <TextField fx:id="editFloorField" layoutX="240.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Emelet/Ajtó" styleClass="textField" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -40,21 +41,21 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </Pane>
-            <CheckBox fx:id="editInvoiceAddressCheckBox" mnemonicParsing="false" onAction="#editFillDeliveryAddress" text="A szállítási és számlázási cím megegyezik">
+            <CheckBox fx:id="editInvoiceAddressCheckBox" mnemonicParsing="false" onAction="#editFillDeliveryAddress" text="A szállítási és számlázási cím megegyezik" textFill="#4c93d7">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" />
                </VBox.margin>
             </CheckBox>
             <Pane fx:id="editDeliveryAddressPane" disable="true" layoutX="10.0" layoutY="145.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="400.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Szállítási cím" textAlignment="CENTER" wrappingWidth="401.2554931640625" />
-                  <TextField fx:id="editDeliveryCityField" layoutX="20.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Város" />
-                  <TextField fx:id="editDeliveryPostalCodeField" layoutX="210.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Irányítószám" />
-                  <TextField fx:id="editDeliveryAddressField" layoutX="20.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Közterület neve" />
-                  <TextField fx:id="editDeliveryAddressTypeField" layoutX="290.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Típus" />
-                  <TextField fx:id="editDeliveryHouseNumberField" layoutX="20.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Házszám/Hrsz" />
-                  <TextField fx:id="editDeliveryStairWayField" layoutX="130.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Épület/Lépcsőház" />
-                  <TextField fx:id="editDeliveryFloorField" layoutX="240.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Emelet/Ajtó" />
+                  <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" text="Szállítási cím" textAlignment="CENTER" wrappingWidth="401.2554931640625" />
+                  <TextField fx:id="editDeliveryCityField" layoutX="20.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Város" styleClass="textField" />
+                  <TextField fx:id="editDeliveryPostalCodeField" layoutX="210.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Irányítószám" styleClass="textField" />
+                  <TextField fx:id="editDeliveryAddressField" layoutX="20.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Közterület neve" styleClass="textField" />
+                  <TextField fx:id="editDeliveryAddressTypeField" layoutX="290.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Típus" styleClass="textField" />
+                  <TextField fx:id="editDeliveryHouseNumberField" layoutX="20.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Házszám/Hrsz" styleClass="textField" />
+                  <TextField fx:id="editDeliveryStairWayField" layoutX="130.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Épület/Lépcsőház" styleClass="textField" />
+                  <TextField fx:id="editDeliveryFloorField" layoutX="240.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="90.0" promptText="Emelet/Ajtó" styleClass="textField" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -62,13 +63,13 @@
             </Pane>
             <Pane layoutX="10.0" layoutY="145.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="400.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="További adatok" textAlignment="CENTER" wrappingWidth="401.2554931640625" />
-                  <TextField fx:id="editVATNumberField" layoutX="20.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Adószám" />
-                  <TextField fx:id="editTelephoneField" layoutX="210.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Telefonszám" />
-                  <TextField fx:id="editEmailField" layoutX="20.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Email cím" />
-                  <TextField fx:id="editWebPageField" layoutX="210.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Weboldal" />
-                  <TextField fx:id="editCustomerCommentField" layoutX="20.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="360.0" promptText="Megjegyzés" />
-                  <TextField fx:id="editBankAccountField" layoutX="20.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Bankszámlaszám" />
+                  <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textField" text="További adatok" textAlignment="CENTER" wrappingWidth="401.2554931640625" />
+                  <TextField fx:id="editVATNumberField" layoutX="20.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Adószám" styleClass="textField" />
+                  <TextField fx:id="editTelephoneField" layoutX="210.0" layoutY="15.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Telefonszám" styleClass="textField" />
+                  <TextField fx:id="editEmailField" layoutX="20.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Email cím" styleClass="textField" />
+                  <TextField fx:id="editWebPageField" layoutX="210.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" promptText="Weboldal" styleClass="textField" />
+                  <TextField fx:id="editCustomerCommentField" layoutX="20.0" layoutY="135.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="360.0" promptText="Megjegyzés" styleClass="textField" />
+                  <TextField fx:id="editBankAccountField" layoutX="20.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="Bankszámlaszám" styleClass="textField" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -76,18 +77,23 @@
             </Pane>
             <ButtonBar prefHeight="40.0" prefWidth="400.0">
                <buttons>
-                  <Button fx:id="editCustomerDoneButton" mnemonicParsing="false" onAction="#doneEditCustomer" prefWidth="12.0" text="Módosítás" />
-                  <Button fx:id="deleteCustomerButton" mnemonicParsing="false" onAction="#deleteCustomer" text="Törlés" />
-                  <Button fx:id="cancelEditCustomerButton" layoutX="315.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeEditCustomerScene" text="Mégse" />
+                  <Button fx:id="editCustomerDoneButton" mnemonicParsing="false" onAction="#doneEditCustomer" prefWidth="130.0" styleClass="buttons" text="Módosítás" />
+                  <Button fx:id="deleteCustomerButton" mnemonicParsing="false" onAction="#deleteCustomer" styleClass="buttons" text="Törlés" />
+                  <Button fx:id="cancelEditCustomerButton" layoutX="315.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeEditCustomerScene" styleClass="buttons" text="Mégse" />
                </buttons>
                <padding>
                   <Insets right="20.0" />
                </padding>
                <VBox.margin>
-                  <Insets bottom="15.0" />
+                  <Insets bottom="25.0" />
                </VBox.margin>
             </ButtonBar>
          </children>
       </VBox>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="3.0" prefHeight="24.0" prefWidth="400.0" styleClass="header" text="Partner szerkesztése" textAlignment="CENTER">
+         <padding>
+            <Insets bottom="15.0" />
+         </padding>
+      </Label>
    </children>
 </Pane>

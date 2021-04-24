@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -41,6 +42,7 @@ public class MainController implements Initializable {
     public static String productComment;
     public static boolean isDiscounted;
     public static boolean isService;
+    public static int productQuantity;
 
     public static String customerId;
     public static String customerBillingName;
@@ -203,6 +205,36 @@ public class MainController implements Initializable {
 
     @FXML
     private TableColumn<ReceiveNote, String> receiveNoteSumGrossPriceColumn;
+    @FXML
+    private ImageView minimizeSceneButton;
+
+    @FXML
+    private ImageView maximizeSceneButton;
+
+    @FXML
+    private ImageView closeAndReturnButton;
+
+
+    @FXML
+    void maximizeScene(MouseEvent event) {
+        Stage stage = (Stage) maximizeSceneButton.getScene().getWindow();
+        if (stage.isMaximized()) {
+            stage.setMaximized(false);
+        } else {
+            stage.setMaximized(true);
+        }
+    }
+
+    @FXML
+    void minimizeScene(MouseEvent event) {
+        Stage stage = (Stage) minimizeSceneButton.getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    @FXML
+    void closeStage(MouseEvent event) {
+        System.exit(0);
+    }
 
     @FXML
     void addNewReceiveNote(ActionEvent event) throws IOException {
@@ -210,7 +242,7 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/receiveNoteStage.fxml"));
         Stage newCustomerStage = new Stage();
         newCustomerStage.setScene(new Scene(root));
-        newCustomerStage.initStyle(StageStyle.UTILITY);
+        newCustomerStage.initStyle(StageStyle.UNDECORATED);
         newCustomerStage.show();
 
         Stage stage = (Stage) newReceiveNoteButton.getScene().getWindow();
@@ -222,7 +254,7 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/customerStage.fxml"));
         Stage newCustomerStage = new Stage();
         newCustomerStage.setScene(new Scene(root));
-        newCustomerStage.initStyle(StageStyle.UTILITY);
+        newCustomerStage.initStyle(StageStyle.UNDECORATED);
         newCustomerStage.show();
 
         Stage stage = (Stage) newCustomerButton.getScene().getWindow();
@@ -235,6 +267,7 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
         Stage newInvoiceStage = new Stage();
         newInvoiceStage.setScene(new Scene(root));
+        newInvoiceStage.initStyle(StageStyle.UNDECORATED);
         newInvoiceStage.show();
 
         Stage stage = (Stage) newInvoiceButton.getScene().getWindow();
@@ -246,7 +279,7 @@ public class MainController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/productStage.fxml"));
         Stage newProductStage = new Stage();
         newProductStage.setScene(new Scene(root));
-        newProductStage.initStyle(StageStyle.UTILITY);
+        newProductStage.initStyle(StageStyle.UNDECORATED);
         newProductStage.show();
 
         Stage stage = (Stage) newProductButton.getScene().getWindow();
@@ -309,7 +342,7 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/editProductStage.fxml"));
             Stage editProductStage = new Stage();
             editProductStage.setScene(new Scene(root));
-            editProductStage.initStyle(StageStyle.UTILITY);
+            editProductStage.initStyle(StageStyle.UNDECORATED);
             editProductStage.show();
 
             Stage stage = (Stage) productTable.getScene().getWindow();
@@ -346,10 +379,11 @@ public class MainController implements Initializable {
             customerBankAccount = selectedcustomer.bankAccount;
             customerComment = selectedcustomer.customerComment;
             hasSameAddress = selectedcustomer.hasSameAddress;
+
             Parent root = FXMLLoader.load(getClass().getResource("scenes/editCustomerStage.fxml"));
             Stage editCustomerStage = new Stage();
             editCustomerStage.setScene(new Scene(root));
-            editCustomerStage.initStyle(StageStyle.UTILITY);
+            editCustomerStage.initStyle(StageStyle.UNDECORATED);
             editCustomerStage.show();
 
             Stage stage = (Stage) customerTable.getScene().getWindow();
@@ -376,11 +410,12 @@ public class MainController implements Initializable {
         productComment = selectedproduct.Comment;
         isDiscounted = selectedproduct.isDiscounted;
         isService = selectedproduct.isService;
+        productQuantity = selectedproduct.Stock;
         if (event.getClickCount() == 2) {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/editProductStage.fxml"));
             Stage editProductStage = new Stage();
             editProductStage.setScene(new Scene(root));
-            editProductStage.initStyle(StageStyle.UTILITY);
+            editProductStage.initStyle(StageStyle.UNDECORATED);
             editProductStage.show();
 
             Stage stage = (Stage) productTable.getScene().getWindow();
@@ -418,7 +453,7 @@ public class MainController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/editCustomerStage.fxml"));
             Stage editCustomerStage = new Stage();
             editCustomerStage.setScene(new Scene(root));
-            editCustomerStage.initStyle(StageStyle.UTILITY);
+            editCustomerStage.initStyle(StageStyle.UNDECORATED);
             editCustomerStage.show();
 
             Stage stage = (Stage) customerTable.getScene().getWindow();
@@ -435,6 +470,7 @@ public class MainController implements Initializable {
         discountGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("discountGrossPrice"));
         stockQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("Stock"));
         getProduct();
+        productTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("billingName"));
         customerAddressColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("billingAddress"));
@@ -444,6 +480,7 @@ public class MainController implements Initializable {
         houseNumberColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("billingHouseNumber"));
         cityColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("billingCity"));
         getCustomer();
+        customerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         invoiceCustomerNameColumn.setCellValueFactory(new PropertyValueFactory<Invoice, String>("invoiceCustomerName"));
         invoiceCustomerAddressColumn.setCellValueFactory(new PropertyValueFactory<Invoice, String>("customerFullAddress"));
@@ -451,6 +488,7 @@ public class MainController implements Initializable {
         invoiceSumNetPriceColumn.setCellValueFactory(new PropertyValueFactory<Invoice, String>("sumNetPrice"));
         invoiceSumGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<Invoice, String>("sumGrossPrice"));
         getInvoice();
+        invoiceTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         receiveNoteCustomerNameColumn.setCellValueFactory(new PropertyValueFactory<ReceiveNote, String>("receiveNoteName"));
         receiveNoteCustomerAddressColumn.setCellValueFactory(new PropertyValueFactory<ReceiveNote, String>("receiveNoteFullAddress"));
@@ -458,6 +496,7 @@ public class MainController implements Initializable {
         receiveNoteSumNetPriceColumn.setCellValueFactory(new PropertyValueFactory<ReceiveNote, String>("receiveNoteSumNetPrice"));
         receiveNoteSumGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<ReceiveNote, String>("receiveNoteSumGrossPrice"));
         getReceiveNote();
+        receiveNoteTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         FilteredList<Product> filteredProduct = new FilteredList<>(FXCollections.observableList(product));
         productSearchField.textProperty().addListener((observable, oldValue, newValue) ->

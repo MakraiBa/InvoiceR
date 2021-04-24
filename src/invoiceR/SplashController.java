@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -53,6 +54,8 @@ public class SplashController implements Initializable {
                     }
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
+                    stage.setMaximized(true);
+                    stage.initStyle(StageStyle.UNDECORATED);
                     stage.setMaximized(true);
                     stage.show();
                     loadingPane.getScene().getWindow().hide();

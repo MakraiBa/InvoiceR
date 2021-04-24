@@ -16,7 +16,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class ProductController implements Initializable {
     double VAT = 1.27;
@@ -27,6 +28,7 @@ public class ProductController implements Initializable {
 
     Connect productConnect = new Connect();
     Calculator calculator = new Calculator();
+    AlertController alertController=new AlertController();
 
 
     @FXML
@@ -85,18 +87,15 @@ public class ProductController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
-        mainStage.initStyle(StageStyle.UTILITY);
+        mainStage.initStyle(StageStyle.UNDECORATED);
+        mainStage.setMaximized(true);
         mainStage.show();
     }
 
     @FXML
     void doneAddProduct(ActionEvent event) throws IOException {
         if (productNameField.getText().isEmpty() || productNetPrice.getText().isEmpty() || productGrossPrice.getText().isEmpty()) {
-            Parent root = FXMLLoader.load(getClass().getResource("scenes/emptyFieldErrorStage.fxml"));
-            Stage missingErrorStage = new Stage();
-            missingErrorStage.setScene(new Scene(root));
-            missingErrorStage.initStyle(StageStyle.UTILITY);
-            missingErrorStage.show();
+            alertController.emptyTextAlert();
         } else {
             UUID uuid = UUID.randomUUID();
             int service = checkIfService(isService);
@@ -123,7 +122,8 @@ public class ProductController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));
-            mainStage.initStyle(StageStyle.UTILITY);
+            mainStage.initStyle(StageStyle.UNDECORATED);
+            mainStage.setMaximized(true);
             mainStage.show();
         }
     }

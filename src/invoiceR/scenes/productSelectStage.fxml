@@ -5,14 +5,18 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.SelectProductController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="750.0" stylesheets="@../style/mainStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.SelectProductController">
    <children>
-      <TextField fx:id="productSearchField" layoutX="24.0" layoutY="14.0" prefHeight="26.0" prefWidth="247.0" promptText="Termék keresése" />
-      <TableView fx:id="productTable" layoutX="31.0" layoutY="43.0" onMouseClicked="#addProduct" prefHeight="513.0" prefWidth="650.0">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" styleClass="header" text="Termék kiválasztása" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <TextField fx:id="productSearchField" layoutX="24.0" layoutY="14.0" prefHeight="26.0" prefWidth="247.0" promptText="Termék keresése" styleClass="textField" AnchorPane.bottomAnchor="550.0" />
+      <TableView fx:id="productTable" layoutX="31.0" layoutY="43.0" onMouseClicked="#addProduct" prefHeight="480.0" prefWidth="650.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
          <placeholder>
-            <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
+            <Label maxHeight="-Infinity" text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
          </placeholder>
          <columns>
             <TableColumn fx:id="productNameColumn" editable="false" prefWidth="75.0" text="Név" />
@@ -24,6 +28,15 @@
             <TableColumn fx:id="invoiceProductNumberColumn" editable="false" prefWidth="75.0" text="Cikkszám" />
          </columns>
       </TableView>
-      <Button fx:id="selectProductButton" layoutX="593.0" layoutY="557.0" mnemonicParsing="false" onAction="#selectProductViaButton" text="Termék kiválasztása" />
+      <Button fx:id="selectProductButton" layoutX="593.0" layoutY="557.0" mnemonicParsing="false" onAction="#selectProductViaButton" styleClass="buttons" text="Termék kiválasztása" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="30.0" />
+      <HBox layoutX="682.0" layoutY="7.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
+         <children>
+            <ImageView fx:id="closeAndReturnButton" fitHeight="20.0" fitWidth="14.0" onMouseClicked="#cancelStage" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
