@@ -169,7 +169,7 @@ public class ReceiveNoteController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage returnToMain = new Stage();
         returnToMain.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
         returnToMain.getIcons().add(icon);
         returnToMain.initStyle(StageStyle.UNDECORATED);
         returnToMain.setMaximized(true);
@@ -184,7 +184,7 @@ public class ReceiveNoteController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage returnToMain = new Stage();
         returnToMain.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
         returnToMain.getIcons().add(icon);
         returnToMain.initStyle(StageStyle.UNDECORATED);
         returnToMain.setMaximized(true);
@@ -196,7 +196,7 @@ public class ReceiveNoteController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/productSelectStage.fxml"));
         Stage addProductToInvoice = new Stage();
         addProductToInvoice.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
         addProductToInvoice.getIcons().add(icon);
         addProductToInvoice.initStyle(StageStyle.UNDECORATED);
         addProductToInvoice.show();
@@ -235,7 +235,7 @@ public class ReceiveNoteController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage returnToMain = new Stage();
             returnToMain.setScene(new Scene(root));
-            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
             returnToMain.getIcons().add(icon);
             returnToMain.initStyle(StageStyle.UNDECORATED);
             returnToMain.setMaximized(true);
@@ -243,10 +243,25 @@ public class ReceiveNoteController implements Initializable {
         }
     }
 
-
     @FXML
     void removeProductReceiveNoteList(ActionEvent event) {
+        Product selectedproduct = receiveNoteProductTable.getSelectionModel().getSelectedItem();
+        try {
+            for (int i = 0; i < SelectProductController.addedProducts.size(); i++) {
+                if (SelectProductController.addedProducts.get(i).getId().equals(selectedproduct.getId())) {
+                    SelectProductController.addedProducts.remove(i);
+                }
+            }
+            receiveNoteProductList.clear();
+            receiveNoteProductList.addAll(SelectProductController.addedProducts);
+            receiveNoteProductTable.setItems(receiveNoteProductList);
+            receiveNoteProductTable.refresh();
 
+            sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(receiveNoteProductList)));
+            sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(receiveNoteProductList)));
+        } catch (Exception e) {
+            alertController.noProductSelectedAlert();
+        }
     }
 
     @FXML
@@ -287,8 +302,8 @@ public class ReceiveNoteController implements Initializable {
 
         receiveNoteProductTable.setEditable(true);
         receiveNoteProductNameColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("Name"));
-        receiveNoteProductNetPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productNetPrice"));
-        receiveNoteProductGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productGrossPrice"));
+        receiveNoteProductNetPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("purchaseNetPrice"));
+        receiveNoteProductGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("purchaseGrossPrice"));
         receiveNoteProductQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("Stock"));
         receiveNoteProductNumberColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("ProductNr"));
         receiveNoteBoughtQuantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("productQuantity"));
@@ -297,8 +312,8 @@ public class ReceiveNoteController implements Initializable {
         receiveNoteProductList.addAll(SelectProductController.addedProducts);
         receiveNoteProductTable.setItems(receiveNoteProductList);
 
-        sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(receiveNoteProductList)));
-        sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(receiveNoteProductList)));
+        sumNetPriceField.setText(String.valueOf(calculator.setPurchaseNetPrice(receiveNoteProductList)));
+        sumGrossPriceField.setText(String.valueOf(calculator.setPurchaseGrossSum(receiveNoteProductList)));
 
         receiveNoteProductTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
@@ -306,8 +321,8 @@ public class ReceiveNoteController implements Initializable {
     public void updateQuantity(TableColumn.CellEditEvent editcell) {
         Product selectedproduct = receiveNoteProductTable.getSelectionModel().getSelectedItem();
         selectedproduct.setProductQuantity(editcell.getNewValue().hashCode());
-        sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(receiveNoteProductList)));
-        sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(receiveNoteProductList)));
+        sumNetPriceField.setText(String.valueOf(calculator.setPurchaseNetPrice(receiveNoteProductList)));
+        sumGrossPriceField.setText(String.valueOf(calculator.setPurchaseGrossSum(receiveNoteProductList)));
     }
 
 }

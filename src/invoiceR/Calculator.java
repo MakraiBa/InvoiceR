@@ -116,6 +116,22 @@ public class Calculator {
         return grossPriceSum;
     }
 
+    public Double setPurchaseNetPrice(ObservableList<Product> productlist) {
+        Double purchaseNetSum = 0.0;
+        for (int i = 0; i < productlist.size(); i++) {
+            purchaseNetSum = purchaseNetSum + purchaseNetSum + (Double.valueOf(productlist.get(i).purchaseNetPrice) * productlist.get(i).productQuantity);
+        }
+        return purchaseNetSum;
+    }
+
+    public int setPurchaseGrossSum(ObservableList<Product> productlist) {
+        int purchaseGrossSum = 0;
+        for (int i = 0; i < productlist.size(); i++) {
+            purchaseGrossSum = purchaseGrossSum + (int) (Double.valueOf(productlist.get(i).purchaseGrossPrice) * productlist.get(i).productQuantity);
+        }
+        return purchaseGrossSum;
+    }
+
     public LocalDate calculateDays(int daysToAdd) {
         String today = String.valueOf(LocalDate.now());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

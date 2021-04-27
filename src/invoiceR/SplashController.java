@@ -2,13 +2,11 @@ package invoiceR;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -35,7 +33,7 @@ public class SplashController implements Initializable {
         @Override
         public void run() {
             try {
-                Thread.sleep(600);
+                Thread.sleep(1000);
                 Platform.runLater(() -> {
                     Stage stage = new Stage();
                     Parent root = null;
@@ -50,7 +48,6 @@ public class SplashController implements Initializable {
                     Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
                     stage.getIcons().add(icon);
                     stage.initStyle(StageStyle.UNDECORATED);
-                    stage.setMaximized(true);
                     stage.show();
                     loadingPane.getScene().getWindow().hide();
                 });
@@ -63,6 +60,9 @@ public class SplashController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadData.getProducts();
+        loadData.getCustomers();
+        loadData.getInvoices();
+        loadData.getReceiveNotes();
         new ShowSplashScreen().start();
         FadeTransition ft = new FadeTransition(Duration.millis(800), loadingLabel);
         ft.setFromValue(1.0);

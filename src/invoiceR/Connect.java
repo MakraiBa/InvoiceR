@@ -51,8 +51,8 @@ public class Connect {
                         productResult.getString("teszor"),
                         productResult.getInt("stock"),
                         productResult.getString("productId"),
-                        getServiceBoolean(productResult.getInt("isservice")),
-                        getDiscountedBoolean(productResult.getInt("isdiscounted")),
+                        getBooleanValue(productResult.getInt("isservice")),
+                        getBooleanValue(productResult.getInt("isdiscounted")),
                         productResult.getString("name"),
                         productResult.getString("comment"),
                         productResult.getString("productnumber"),
@@ -360,16 +360,8 @@ public class Connect {
         return increaseStock;
     }
 
-    private boolean getServiceBoolean(int isservice) {
-        if (isservice == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    private boolean getDiscountedBoolean(int isdiscounted) {
-        if (isdiscounted == 0) {
+    private boolean getBooleanValue(int inttoboolean) {
+        if (inttoboolean == 0) {
             return false;
         } else {
             return true;

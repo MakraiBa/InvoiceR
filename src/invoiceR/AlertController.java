@@ -14,11 +14,9 @@ public class AlertController {
     ButtonType Confirm= new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
 
     public void deleteProductConfirmAlert(String id, String name) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",Cancel,Confirm);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Biztos vagy benne?",Cancel,Confirm);
         alert.setTitle("Törlés megerősítése");
         alert.setHeaderText("A következő termék törlésére készülsz: " + name);
-        alert.setContentText("Biztos vagy benne?");
-
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == Confirm) {
             connect.deleteProduct(id);
@@ -28,11 +26,9 @@ public class AlertController {
     }
 
     public void deleteCustomerConfirmAlert(String id, String name) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"",Cancel,Confirm);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Biztos vagy benne?",Cancel,Confirm);
         alert.setTitle("Törlés megerősítése");
         alert.setHeaderText("A következő partner törlésére készülsz: " + name);
-        alert.setContentText("Biztos vagy benne?");
-
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == Confirm) {
             connect.deleteCustomer(id);

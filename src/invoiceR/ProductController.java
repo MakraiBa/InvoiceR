@@ -29,7 +29,7 @@ public class ProductController implements Initializable {
 
     Connect productConnect = new Connect();
     Calculator calculator = new Calculator();
-    AlertController alertController=new AlertController();
+    AlertController alertController = new AlertController();
 
 
     @FXML
@@ -88,7 +88,7 @@ public class ProductController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
         mainStage.getIcons().add(icon);
         mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setMaximized(true);
@@ -101,23 +101,11 @@ public class ProductController implements Initializable {
             alertController.emptyTextAlert();
         } else {
             UUID uuid = UUID.randomUUID();
-            int service = checkIfService(isService);
-            int discounted = checkIfDiscounted();
-            String productSceneTeszor = TeszorField.getText();
-            String productSceneId = String.valueOf(uuid);
-            String productSceneName = productNameField.getText();
-            String productSceneComment = productCommentField.getText();
-            String productSceneProductNr = productCodeField.getText();
-            String productSceneProductNetPrice = productNetPrice.getText();
-            String productSceneProductGrossPrice = productGrossPrice.getText();
-            String productScenePurchaseNetPrice = purchaseNetPrice.getText();
-            String productScenePurchaseGrossPrice = purchaseGrossPrice.getText();
-            String productSceneDiscountNetPrice = discountNetPrice.getText();
-            String productSceneDiscountGrossPrice = discountGrossPrice.getText();
 
-            productConnect.addNewProduct(productSceneTeszor, productSceneId, service, productSceneName, productSceneComment, productSceneProductNr,
-                    productSceneProductNetPrice, productSceneProductGrossPrice, productScenePurchaseNetPrice, productScenePurchaseGrossPrice,
-                    productSceneDiscountNetPrice, productSceneDiscountGrossPrice, discounted);
+            productConnect.addNewProduct(TeszorField.getText(), String.valueOf(uuid), checkIfService(isService), productNameField.getText(),
+                    productCommentField.getText(), productCodeField.getText(),
+                    productNetPrice.getText(), productGrossPrice.getText(), purchaseNetPrice.getText(),
+                    purchaseGrossPrice.getText(), discountNetPrice.getText(), discountGrossPrice.getText(), checkIfDiscounted());
 
             Stage stage = (Stage) doneProductButton.getScene().getWindow();
             stage.close();
@@ -125,7 +113,7 @@ public class ProductController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));
-            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
             mainStage.getIcons().add(icon);
             mainStage.initStyle(StageStyle.UNDECORATED);
             mainStage.setMaximized(true);

@@ -106,8 +106,8 @@
                </placeholder>
               <columns>
                 <TableColumn fx:id="receiveNoteProductNameColumn" prefWidth="75.0" text="Név" />
-                <TableColumn fx:id="receiveNoteProductNetPriceColumn" prefWidth="75.0" text="Nettó ár" />
-                  <TableColumn fx:id="receiveNoteProductGrossPriceColumn" prefWidth="75.0" text="Bruttó ár" />
+                <TableColumn fx:id="receiveNoteProductNetPriceColumn" prefWidth="75.0" text="Nettó beszerzési ár" />
+                  <TableColumn fx:id="receiveNoteProductGrossPriceColumn" prefWidth="75.0" text="Bruttó beszerzési ár" />
                   <TableColumn fx:id="receiveNoteProductQuantityColumn" prefWidth="75.0" text="Raktárkészlet" />
                   <TableColumn fx:id="receiveNoteProductNumberColumn" prefWidth="75.0" text="Cikkszám" />
                   <TableColumn fx:id="receiveNoteBoughtQuantityColumn" onEditCommit="#updateQuantity" prefWidth="152.800048828125" text="Szállított mennyiség" />

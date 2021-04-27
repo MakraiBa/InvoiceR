@@ -77,18 +77,17 @@ public class SelectProductController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/invoiceStage.fxml"));
         Stage returnToInvoice = new Stage();
         returnToInvoice.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
         returnToInvoice.getIcons().add(icon);
         returnToInvoice.initStyle(StageStyle.UNDECORATED);
-        returnToInvoice.setMaximized(true);
         returnToInvoice.show();
     }
 
     @FXML
     void selectProductViaButton(ActionEvent event) throws IOException {
         boolean addProduct = true;
+        Product selectedproduct = productTable.getSelectionModel().getSelectedItem();
         try {
-            Product selectedproduct = productTable.getSelectionModel().getSelectedItem();
             for (int i = 0; i < addedProducts.size(); i++) {
                 if (addedProducts.get(i).Id.equals(selectedproduct.Id)) {
                     addProduct = false;
@@ -107,7 +106,7 @@ public class SelectProductController implements Initializable {
             Parent root = loader.load();
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
-            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
             invoiceStage.getIcons().add(icon);
             invoiceStage.initStyle(StageStyle.UNDECORATED);
             invoiceStage.show();
@@ -146,10 +145,9 @@ public class SelectProductController implements Initializable {
             Parent root = loader.load();
             Stage invoiceStage = new Stage();
             invoiceStage.setScene(new Scene(root));
-            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
             invoiceStage.getIcons().add(icon);
             invoiceStage.initStyle(StageStyle.UNDECORATED);
-            invoiceStage.setMaximized(true);
             invoiceStage.show();
         }
     }
@@ -183,7 +181,8 @@ public class SelectProductController implements Initializable {
                     Connect.productList.get(i).isService, Connect.productList.get(i).Name,
                     Connect.productList.get(i).ProductNr, Connect.productList.get(i).productNetPrice,
                     Connect.productList.get(i).productGrossPrice, Connect.productList.get(i).discountNetPrice,
-                    Connect.productList.get(i).discountGrossPrice, 1, Connect.productList.get(i).isDiscounted));
+                    Connect.productList.get(i).discountGrossPrice, 1, Connect.productList.get(i).isDiscounted,
+                    Connect.productList.get(i).purchaseNetPrice, Connect.productList.get(i).purchaseGrossPrice));
         }
         return productsToAdd;
     }

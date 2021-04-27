@@ -146,25 +146,7 @@ public class InvoiceController implements Initializable {
 
     @FXML
     void invoiceCancel(MouseEvent event) throws IOException {
-        SelectProductController.addedProducts.clear();
-        SelectBuyerController.customerName = "";
-        SelectBuyerController.customerFullAddress = "";
-        SelectBuyerController.customerVAT = "";
-        SelectBuyerController.customerPhone = "";
-        SelectBuyerController.customerEmail = "";
-        SelectBuyerController.customerBankNumber = "";
-
-        Stage stage = (Stage) closeAndReturnButton.getScene().getWindow();
-        stage.close();
-
-        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
-        Stage returnToMain = new Stage();
-        returnToMain.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
-        returnToMain.getIcons().add(icon);
-        returnToMain.initStyle(StageStyle.UNDECORATED);
-        returnToMain.setMaximized(true);
-        returnToMain.show();
+        emptyScene();
     }
 
     @FXML
@@ -172,7 +154,7 @@ public class InvoiceController implements Initializable {
         Product selectedproduct = invoiceProductTable.getSelectionModel().getSelectedItem();
         try {
             for (int i = 0; i < SelectProductController.addedProducts.size(); i++) {
-                if (SelectProductController.addedProducts.get(i).Name.equals(selectedproduct.Name)) {
+                if (SelectProductController.addedProducts.get(i).getId().equals(selectedproduct.getId())) {
                     SelectProductController.addedProducts.remove(i);
                 }
             }
@@ -190,19 +172,13 @@ public class InvoiceController implements Initializable {
 
     @FXML
     void closeInvoice(ActionEvent event) throws IOException {
-        UUID uuid = UUID.randomUUID();
-        String invoiceInvoiceId = String.valueOf(uuid);
-        String invoiceBuyerId = SelectBuyerController.buyerId;
-        String invoiceCustomerName = SelectBuyerController.customerName;
-        String invoiceCustomerFullAddress = SelectBuyerController.customerFullAddress;
-        String invoiceSumNetPriceString = sumNetPriceField.getText();
-        String invoiceGrossNetPriceString = sumGrossPriceField.getText();
-        String invoiceCurrentDateString = currentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        if (invoiceProductList.isEmpty() || invoiceCustomerName == null) {
+        if (invoiceProductList.isEmpty() || SelectBuyerController.customerName == null) {
             alertController.emptyFieldAlert();
         } else {
-            connect.addNewInvoice(invoiceInvoiceId, invoiceCustomerName, invoiceCustomerFullAddress,
-                    invoiceSumNetPriceString, invoiceGrossNetPriceString, invoiceCurrentDateString, invoiceBuyerId);
+            UUID uuid = UUID.randomUUID();
+            connect.addNewInvoice(String.valueOf(uuid), SelectBuyerController.customerName, SelectBuyerController.customerFullAddress,
+                    sumNetPriceField.getText(), sumGrossPriceField.getText(),
+                    currentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), SelectBuyerController.buyerId);
 
             connect.reduceStockQuantity(invoiceProductList);
             Stage stage = (Stage) doneInvoiceButton.getScene().getWindow();
@@ -211,7 +187,7 @@ public class InvoiceController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage returnToMain = new Stage();
             returnToMain.setScene(new Scene(root));
-            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
             returnToMain.getIcons().add(icon);
             returnToMain.initStyle(StageStyle.UNDECORATED);
             returnToMain.setMaximized(true);
@@ -221,25 +197,7 @@ public class InvoiceController implements Initializable {
 
     @FXML
     void cancelInvoice(ActionEvent event) throws IOException {
-        SelectProductController.addedProducts.clear();
-        SelectBuyerController.customerName = "";
-        SelectBuyerController.customerFullAddress = "";
-        SelectBuyerController.customerVAT = "";
-        SelectBuyerController.customerPhone = "";
-        SelectBuyerController.customerEmail = "";
-        SelectBuyerController.customerBankNumber = "";
-
-        Stage stage = (Stage) cancelInvoiceButton.getScene().getWindow();
-        stage.close();
-
-        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
-        Stage returnToMain = new Stage();
-        returnToMain.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
-        returnToMain.getIcons().add(icon);
-        returnToMain.initStyle(StageStyle.UNDECORATED);
-        returnToMain.setMaximized(true);
-        returnToMain.show();
+        emptyScene();
     }
 
     @FXML
@@ -253,7 +211,7 @@ public class InvoiceController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/productSelectStage.fxml"));
         Stage addProductToInvoice = new Stage();
         addProductToInvoice.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
         addProductToInvoice.getIcons().add(icon);
         addProductToInvoice.initStyle(StageStyle.UNDECORATED);
         addProductToInvoice.show();
@@ -267,7 +225,7 @@ public class InvoiceController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/buyerSelectStage.fxml"));
         Stage buyerSelectStage = new Stage();
         buyerSelectStage.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
         buyerSelectStage.getIcons().add(icon);
         buyerSelectStage.initStyle(StageStyle.UNDECORATED);
         buyerSelectStage.show();
@@ -301,7 +259,6 @@ public class InvoiceController implements Initializable {
                 Seller.defaultSeller.getSellerHouseNumber(), Seller.defaultSeller.getSellerStairway(),
                 Seller.defaultSeller.getSellerFloor()
         ));
-
         sellerEmailField.setText(Seller.defaultSeller.sellerEmail);
         sellerInvoiceVATField.setText(Seller.defaultSeller.sellerVAT);
         sellerPhoneField.setText(Seller.defaultSeller.sellerPhone);
@@ -349,5 +306,27 @@ public class InvoiceController implements Initializable {
         }
         sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
         sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
+    }
+
+    private void emptyScene() throws IOException {
+        SelectProductController.addedProducts.clear();
+        SelectBuyerController.customerName = "";
+        SelectBuyerController.customerFullAddress = "";
+        SelectBuyerController.customerVAT = "";
+        SelectBuyerController.customerPhone = "";
+        SelectBuyerController.customerEmail = "";
+        SelectBuyerController.customerBankNumber = "";
+
+        Stage stage = (Stage) cancelInvoiceButton.getScene().getWindow();
+        stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage returnToMain = new Stage();
+        returnToMain.setScene(new Scene(root));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
+        returnToMain.getIcons().add(icon);
+        returnToMain.initStyle(StageStyle.UNDECORATED);
+        returnToMain.setMaximized(true);
+        returnToMain.show();
     }
 }
