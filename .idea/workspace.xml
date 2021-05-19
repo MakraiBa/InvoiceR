@@ -1,30 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="InvoiceR" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="c96ce97b-4699-4db6-b534-044c8ff107ba" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jfoenix_8_0_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jfoenix_9_0_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jfoenix_9_0_102.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jfoenix_9_0_103.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvR.iml" beforeDir="false" afterPath="$PROJECT_DIR$/InvR.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/AlertController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/AlertController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Calculator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Connect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Connect.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/ErrorController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Customer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/CustomerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/EditCustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/EditCustomerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/EditProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/EditProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Invoice.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Invoice.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Product.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/ProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/ReceiveNote.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/ReceiveNote.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/ReceiveNoteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/ReceiveNoteController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectBuyerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectBuyerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/Seller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/Seller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SplashController$ShowSplashScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SplashController$ShowSplashScreen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SplashController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SplashController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/AlertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/AlertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/ErrorController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/ReceiveNoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/ReceiveNoteController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/SelectProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/SelectProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/SplashController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/SplashController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/receiveNoteStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/receiveNoteStage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +119,9 @@
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
+  </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
@@ -176,8 +188,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../jfoenix-9.0.10.jar" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../javafx-sdk-11.0.2/bin/vcruntime140.dll" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15527344" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
