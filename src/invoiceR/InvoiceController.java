@@ -178,7 +178,10 @@ public class InvoiceController implements Initializable {
             UUID uuid = UUID.randomUUID();
             connect.addNewInvoice(String.valueOf(uuid), SelectBuyerController.customerName, SelectBuyerController.customerFullAddress,
                     sumNetPriceField.getText(), sumGrossPriceField.getText(),
-                    currentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), SelectBuyerController.buyerId);
+                    currentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                    SelectBuyerController.buyerId, selectPaymentMethod.getValue(),
+                    paymentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                    fulfilmentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
             connect.reduceStockQuantity(invoiceProductList);
 

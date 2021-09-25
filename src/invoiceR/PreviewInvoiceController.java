@@ -61,7 +61,7 @@ public class PreviewInvoiceController implements Initializable {
     private TextField paymentDate;
 
     @FXML
-    private TextField fulfilmentDate;
+    private TextField fullfilmentDate;
 
     @FXML
     private TableView<?> invoiceProductTable;
@@ -159,7 +159,7 @@ public class PreviewInvoiceController implements Initializable {
 
         for (int i = 0; i < Connect.invoiceList.size(); i++) {
             if (Connect.invoiceList.get(i).getInvoiceId().equals(MainController.invoiceId)) {
- dss
+
             }
         }
     }

@@ -626,7 +626,10 @@ public class MainController implements Initializable {
                     Connect.invoiceList.get(i).customerFullAddress,
                     Connect.invoiceList.get(i).sumNetPrice,
                     Connect.invoiceList.get(i).sumGrossPrice,
-                    Connect.invoiceList.get(i).currentDate
+                    Connect.invoiceList.get(i).currentDate,
+                    Connect.invoiceList.get(i).paymentMethod,
+                    Connect.invoiceList.get(i).fulfilmentDate,
+                    Connect.invoiceList.get(i).paymentDate
             ));
         }
         return invoice;

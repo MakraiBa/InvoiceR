@@ -8,10 +8,13 @@ public class Invoice {
     Double sumNetPrice;
     int sumGrossPrice;
     String currentDate;
+    String paymentMethod;
+    String fulfilmentDate;
+    String paymentDate;
 
     public Invoice(String invoiceId, String buyerId, String invoiceCustomerName,
-                   String customerFullAddress, Double sumNetPrice,
-                   int sumGrossPrice, String currentDate) {
+                   String customerFullAddress, Double sumNetPrice, int sumGrossPrice,
+                   String currentDate, String paymentMehod, String fulfilmentDate, String paymentDate) {
         this.invoiceId = invoiceId;
         this.buyerId = buyerId;
         this.invoiceCustomerName = invoiceCustomerName;
@@ -19,6 +22,9 @@ public class Invoice {
         this.sumNetPrice = sumNetPrice;
         this.sumGrossPrice = sumGrossPrice;
         this.currentDate = currentDate;
+        this.paymentMethod = paymentMehod;
+        this.fulfilmentDate = fulfilmentDate;
+        this.paymentDate = paymentDate;
     }
 
     public String getInvoiceId() {
@@ -75,5 +81,29 @@ public class Invoice {
 
     public void setCurrentDate(String currentDate) {
         this.currentDate = currentDate;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public String getFulfilmentDate() {
+        return fulfilmentDate;
+    }
+
+    public void setFulfilmentDate(String fulfilmentDate) {
+        this.fulfilmentDate = fulfilmentDate;
+    }
+
+    public String getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(String paymentDate) {
+        this.paymentDate = paymentDate;
     }
 }

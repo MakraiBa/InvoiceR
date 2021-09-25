@@ -219,15 +219,16 @@ public class Connect {
     }
 
     public Connection addNewInvoice(String invoiceId, String customerInvoiceName, String customerInvoiceAddress,
-                                    String sumNetPrice, String sumGrossPrice, String invoiceDate, String buyerId) {
+                                    String sumNetPrice, String sumGrossPrice, String invoiceDate, String buyerId, String paymentMethod,
+                                    String paymentDate, String fullfilmentDate) {
         Connection addNewInvoice = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             addNewInvoice = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement st;
             st = addNewInvoice.createStatement();
-            String insert = "INSERT INTO `invoices` ( `invoiceId`,`customerInvoiceName`,`customerInvoiceAddress`,`sumNetPrice`,`sumGrossPrice`,`invoiceDate`,`buyerId`) " +
-                    "VALUES ('" + invoiceId + "','" + customerInvoiceName + "','" + customerInvoiceAddress + "','" + sumNetPrice + "','" + sumGrossPrice + "','" + invoiceDate + "','" + buyerId + "')";
+            String insert = "INSERT INTO `invoices` ( `invoiceId`,`customerInvoiceName`,`customerInvoiceAddress`,`sumNetPrice`,`sumGrossPrice`,`invoiceDate`,`buyerId`,`paymentmethod`, `paymentdate`, `fullfilmentdate`) " +
+                    "VALUES ('" + invoiceId + "','" + customerInvoiceName + "','" + customerInvoiceAddress + "','" + sumNetPrice + "','" + sumGrossPrice + "','" + invoiceDate + "','" + buyerId + "','" + paymentMethod + "','" + paymentDate + "','" + fullfilmentDate + "')";
             st.executeUpdate(insert);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
@@ -253,8 +254,10 @@ public class Connect {
                         invoiceResult.getString("customerInvoiceAddress"),
                         Double.parseDouble(invoiceResult.getString("sumNetPrice")),
                         Integer.parseInt(invoiceResult.getString("sumGrossPrice")),
-                        invoiceResult.getString("invoiceDate")
-                ));
+                        invoiceResult.getString("invoiceDate"),
+                        invoiceResult.getString("paymentmethod"),
+                        invoiceResult.getString("fullfilmentdate"),
+                        invoiceResult.getString("paymentdate")));
             }
         } catch (ClassNotFoundException | SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
