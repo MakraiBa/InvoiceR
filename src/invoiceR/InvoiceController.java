@@ -181,6 +181,17 @@ public class InvoiceController implements Initializable {
                     currentDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), SelectBuyerController.buyerId);
 
             connect.reduceStockQuantity(invoiceProductList);
+
+            for (int i = 0; i < invoiceProductList.size(); i++) {
+                UUID productuuid = UUID.randomUUID();
+                connect.addNewInvoiceProduct(String.valueOf(productuuid), String.valueOf(uuid),
+                        SelectProductController.addedProducts.get(i).getId(), SelectProductController.addedProducts.get(i).getName(),
+                        SelectProductController.addedProducts.get(i).getProductNetPrice(), SelectProductController.addedProducts.get(i).getProductGrossPrice(),
+                        SelectProductController.addedProducts.get(i).getDiscountNetPrice(), SelectProductController.addedProducts.get(i).getDiscountGrossPrice(),
+                        SelectProductController.addedProducts.get(i).getProductNr(), invoiceProductList.get(i).getProductQuantity());
+                System.out.println();
+            }
+
             Stage stage = (Stage) doneInvoiceButton.getScene().getWindow();
             stage.close();
 

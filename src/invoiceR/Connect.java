@@ -268,6 +268,24 @@ public class Connect {
         return getInvoices;
     }
 
+    public Connection addNewInvoiceProduct(String id, String invoiceId, String productId, String pruductName,
+                                           String productNetPrice, String productGrossPrice, String discountNetPrice,
+                                           String discountGrossPrice, String productNumber, int productQuantity) {
+        Connection addNewInvoiceProduct = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            addNewInvoiceProduct = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
+            Statement st;
+            st = addNewInvoiceProduct.createStatement();
+            String insert = "INSERT INTO `invoiceproducts` (`id`, `invoiceid`, `productid`, `pruductname`, `productnetprice`, `productgrossprice`, `discountnetprice`, `discountgrossprice`, `productnumber`, `productquantity`) " +
+                    "VALUES ('" + id + "','" + invoiceId + "','" + productId + "','" + pruductName + "','" + productNetPrice + "','" + productGrossPrice + "','" + discountNetPrice + "','" + discountGrossPrice + "','" + productNumber + "','" + productQuantity + "')";
+            st.executeUpdate(insert);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e);
+        }
+        return addNewInvoiceProduct;
+    }
+
     public Connection addNewReceiveNote(String receiveNoteId, String sellerId, String receiveNoteName,
                                         String receiveNoteFullAddress, String receiveNoteSumNetPrice,
                                         String receiveNoteSumGrossPrice, String receiveNoteCurrentDate) {
