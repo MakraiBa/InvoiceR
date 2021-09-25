@@ -9,10 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c96ce97b-4699-4db6-b534-044c8ff107ba" name="Default Changelist" comment="">
+    <list default="true" id="c96ce97b-4699-4db6-b534-044c8ff107ba" name="Default Changelist" comment="hozzáadva a producttable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Invoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/mainStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/mainStage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,6 +278,14 @@
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
     </task>
+    <task id="LOCAL-00001" summary="hozzáadva a producttable">
+      <created>1632567859219</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1632567859219</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -326,6 +336,8 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <MESSAGE value="hozzáadva a producttable" />
+    <option name="LAST_COMMIT_MESSAGE" value="hozzáadva a producttable" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/InvoiceR$Main.ic" NAME="Main Coverage Results" MODIFIED="1615971873694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

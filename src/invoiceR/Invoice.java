@@ -9,9 +9,6 @@ public class Invoice {
     int sumGrossPrice;
     String currentDate;
 
-    public Invoice() {
-    }
-
     public Invoice(String invoiceId, String buyerId, String invoiceCustomerName,
                    String customerFullAddress, Double sumNetPrice,
                    int sumGrossPrice, String currentDate) {

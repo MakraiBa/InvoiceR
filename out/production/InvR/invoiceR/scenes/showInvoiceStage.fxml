@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="700.0" minWidth="900.0" stylesheets="@../style/mainStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.PreviewInvoiceController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" styleClass="header" text="Számla adatai" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0" />
+      <VBox alignment="CENTER" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0">
+         <children>
+            <HBox styleClass="smooter">
+               <children>
+                  <AnchorPane minWidth="400.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <TextField fx:id="sellerInvoiceNameField" editable="false" layoutX="15.0" layoutY="30.0" promptText="Név" styleClass="textField" stylesheets="@../style/mainStyle.css" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
+                        <TextField fx:id="sellerInvoiceVATField" editable="false" layoutX="246.0" layoutY="201.0" promptText="Adószám" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="230.0" />
+                        <TextField fx:id="sellerInvoiceAddressField" editable="false" layoutX="18.0" layoutY="84.0" promptText="Cím" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0" />
+                        <TextField fx:id="sellerInvoiceBankNumberField" editable="false" layoutX="137.0" layoutY="214.0" promptText="Bankszámlaszám" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="150.0" />
+                        <TextField fx:id="sellerPhoneField" editable="false" layoutX="18.0" layoutY="175.0" promptText="Telefonszám" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="110.0" />
+                        <TextField fx:id="sellerEmailField" editable="false" layoutX="190.0" layoutY="110.0" promptText="Email cím" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="190.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutX="10.0" layoutY="10.0" minWidth="400.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <TextField fx:id="buyerInvoiceNameField" editable="false" layoutY="27.0" promptText="Vevő neve" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
+                        <TextField fx:id="buyerInvoiceVATField" editable="false" layoutX="89.0" layoutY="212.0" promptText="Vevő adószáma" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="230.0" />
+                        <TextField fx:id="buyerInvoiceAddressField" editable="false" layoutX="12.0" layoutY="68.0" promptText="Vevő címe" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0" />
+                        <TextField fx:id="buyerInvoiceBankNumberField" editable="false" layoutX="12.0" layoutY="145.0" promptText="Vevő bankszámlaszáma" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="150.0" />
+                        <TextField fx:id="buyerPhoneField" editable="false" layoutY="110.0" promptText="Vevő telefonszáma" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="110.0" />
+                        <TextField fx:id="buyerEmailField" editable="false" layoutX="182.0" layoutY="177.0" promptText="Vevő emailcíme" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="190.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <AnchorPane VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <children>
+                  <HBox AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="30.0">
+                     <children>
+                        <ComboBox fx:id="selectPaymentMethod" minWidth="-Infinity" onAction="#changePaymentMethod" prefWidth="120.0" promptText="Fizetési mód">
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                        <DatePicker fx:id="currentDate" editable="false">
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin>
+                        </DatePicker>
+                        <DatePicker fx:id="paymentDate">
+                           <HBox.margin>
+                              <Insets right="15.0" />
+                           </HBox.margin>
+                        </DatePicker>
+                        <DatePicker fx:id="fulfilmentDate" />
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <TableView fx:id="invoiceProductTable" maxHeight="300.0" VBox.vgrow="NEVER">
+               <placeholder>
+                  <Label text="Adj hozzá terméket!" />
+               </placeholder>
+               <columns>
+                  <TableColumn fx:id="invoiceProductNameColumn" minWidth="75.0" prefWidth="75.0" text="Név" />
+                  <TableColumn fx:id="invoiceProductNetPriceColumn" minWidth="75.0" prefWidth="75.0" text="Nettó ár" />
+                  <TableColumn fx:id="invoiceProductGrossPriceColumn" minWidth="100.0" prefWidth="100.0" text="Bruttó ár" />
+                  <TableColumn fx:id="invoiceDiscountNetPriceColumn" minWidth="100.0" prefWidth="100.0" text="Kedvezményes nettó ár" />
+                  <TableColumn fx:id="invoiceDiscountGrossPriceColumn" minWidth="100.0" prefWidth="100.0" text="Kedvezményes bruttó ár" />
+                  <TableColumn fx:id="invoiceProductQuantityColumn" minWidth="100.0" prefWidth="100.0" text="Raktárkészlet" />
+                  <TableColumn fx:id="invoiceProductNumberColumn" minWidth="75.0" prefWidth="75.0" text="Cikkszám" />
+                  <TableColumn fx:id="boughtQuantityColumn" minWidth="100.0" onEditCommit="#updateQuantity" prefWidth="100.0" text="Vásárolt mennyiség" />
+               </columns>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </TableView>
+            <AnchorPane minHeight="100.0">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+               <children>
+                  <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+                     <children>
+                        <TextField fx:id="sumGrossPriceField" promptText="Bruttó összár" styleClass="textField" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="185.0" AnchorPane.topAnchor="5.0" />
+                        <TextField fx:id="sumNetPriceField" editable="false" promptText="Nettó összár" styleClass="textField" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="5.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Button fx:id="exitInvoicePreviewButton" layoutX="725.0" layoutY="-15.0" mnemonicParsing="false" onAction="#exitInvoicePreview" prefWidth="150.0" styleClass="buttons" text="Bezár" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <HBox layoutX="861.0" layoutY="2.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
+         <children>
+            <ImageView fx:id="minimizeSceneButton" fitHeight="25.0" fitWidth="14.0" onMouseClicked="#minimizeScene" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/minimize.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="maximizeSceneButton" fitHeight="25.0" fitWidth="14.0" onMouseClicked="#maximizeScene" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/reduce.png" />
+               </image>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="closeAndReturnButton" fitHeight="20.0" fitWidth="14.0" onMouseClicked="#invoiceCancel" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

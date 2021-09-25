@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane stylesheets="@../style/mainStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.MainController">
+<AnchorPane stylesheets="@../style/mainStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.MainController">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="750.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
          <right>
@@ -113,7 +112,7 @@
                         <AnchorPane fx:id="invoicePane" prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="invoiceSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Számla keresése" styleClass="textField" />
-                              <TableView fx:id="invoiceTable" layoutY="57.0" onMouseClicked="#openCustomer" prefHeight="513.0" prefWidth="650.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
+                              <TableView fx:id="invoiceTable" layoutY="57.0" onMouseClicked="#openInvoice" prefHeight="513.0" prefWidth="650.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                                  <placeholder>
                                     <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
                                  </placeholder>
@@ -134,7 +133,7 @@
                         <AnchorPane fx:id="incomingPane" prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="receiveNoteSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Bizonylat keresése" styleClass="textField" />
-                              <TableView fx:id="receiveNoteTable" layoutY="57.0" onMouseClicked="#openCustomer" prefHeight="513.0" prefWidth="650.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
+                              <TableView fx:id="receiveNoteTable" layoutY="57.0" prefHeight="513.0" prefWidth="650.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                                  <placeholder>
                                     <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
                                  </placeholder>
