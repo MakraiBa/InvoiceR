@@ -15,7 +15,7 @@ public class Connect {
     public static List<Invoice> invoiceList = new ArrayList<>();
     public static List<ReceiveNote> receiveNoteList = new ArrayList<>();
     public static List<Customer> previewInvoiceBuyerList = new ArrayList<>();
-
+    public static List<InvoiceProduct> previewInvoiceProductList = new ArrayList<>();
 
     public Connection addNewProduct
             (String Teszor, String Id, int isService, String Name, String Comment, String ProductNr,
@@ -272,7 +272,7 @@ public class Connect {
         return getInvoices;
     }
 
-    public Connection addNewInvoiceProduct(String id, String invoiceId, String productId, String pruductName,
+    public Connection addNewInvoiceProduct(String id, String invoiceId, String productId, String productName,
                                            String productNetPrice, String productGrossPrice, String discountNetPrice,
                                            String discountGrossPrice, String productNumber, int productQuantity) {
         Connection addNewInvoiceProduct = null;
@@ -281,8 +281,8 @@ public class Connect {
             addNewInvoiceProduct = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement st;
             st = addNewInvoiceProduct.createStatement();
-            String insert = "INSERT INTO `invoiceproducts` (`id`, `invoiceid`, `productid`, `pruductname`, `productnetprice`, `productgrossprice`, `discountnetprice`, `discountgrossprice`, `productnumber`, `productquantity`) " +
-                    "VALUES ('" + id + "','" + invoiceId + "','" + productId + "','" + pruductName + "','" + productNetPrice + "','" + productGrossPrice + "','" + discountNetPrice + "','" + discountGrossPrice + "','" + productNumber + "','" + productQuantity + "')";
+            String insert = "INSERT INTO `invoiceproducts` (`id`, `invoiceid`, `productid`, `productname`, `productnetprice`, `productgrossprice`, `discountnetprice`, `discountgrossprice`, `productnumber`, `productquantity`) " +
+                    "VALUES ('" + id + "','" + invoiceId + "','" + productId + "','" + productName + "','" + productNetPrice + "','" + productGrossPrice + "','" + discountNetPrice + "','" + discountGrossPrice + "','" + productNumber + "','" + productQuantity + "')";
             st.executeUpdate(insert);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
@@ -390,6 +390,43 @@ public class Connect {
             }
         }
         return getInvoiceBuyerData;
+    }
+
+    public Connection getInvoiceProducts() {
+        Connection getInvoiceProducts = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String invoiceProductsQuery = "SELECT * FROM invoiceproducts";
+            getInvoiceProducts = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
+            Statement prdct;
+            prdct = getInvoiceProducts.createStatement();
+            ResultSet invoiceProductResult = prdct.executeQuery(invoiceProductsQuery);
+            previewInvoiceProductList.clear();
+            while (invoiceProductResult.next()) {
+                previewInvoiceProductList.add(new InvoiceProduct(
+                        invoiceProductResult.getString("id"),
+                        invoiceProductResult.getString("invoiceid"),
+                        invoiceProductResult.getString("productid"),
+                        invoiceProductResult.getString("productname"),
+                        invoiceProductResult.getString("productnetprice"),
+                        invoiceProductResult.getString("productgrossprice"),
+                        invoiceProductResult.getString("discountnetprice"),
+                        invoiceProductResult.getString("discountgrossprice"),
+                        invoiceProductResult.getString("productnumber"),
+                        invoiceProductResult.getInt("productquantity")
+                ));
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Sikertelen csatlakozás");
+            alert.setHeaderText("Az adatbázishoz való csatlakozás sikertelen");
+            alert.setContentText("Próbáld meg később!");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                System.exit(0);
+            }
+        }
+        return getInvoiceProducts;
     }
 
     public Connection reduceStockQuantity(ObservableList<Product> list) {

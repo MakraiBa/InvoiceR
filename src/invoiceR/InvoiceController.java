@@ -4,7 +4,6 @@ package invoiceR;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +24,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-
 import java.util.UUID;
 
 
@@ -38,6 +36,7 @@ public class InvoiceController implements Initializable {
 
     ObservableList<String> paymentMethodList = FXCollections.observableArrayList("Készpénz", "Átutalás - 8 nap", "Átutalás - 15 nap", "Átutalás - 30 nap", "Utánvét", "Bankkártya");
     ObservableList<Product> invoiceProductList = FXCollections.observableArrayList();
+
 
     @FXML
     private ComboBox<String> selectPaymentMethod;
@@ -197,6 +196,7 @@ public class InvoiceController implements Initializable {
 
             Stage stage = (Stage) doneInvoiceButton.getScene().getWindow();
             stage.close();
+            alertController.invoiceSuccessAlert();
 
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage returnToMain = new Stage();
@@ -217,6 +217,7 @@ public class InvoiceController implements Initializable {
     @FXML
     void changePaymentMethod(ActionEvent event) {
         String paymentString = (String) selectPaymentMethod.getSelectionModel().getSelectedItem();
+        Calculator.payment = calculator.calculateComboboxIndex(paymentString);
         paymentDate.setValue(calculator.calculateDays(calculator.calculateDaysToAdd(paymentString)));
     }
 
@@ -278,6 +279,7 @@ public class InvoiceController implements Initializable {
         sellerPhoneField.setText(Seller.defaultSeller.sellerPhone);
         sellerInvoiceBankNumberField.setText(Seller.defaultSeller.sellerBankAccount);
         selectPaymentMethod.getItems().addAll(paymentMethodList);
+        selectPaymentMethod.getSelectionModel().select(Calculator.payment);
         currentDate.setValue(LocalDate.now());
         paymentDate.setValue(calculator.calculateDays(0));
         fulfilmentDate.setValue(LocalDate.now());

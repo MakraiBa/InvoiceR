@@ -13,6 +13,7 @@ import java.util.Calendar;
 public class Calculator {
     String formatter = "#.##";
     DecimalFormat df = new DecimalFormat(formatter);
+    public static int payment = 0;
 
     public Calculator() {
     }
@@ -165,5 +166,26 @@ public class Calculator {
                 daystoadd = 0;
         }
         return daystoadd;
+    }
+
+    public int calculateComboboxIndex(String paymentString) {
+        int index = 0;
+        switch (paymentString) {
+            case "Átutalás - 8 nap":
+                index = 1;
+                break;
+            case "Átutalás - 15 nap":
+                index = 2;
+                break;
+            case "Átutalás - 30 nap":
+                index = 3;
+                break;
+            case "Utánvét":
+                index = 4;
+                break;
+            default:
+                index = 0;
+        }
+        return index;
     }
 }

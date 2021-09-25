@@ -89,5 +89,16 @@ public class AlertController {
             alert.close();
         }
     }
+
+    public void invoiceSuccessAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Siker!");
+        alert.setHeaderText("A számla sikeresen létrehozva!");
+        //alert.setContentText("Töltsd ki a szükséges mezőket!");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
 }
 

@@ -1,12 +1,25 @@
 package invoiceR;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -14,6 +27,8 @@ public class PreviewInvoiceController implements Initializable {
 
     Connect connect = new Connect();
     Seller seller = new Seller();
+
+    ObservableList<InvoiceProduct> invoiceProducts = FXCollections.observableArrayList();
 
     @FXML
     private TextField sellerInvoiceNameField;
@@ -61,34 +76,34 @@ public class PreviewInvoiceController implements Initializable {
     private TextField paymentDate;
 
     @FXML
-    private TextField fullfilmentDate;
+    private TextField fulfilmentDate;
 
     @FXML
-    private TableView<?> invoiceProductTable;
+    private TableView<InvoiceProduct> invoiceProductTable;
 
     @FXML
-    private TableColumn<?, ?> invoiceProductNameColumn;
+    private TableColumn<InvoiceProduct, String> invoiceProductNameColumn;
 
     @FXML
-    private TableColumn<?, ?> invoiceProductNetPriceColumn;
+    private TableColumn<InvoiceProduct, String> invoiceProductNetPriceColumn;
 
     @FXML
-    private TableColumn<?, ?> invoiceProductGrossPriceColumn;
+    private TableColumn<InvoiceProduct, String> invoiceProductGrossPriceColumn;
 
     @FXML
-    private TableColumn<?, ?> invoiceDiscountNetPriceColumn;
+    private TableColumn<InvoiceProduct, String> invoiceDiscountNetPriceColumn;
 
     @FXML
-    private TableColumn<?, ?> invoiceDiscountGrossPriceColumn;
+    private TableColumn<InvoiceProduct, String> invoiceDiscountGrossPriceColumn;
 
     @FXML
     private TableColumn<?, ?> invoiceProductQuantityColumn;
 
     @FXML
-    private TableColumn<?, ?> invoiceProductNumberColumn;
+    private TableColumn<InvoiceProduct, String> invoiceProductNumberColumn;
 
     @FXML
-    private TableColumn<?, ?> boughtQuantityColumn;
+    private TableColumn<InvoiceProduct, Integer> boughtQuantityColumn;
 
     @FXML
     private TextField sumGrossPriceField;
@@ -109,23 +124,50 @@ public class PreviewInvoiceController implements Initializable {
     private ImageView closeAndReturnButton;
 
     @FXML
-    void exitInvoicePreview(ActionEvent event) {
+    void invoiceCancel(MouseEvent event) throws IOException {
+        Stage stage = (Stage) closeAndReturnButton.getScene().getWindow();
+        stage.close();
 
+        Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        Stage returnToMain = new Stage();
+        returnToMain.setScene(new Scene(root));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
+        returnToMain.getIcons().add(icon);
+        returnToMain.initStyle(StageStyle.UNDECORATED);
+        returnToMain.setMaximized(true);
+        returnToMain.show();
     }
 
     @FXML
-    void invoiceCancel(MouseEvent event) {
+    void exitInvoicePreview(ActionEvent event) {
+        Stage stage = (Stage) exitInvoicePreviewButton.getScene().getWindow();
+        stage.close();
 
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage returnToMain = new Stage();
+        returnToMain.setScene(new Scene(root));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
+        returnToMain.getIcons().add(icon);
+        returnToMain.initStyle(StageStyle.UNDECORATED);
+        returnToMain.setMaximized(true);
+        returnToMain.show();
     }
 
     @FXML
     void maximizeScene(MouseEvent event) {
-
+        Stage stage = (Stage) maximizeSceneButton.getScene().getWindow();
+        stage.setMaximized(!stage.isMaximized());
     }
 
     @FXML
     void minimizeScene(MouseEvent event) {
-
+        Stage stage = (Stage) minimizeSceneButton.getScene().getWindow();
+        stage.setIconified(true);
     }
 
     @Override
@@ -159,15 +201,54 @@ public class PreviewInvoiceController implements Initializable {
 
         for (int i = 0; i < Connect.invoiceList.size(); i++) {
             if (Connect.invoiceList.get(i).getInvoiceId().equals(MainController.invoiceId)) {
-
+                selectedPaymentMethod.setText(Connect.invoiceList.get(i).paymentMethod);
+                invoiceDate.setText(Connect.invoiceList.get(i).currentDate);
+                paymentDate.setText(Connect.invoiceList.get(i).paymentDate);
+                fulfilmentDate.setText(Connect.invoiceList.get(i).fulfilmentDate);
+                sumNetPriceField.setText(String.valueOf(Connect.invoiceList.get(i).sumNetPrice));
+                sumGrossPriceField.setText(String.valueOf(Connect.invoiceList.get(i).sumGrossPrice));
             }
         }
+
+        invoiceProductNameColumn.setCellValueFactory(new PropertyValueFactory<InvoiceProduct, String>("productName"));
+        invoiceProductNetPriceColumn.setCellValueFactory(new PropertyValueFactory<InvoiceProduct, String>("productNetPrice"));
+        invoiceProductGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<InvoiceProduct, String>("productGrossPrice"));
+        invoiceDiscountNetPriceColumn.setCellValueFactory(new PropertyValueFactory<InvoiceProduct, String>("discountNetPrice"));
+        invoiceDiscountGrossPriceColumn.setCellValueFactory(new PropertyValueFactory<InvoiceProduct, String>("discountGrossPrice"));
+        invoiceProductNumberColumn.setCellValueFactory(new PropertyValueFactory<InvoiceProduct, String>("productNumber"));
+        boughtQuantityColumn.setCellValueFactory(new PropertyValueFactory<InvoiceProduct, Integer>("productQuantity"));
+        getProduct();
+        invoiceProductTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        invoiceProductTable.setItems(invoiceProducts);
     }
 
     private String setBuyerAddress(String postalcode, String city, String address,
                                    String addresstype, String housenumber,
                                    String stairway, String floor) {
         return postalcode + " " + city + ", " + address + " " + addresstype + " " + housenumber + " " + stairway + " " + floor;
+    }
+
+    public ObservableList<InvoiceProduct> getProduct() {
+        invoiceProducts.clear();
+        connect.getInvoiceProducts();
+        for (int i = 0; i < Connect.previewInvoiceProductList.size(); i++) {
+            if (Connect.previewInvoiceProductList.get(i).invoiceId.equals(MainController.invoiceId)) {
+                invoiceProducts.add(new InvoiceProduct(
+                        Connect.previewInvoiceProductList.get(i).getId(),
+                        Connect.previewInvoiceProductList.get(i).getInvoiceId(),
+                        Connect.previewInvoiceProductList.get(i).getProductId(),
+                        Connect.previewInvoiceProductList.get(i).getProductName(),
+                        Connect.previewInvoiceProductList.get(i).getProductNetPrice(),
+                        Connect.previewInvoiceProductList.get(i).getProductGrossPrice(),
+                        Connect.previewInvoiceProductList.get(i).getDiscountNetPrice(),
+                        Connect.previewInvoiceProductList.get(i).getDiscountGrossPrice(),
+                        Connect.previewInvoiceProductList.get(i).getProductNumber(),
+                        Connect.previewInvoiceProductList.get(i).getProductQuantity()
+                ));
+            }
+        }
+        return invoiceProducts;
     }
 }
 
