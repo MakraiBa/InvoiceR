@@ -3,8 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,6 +12,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="700.0" minWidth="900.0" stylesheets="@../style/mainStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="invoiceR.PreviewInvoiceController">
    <children>
@@ -26,7 +26,7 @@
                      <children>
                         <TextField fx:id="sellerInvoiceNameField" editable="false" layoutX="15.0" layoutY="30.0" promptText="Név" styleClass="textField" stylesheets="@../style/mainStyle.css" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="30.0" />
                         <TextField fx:id="sellerInvoiceVATField" editable="false" layoutX="246.0" layoutY="201.0" promptText="Adószám" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="230.0" />
-                        <TextField fx:id="sellerInvoiceAddressField" editable="false" layoutX="18.0" layoutY="84.0" promptText="Cím" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0" />
+                        <TextField fx:id="sellerInvoiceAddressField" editable="false" layoutX="18.0" layoutY="84.0" promptText="Cím" styleClass="textField" stylesheets="@../style/mainStyle.css" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0" />
                         <TextField fx:id="sellerInvoiceBankNumberField" editable="false" layoutX="137.0" layoutY="214.0" promptText="Bankszámlaszám" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="150.0" />
                         <TextField fx:id="sellerPhoneField" editable="false" layoutX="18.0" layoutY="175.0" promptText="Telefonszám" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="110.0" />
                         <TextField fx:id="sellerEmailField" editable="false" layoutX="190.0" layoutY="110.0" promptText="Email cím" styleClass="textField" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="190.0" />
@@ -52,24 +52,57 @@
                   <Insets top="20.0" />
                </VBox.margin>
                <children>
-                  <HBox AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="30.0">
+                  <HBox styleClass="textField" stylesheets="@../style/mainStyle.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="30.0">
                      <children>
-                        <ComboBox fx:id="selectPaymentMethod" minWidth="-Infinity" onAction="#changePaymentMethod" prefWidth="120.0" promptText="Fizetési mód">
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textField" text="Fizetési mód: " wrappingWidth="60.3466796875">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </Text>
+                        <TextField fx:id="selectedPaymentMethod" editable="false">
+                           <HBox.margin>
+                              <Insets right="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textField" text="Számla kelte:" wrappingWidth="60.3466796875">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </Text>
+                        <TextField fx:id="invoiceDate" editable="false">
+                           <HBox.margin>
+                              <Insets right="3.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textField" text="Fizetési dátum:" textAlignment="CENTER" wrappingWidth="60.3466796875">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="1.0" />
+                           </HBox.margin>
+                        </Text>
+                        <TextField fx:id="paymentDate" editable="false">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textField" text="Teljesítés dátuma:" textAlignment="CENTER" wrappingWidth="60.3466796875">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="fulfilmentDate" editable="false">
                            <HBox.margin>
                               <Insets right="15.0" />
                            </HBox.margin>
-                        </ComboBox>
-                        <DatePicker fx:id="currentDate" editable="false">
-                           <HBox.margin>
-                              <Insets right="15.0" />
-                           </HBox.margin>
-                        </DatePicker>
-                        <DatePicker fx:id="paymentDate">
-                           <HBox.margin>
-                              <Insets right="15.0" />
-                           </HBox.margin>
-                        </DatePicker>
-                        <DatePicker fx:id="fulfilmentDate" />
+                        </TextField>
                      </children>
                   </HBox>
                </children>

@@ -14,7 +14,7 @@ public class Connect {
     public static List<Customer> customerList = new ArrayList<>();
     public static List<Invoice> invoiceList = new ArrayList<>();
     public static List<ReceiveNote> receiveNoteList = new ArrayList<>();
-    public static List<String> previewInvoiceList = new ArrayList<>();
+    public static List<Customer> previewInvoiceBuyerList = new ArrayList<>();
 
 
     public Connection addNewProduct
@@ -339,6 +339,56 @@ public class Connect {
         return getReceiveNotes;
     }
 
+    public Connection getInvoiceBuyerData(String buyerID) {
+        Connection getInvoiceBuyerData = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String invoiceBuyerQuery = "SELECT * FROM customers WHERE `customerId` ='" + buyerID + "'";
+            getInvoiceBuyerData = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
+            Statement invcbydt;
+            invcbydt = getInvoiceBuyerData.createStatement();
+            ResultSet invoiceBuyerResult = invcbydt.executeQuery(invoiceBuyerQuery);
+            previewInvoiceBuyerList.clear();
+            while (invoiceBuyerResult.next()) {
+                previewInvoiceBuyerList.add(new Customer(
+                        invoiceBuyerResult.getString("customerId"),
+                        invoiceBuyerResult.getString("billingName"),
+                        invoiceBuyerResult.getString("billingCity"),
+                        invoiceBuyerResult.getString("billingPostalCode"),
+                        invoiceBuyerResult.getString("billingAddress"),
+                        invoiceBuyerResult.getString("billingAddressType"),
+                        invoiceBuyerResult.getString("billingHouseNumber"),
+                        invoiceBuyerResult.getString("billingStairway"),
+                        invoiceBuyerResult.getString("billingFloor"),
+                        invoiceBuyerResult.getString("deliveryCity"),
+                        invoiceBuyerResult.getString("deliveryPostalCode"),
+                        invoiceBuyerResult.getString("deliveryAddress"),
+                        invoiceBuyerResult.getString("deliveryAddressType"),
+                        invoiceBuyerResult.getString("deliveryHouseNumber"),
+                        invoiceBuyerResult.getString("deliveryStairway"),
+                        invoiceBuyerResult.getString("deliveryFloor"),
+                        invoiceBuyerResult.getString("customerVAT"),
+                        invoiceBuyerResult.getString("phone"),
+                        invoiceBuyerResult.getString("email"),
+                        invoiceBuyerResult.getString("webPage"),
+                        invoiceBuyerResult.getString("bankAccount"),
+                        invoiceBuyerResult.getString("contactComment"),
+                        hasTheSameAddress(invoiceBuyerResult.getInt("hasSameAddress")))
+                );
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Sikertelen csatlakozás");
+            alert.setHeaderText("Az adatbázishoz való csatlakozás sikertelen");
+            alert.setContentText("Próbáld meg később!");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                System.exit(0);
+            }
+        }
+        return getInvoiceBuyerData;
+    }
+
     public Connection reduceStockQuantity(ObservableList<Product> list) {
         Connection reduceStock = null;
         try {
@@ -377,45 +427,6 @@ public class Connect {
             System.out.println(e);
         }
         return increaseStock;
-    }
-
-    public Connection getInvoiceBuyerData(String buyerID) {
-        Connection getInvoiceBuyerData = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String invoiceBuyerQuery = "SELECT * FROM customers WHERE customerId=" + buyerID + "";
-            getInvoiceBuyerData = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
-            Statement invcdt;
-            invcdt = getInvoiceBuyerData.createStatement();
-            ResultSet productResult = invcdt.executeQuery(invoiceBuyerQuery);
-            while (productResult.next()) {
-                productList.add(new Product(
-                        productResult.getString("teszor"),
-                        productResult.getInt("stock"),
-                        productResult.getString("productId"),
-                        getBooleanValue(productResult.getInt("isservice")),
-                        getBooleanValue(productResult.getInt("isdiscounted")),
-                        productResult.getString("name"),
-                        productResult.getString("comment"),
-                        productResult.getString("productnumber"),
-                        productResult.getString("netprice"),
-                        productResult.getString("grossprice"),
-                        productResult.getString("purchasenetprice"),
-                        productResult.getString("purchasegrossprice"),
-                        productResult.getString("discountnetprice"),
-                        productResult.getString("dicountgrossprice")));
-            }
-        } catch (ClassNotFoundException | SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Sikertelen csatlakozás");
-            alert.setHeaderText("Az adatbázishoz való csatlakozás sikertelen");
-            alert.setContentText("Próbáld meg később!");
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                System.exit(0);
-            }
-        }
-        return getInvoiceBuyerData;
     }
 
     private boolean getBooleanValue(int inttoboolean) {

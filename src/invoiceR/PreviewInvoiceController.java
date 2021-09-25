@@ -13,13 +13,7 @@ import java.util.ResourceBundle;
 public class PreviewInvoiceController implements Initializable {
 
     Connect connect = new Connect();
-
-    String buyerInvoiceName;
-    String buyerAddress;
-    String buyerPhone;
-    String buyerBankNumber;
-    String buyerEmail;
-    String buyerVAT;
+    Seller seller = new Seller();
 
     @FXML
     private TextField sellerInvoiceNameField;
@@ -58,16 +52,16 @@ public class PreviewInvoiceController implements Initializable {
     private TextField buyerEmailField;
 
     @FXML
-    private ComboBox<?> selectPaymentMethod;
+    private TextField selectedPaymentMethod;
 
     @FXML
-    private DatePicker currentDate;
+    private TextField invoiceDate;
 
     @FXML
-    private DatePicker paymentDate;
+    private TextField paymentDate;
 
     @FXML
-    private DatePicker fulfilmentDate;
+    private TextField fulfilmentDate;
 
     @FXML
     private TableView<?> invoiceProductTable;
@@ -115,11 +109,6 @@ public class PreviewInvoiceController implements Initializable {
     private ImageView closeAndReturnButton;
 
     @FXML
-    void changePaymentMethod(ActionEvent event) {
-
-    }
-
-    @FXML
     void exitInvoicePreview(ActionEvent event) {
 
     }
@@ -139,15 +128,46 @@ public class PreviewInvoiceController implements Initializable {
 
     }
 
-    @FXML
-    void updateQuantity(ActionEvent event) {
-
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         connect.getInvoiceBuyerData(MainController.customerId);
+        connect.getInvoices();
 
+        String fullAddress = setBuyerAddress(Connect.previewInvoiceBuyerList.get(0).billingPostalCode, Connect.previewInvoiceBuyerList.get(0).billingCity,
+                Connect.previewInvoiceBuyerList.get(0).billingAddress, Connect.previewInvoiceBuyerList.get(0).billingAddressType,
+                Connect.previewInvoiceBuyerList.get(0).billingHouseNumber, Connect.previewInvoiceBuyerList.get(0).billingStairway,
+                Connect.previewInvoiceBuyerList.get(0).billingFloor);
+
+        buyerInvoiceNameField.setText(Connect.previewInvoiceBuyerList.get(0).getBillingName());
+        buyerInvoiceAddressField.setText(fullAddress);
+        buyerPhoneField.setText(Connect.previewInvoiceBuyerList.get(0).getPhone());
+        buyerInvoiceBankNumberField.setText(Connect.previewInvoiceBuyerList.get(0).getBankAccount());
+        buyerEmailField.setText(Connect.previewInvoiceBuyerList.get(0).getEmail());
+        buyerInvoiceVATField.setText(Connect.previewInvoiceBuyerList.get(0).getCustomerVAT());
+
+        sellerInvoiceNameField.setText(Seller.defaultSeller.sellerName);
+        sellerInvoiceAddressField.setText(seller.setSellerAddress(
+                Seller.defaultSeller.getSellerPostalCode(), Seller.defaultSeller.getSellerCity(),
+                Seller.defaultSeller.getSellerAddress(), Seller.defaultSeller.getSellerAddressType(),
+                Seller.defaultSeller.getSellerHouseNumber(), Seller.defaultSeller.getSellerStairway(),
+                Seller.defaultSeller.getSellerFloor()
+        ));
+        sellerEmailField.setText(Seller.defaultSeller.sellerEmail);
+        sellerInvoiceVATField.setText(Seller.defaultSeller.sellerVAT);
+        sellerPhoneField.setText(Seller.defaultSeller.sellerPhone);
+        sellerInvoiceBankNumberField.setText(Seller.defaultSeller.sellerBankAccount);
+
+        for (int i = 0; i < Connect.invoiceList.size(); i++) {
+            if (Connect.invoiceList.get(i).getInvoiceId().equals(MainController.invoiceId)) {
+ dss
+            }
+        }
+    }
+
+    private String setBuyerAddress(String postalcode, String city, String address,
+                                   String addresstype, String housenumber,
+                                   String stairway, String floor) {
+        return postalcode + " " + city + ", " + address + " " + addresstype + " " + housenumber + " " + stairway + " " + floor;
     }
 }
 
