@@ -11,10 +11,10 @@ public class AlertController {
     Connect connect = new Connect();
 
     ButtonType Cancel = new ButtonType("Mégse", ButtonBar.ButtonData.CANCEL_CLOSE);
-    ButtonType Confirm= new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+    ButtonType Confirm = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
 
     public void deleteProductConfirmAlert(String id, String name) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Biztos vagy benne?",Cancel,Confirm);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Biztos vagy benne?", Cancel, Confirm);
         alert.setTitle("Törlés megerősítése");
         alert.setHeaderText("A következő termék törlésére készülsz: " + name);
         Optional<ButtonType> result = alert.showAndWait();
@@ -26,7 +26,7 @@ public class AlertController {
     }
 
     public void deleteCustomerConfirmAlert(String id, String name) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"Biztos vagy benne?",Cancel,Confirm);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Biztos vagy benne?", Cancel, Confirm);
         alert.setTitle("Törlés megerősítése");
         alert.setHeaderText("A következő partner törlésére készülsz: " + name);
         Optional<ButtonType> result = alert.showAndWait();
@@ -69,6 +69,7 @@ public class AlertController {
             alert.close();
         }
     }
+
     public void emptyTextAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Hiba!");
@@ -79,6 +80,7 @@ public class AlertController {
             alert.close();
         }
     }
+
     public void emptyFieldAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Hiba!");
@@ -94,11 +96,11 @@ public class AlertController {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Siker!");
         alert.setHeaderText("A számla sikeresen létrehozva!");
-        //alert.setContentText("Töltsd ki a szükséges mezőket!");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             alert.close();
         }
     }
+
 }
 

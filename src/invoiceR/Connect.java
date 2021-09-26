@@ -20,15 +20,15 @@ public class Connect {
     public Connection addNewProduct
             (String Teszor, String Id, int isService, String Name, String Comment, String ProductNr,
              String productNetPrice, String productGrossPrice, String purchaseNetPrice, String purchaseGrossPrice,
-             String discountNetPrice, String discountGrossPrice, int isDiscounted) {
+             String discountNetPrice, String discountGrossPrice, int isDiscounted, String replacementID) {
         Connection newProductToAdd = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             newProductToAdd = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement add;
             add = newProductToAdd.createStatement();
-            String insert = "INSERT INTO `products` ( `productID`,`teszor`,`isservice`,`name`, `comment`, `productnumber`, `netprice`, `grossprice`, `purchasenetprice`, `purchasegrossprice`, `discountnetprice`, `dicountgrossprice`,`isdiscounted`) " +
-                    "VALUES ('" + Id + "','" + Teszor + "','" + isService + "','" + Name + "','" + Comment + "','" + ProductNr + "','" + productNetPrice + "','" + productGrossPrice + "','" + purchaseNetPrice + "','" + purchaseGrossPrice + "','" + discountNetPrice + "','" + discountGrossPrice + "','" + isDiscounted + "')";
+            String insert = "INSERT INTO `products` ( `productID`,`teszor`,`isservice`,`name`, `comment`, `productnumber`, `netprice`, `grossprice`, `purchasenetprice`, `purchasegrossprice`, `discountnetprice`, `dicountgrossprice`,`isdiscounted`,`replacementid`) " +
+                    "VALUES ('" + Id + "','" + Teszor + "','" + isService + "','" + Name + "','" + Comment + "','" + ProductNr + "','" + productNetPrice + "','" + productGrossPrice + "','" + purchaseNetPrice + "','" + purchaseGrossPrice + "','" + discountNetPrice + "','" + discountGrossPrice + "','" + isDiscounted + "','" + replacementID + "')";
 
             add.executeUpdate(insert);
         } catch (ClassNotFoundException | SQLException e) {
@@ -62,7 +62,8 @@ public class Connect {
                         productResult.getString("purchasenetprice"),
                         productResult.getString("purchasegrossprice"),
                         productResult.getString("discountnetprice"),
-                        productResult.getString("dicountgrossprice")));
+                        productResult.getString("dicountgrossprice"),
+                        productResult.getString("replacementid")));
             }
         } catch (ClassNotFoundException | SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -95,14 +96,14 @@ public class Connect {
     public Connection updateProductDetails
             (String Teszor, String Id, int isService, String Name, String Comment, String productNr,
              String productNetPrice, String productGrossPrice, String purchaseNetPrice, String purchaseGrossPrice,
-             String discountNetPrice, String discountGrossPrice, int isDiscounted) {
+             String discountNetPrice, String discountGrossPrice, int isDiscounted, String replacementId) {
         Connection productDataUpdate = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             productDataUpdate = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/invoicerdb", "admin", "admin");
             Statement st;
             st = productDataUpdate.createStatement();
-            String updatePrd = "UPDATE `products` SET `teszor` = '" + Teszor + "', `isservice` = '" + isService + "', `name` = '" + Name + "', `comment` = '" + Comment + "', `productnumber` = '" + productNr + "', `netprice` = '" + productNetPrice + "', `grossprice` = '" + productGrossPrice + "', `purchasenetprice` = '" + purchaseNetPrice + "', `purchasegrossprice` = '" + purchaseGrossPrice + "', `discountnetprice` = '" + discountNetPrice + "', `dicountgrossprice` = '" + discountGrossPrice + "', `isdiscounted` = '" + isDiscounted + "' WHERE `products`.`productID` = '" + Id + "'";
+            String updatePrd = "UPDATE `products` SET `teszor` = '" + Teszor + "', `isservice` = '" + isService + "', `name` = '" + Name + "', `comment` = '" + Comment + "', `productnumber` = '" + productNr + "', `netprice` = '" + productNetPrice + "', `grossprice` = '" + productGrossPrice + "', `purchasenetprice` = '" + purchaseNetPrice + "', `purchasegrossprice` = '" + purchaseGrossPrice + "', `discountnetprice` = '" + discountNetPrice + "', `dicountgrossprice` = '" + discountGrossPrice + "', `isdiscounted` = '" + isDiscounted + "', `replacementid` = '" + replacementId + "' WHERE `products`.`productID` = '" + Id + "'";
             st.executeUpdate(updatePrd);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);

@@ -26,6 +26,7 @@ public class EditProductController implements Initializable {
     }
 
     Double VAT;
+    String replacementID = "";
 
     Connect connect = new Connect();
     Calculator calculator = new Calculator();
@@ -33,6 +34,12 @@ public class EditProductController implements Initializable {
 
     ObservableList<String> editTypeList = FXCollections.observableArrayList("Termék", "Szolgáltatás");
     ObservableList<String> editVATTypeList = FXCollections.observableArrayList("0%", "5%", "18%", "27%");
+    ObservableList<Product> replecementProducts = FXCollections.observableArrayList();
+    ObservableList<String> replecementProductsString = FXCollections.observableArrayList();
+
+
+    @FXML
+    private ComboBox<String> replecementProduct;
 
     @FXML
     private ComboBox<String> editVATtype;
@@ -89,6 +96,12 @@ public class EditProductController implements Initializable {
     private TextField editTeszorField;
 
     @FXML
+    void changeReplacementProduct(ActionEvent event) {
+        int selectedIndex = replecementProduct.getSelectionModel().getSelectedIndex();
+        replacementID = replecementProducts.get(selectedIndex).Id;
+    }
+
+    @FXML
     void closeProductScene(ActionEvent event) throws IOException {
         Stage stage = (Stage) editCancelProductButton.getScene().getWindow();
         stage.close();
@@ -96,7 +109,7 @@ public class EditProductController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
         mainStage.getIcons().add(icon);
         mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setMaximized(true);
@@ -113,7 +126,7 @@ public class EditProductController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
-        Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
         mainStage.getIcons().add(icon);
         mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setMaximized(true);
@@ -171,7 +184,8 @@ public class EditProductController implements Initializable {
                     editProductNameField.getText(), editProductCommentField.getText(), editProductCodeField.getText(),
                     editProductNetPrice.getText(), editProductGrossPrice.getText(), editPurchaseNetPrice.getText(),
                     editPurchaseGrossPrice.getText(), editDiscountNetPrice.getText(), editDiscountGrossPrice.getText(),
-                    getDiscountedValue(editDiscountCheckbox.isSelected()));
+                    getDiscountedValue(editDiscountCheckbox.isSelected()),
+                    returnSelectedId(replecementProduct.getSelectionModel().getSelectedIndex()));
 
             Stage stage = (Stage) editDoneProductButton.getScene().getWindow();
             stage.close();
@@ -179,7 +193,7 @@ public class EditProductController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));
-            Image icon=new Image(getClass().getResourceAsStream("images/invoice.png"));
+            Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
             mainStage.getIcons().add(icon);
             mainStage.initStyle(StageStyle.UNDECORATED);
             mainStage.setMaximized(true);
@@ -228,6 +242,7 @@ public class EditProductController implements Initializable {
         if (MainController.isDiscounted) {
             editDiscountPriceHBox.setDisable(false);
         }
+        fillReplacementList();
     }
 
     private int getServiceValue(boolean isItService) {
@@ -272,5 +287,32 @@ public class EditProductController implements Initializable {
         }
     }
 
+    private void fillReplacementList() {
+        replecementProducts.clear();
+        replecementProductsString.clear();
+        connect.getProducts();
+        int index = -1;
+        String id = "";
+        for (int i = 0; i < Connect.productList.size(); i++) {
+            replecementProducts.add(new Product(Connect.productList.get(i).getId(), Connect.productList.get(i).getName(),
+                    Connect.productList.get(i).getReplacementID()));
+            replecementProductsString.add(replecementProducts.get(i).Name);
+            replecementProduct.getItems().add(replecementProductsString.get(i));
+            if (Connect.productList.get(i).getId().equals(MainController.productID)) {
+                id = Connect.productList.get(i).getReplacementID();
+            }
+        }
+        for (int j = 0; j < replecementProducts.size(); j++) {
+            if (Connect.productList.get(j).getId().equals(id)) {
+                index = j;
+            }
+        }
+        if (index >= 0) {
+            replecementProduct.getSelectionModel().select(index);
+        }
+    }
 
+    private String returnSelectedId(int index) {
+        return replecementProducts.get(index).getId();
+    }
 }

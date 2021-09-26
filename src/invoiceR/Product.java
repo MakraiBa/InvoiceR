@@ -17,6 +17,14 @@ public class Product {
     String discountNetPrice;
     String discountGrossPrice;
     int productQuantity;
+    String replacementID;
+
+    public Product(String id, String name, String replacementid) {
+        Id = id;
+        Name = name;
+        replacementID = replacementid;
+
+    }
 
     public Product(int stock, String id, boolean isService, String name, String productNr,
                    String productNetPrice, String productGrossPrice, String discountNetPrice,
@@ -40,7 +48,7 @@ public class Product {
     public Product(String teszor, int stock, String id, boolean isService, boolean isDiscounted, String name,
                    String comment, String productNr, String productNetPrice, String productGrossPrice,
                    String purchaseNetPrice, String purchaseGrossPrice,
-                   String discountNetPrice, String discountGrossPrice) {
+                   String discountNetPrice, String discountGrossPrice, String replacementID) {
         Teszor = teszor;
         Stock = stock;
         Id = id;
@@ -55,6 +63,7 @@ public class Product {
         this.purchaseGrossPrice = purchaseGrossPrice;
         this.discountNetPrice = discountNetPrice;
         this.discountGrossPrice = discountGrossPrice;
+        this.replacementID = replacementID;
     }
 
 
@@ -176,5 +185,13 @@ public class Product {
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public String getReplacementID() {
+        return replacementID;
+    }
+
+    public void setReplacementID(String replacementID) {
+        this.replacementID = replacementID;
     }
 }

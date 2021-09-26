@@ -21,16 +21,24 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 public class ProductController implements Initializable {
+
+
     double VAT = 1.27;
     boolean isService = false;
+    String replacementID = "";
 
     ObservableList<String> typeList = FXCollections.observableArrayList("Termék", "Szolgáltatás");
     ObservableList<String> VATType = FXCollections.observableArrayList("0%", "5%", "18%", "27%");
+    ObservableList<Product> replecementProducts = FXCollections.observableArrayList();
+    ObservableList<String> replecementProductsString = FXCollections.observableArrayList();
+
 
     Connect productConnect = new Connect();
     Calculator calculator = new Calculator();
     AlertController alertController = new AlertController();
 
+    @FXML
+    private ComboBox<String> replecementProduct;
 
     @FXML
     private Button cancelProductButton;
@@ -81,6 +89,12 @@ public class ProductController implements Initializable {
     private TextField TeszorField;
 
     @FXML
+    void changeReplacementProduct(ActionEvent event) {
+        int selectedIndex = replecementProduct.getSelectionModel().getSelectedIndex();
+        replacementID = replecementProducts.get(selectedIndex).Id;
+    }
+
+    @FXML
     void closeProductScene(ActionEvent event) throws IOException {
         Stage stage = (Stage) cancelProductButton.getScene().getWindow();
         stage.close();
@@ -105,7 +119,8 @@ public class ProductController implements Initializable {
             productConnect.addNewProduct(TeszorField.getText(), String.valueOf(uuid), checkIfService(isService), productNameField.getText(),
                     productCommentField.getText(), productCodeField.getText(),
                     productNetPrice.getText(), productGrossPrice.getText(), purchaseNetPrice.getText(),
-                    purchaseGrossPrice.getText(), discountNetPrice.getText(), discountGrossPrice.getText(), checkIfDiscounted());
+                    purchaseGrossPrice.getText(), discountNetPrice.getText(), discountGrossPrice.getText(),
+                    checkIfDiscounted(), replacementID);
 
             Stage stage = (Stage) doneProductButton.getScene().getWindow();
             stage.close();
@@ -123,6 +138,7 @@ public class ProductController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        fillReplacementList();
         selectType.setItems(typeList);
         VATtype.setItems(VATType);
     }
@@ -205,4 +221,17 @@ public class ProductController implements Initializable {
             return 0;
         }
     }
+
+    private void fillReplacementList() {
+        replecementProducts.clear();
+        replecementProductsString.clear();
+        productConnect.getProducts();
+        for (int i = 0; i < Connect.productList.size(); i++) {
+            replecementProducts.add(new Product(Connect.productList.get(i).getId(), Connect.productList.get(i).getName(),
+                    Connect.productList.get(i).getReplacementID()));
+            replecementProductsString.add(replecementProducts.get(i).Name);
+            replecementProduct.getItems().add(replecementProductsString.get(i));
+        }
+    }
+
 }

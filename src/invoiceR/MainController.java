@@ -578,7 +578,8 @@ public class MainController implements Initializable {
                     Connect.productList.get(i).purchaseNetPrice,
                     Connect.productList.get(i).purchaseGrossPrice,
                     Connect.productList.get(i).discountNetPrice,
-                    Connect.productList.get(i).discountGrossPrice));
+                    Connect.productList.get(i).discountGrossPrice,
+                    Connect.productList.get(i).replacementID));
         }
         return product;
     }
