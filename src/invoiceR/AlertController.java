@@ -82,9 +82,39 @@ public class AlertController {
     }
 
     public void invoiceSuccessAlert() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Siker!");
         alert.setHeaderText("A számla sikeresen létrehozva!");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
+
+    public void newProductAdded(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Siker!");
+        alert.setHeaderText("A termék sikeresen hozzáadva!");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
+
+    public void deletedProduct(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Siker!");
+        alert.setHeaderText("A termék törlésre került!");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
+
+    public void editDoneProduct(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Siker!");
+        alert.setHeaderText("A termék sikeresen módosítva!");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             alert.close();

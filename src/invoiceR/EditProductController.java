@@ -123,6 +123,8 @@ public class EditProductController implements Initializable {
         Stage stage = (Stage) deleteProductButton.getScene().getWindow();
         stage.close();
 
+        alertController.deletedProduct();
+
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(root));
@@ -179,16 +181,23 @@ public class EditProductController implements Initializable {
         if (editProductNameField.getText().isEmpty() || editProductNetPrice.getText().isEmpty() || editProductGrossPrice.getText().isEmpty()) {
             alertController.emptyTextAlert();
         } else {
+            String replacementID;
+            if (replecementProduct.getSelectionModel().getSelectedIndex() >= 0) {
+                replacementID = returnSelectedId(replecementProduct.getSelectionModel().getSelectedIndex());
+            } else {
+                replacementID = "";
+            }
             connect.updateProductDetails(editTeszorField.getText(), MainController.productID,
                     getServiceValueFromString((String) editSelectType.getSelectionModel().getSelectedItem()),
                     editProductNameField.getText(), editProductCommentField.getText(), editProductCodeField.getText(),
                     editProductNetPrice.getText(), editProductGrossPrice.getText(), editPurchaseNetPrice.getText(),
                     editPurchaseGrossPrice.getText(), editDiscountNetPrice.getText(), editDiscountGrossPrice.getText(),
-                    getDiscountedValue(editDiscountCheckbox.isSelected()),
-                    returnSelectedId(replecementProduct.getSelectionModel().getSelectedIndex()));
+                    getDiscountedValue(editDiscountCheckbox.isSelected()), replacementID);
 
             Stage stage = (Stage) editDoneProductButton.getScene().getWindow();
             stage.close();
+
+            alertController.editDoneProduct();
 
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
@@ -243,6 +252,7 @@ public class EditProductController implements Initializable {
             editDiscountPriceHBox.setDisable(false);
         }
         fillReplacementList();
+        System.out.println(replecementProduct.getSelectionModel().getSelectedIndex() + "   feewewefef");
     }
 
     private int getServiceValue(boolean isItService) {
