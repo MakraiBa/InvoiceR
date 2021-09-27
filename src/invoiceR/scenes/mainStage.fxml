@@ -133,7 +133,7 @@
                         <AnchorPane fx:id="incomingPane" prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="receiveNoteSearchField" layoutX="26.0" layoutY="16.0" prefHeight="26.0" prefWidth="247.0" promptText="Bizonylat keresése" styleClass="textField" />
-                              <TableView fx:id="receiveNoteTable" layoutY="57.0" onMouseClicked="#openReceiveNote" prefHeight="513.0" prefWidth="650.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
+                              <TableView fx:id="receiveNoteTable" layoutY="57.0" prefHeight="513.0" prefWidth="650.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0">
                                  <placeholder>
                                     <Label text="Hmmm.... Úgy tűnik, itt nincs semmi!" />
                                  </placeholder>

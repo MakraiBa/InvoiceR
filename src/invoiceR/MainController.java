@@ -463,25 +463,6 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void openReceiveNote(MouseEvent event) throws IOException {
-        ReceiveNote selectedReceiveNote = receiveNoteTable.getSelectionModel().getSelectedItem();
-        receiveNoteCustomerId = selectedReceiveNote.sellerId;
-        receiveNoteId = selectedReceiveNote.getReceiveNoteId();
-        if (event.getClickCount() == 2) {
-            Parent root = FXMLLoader.load(getClass().getResource("scenes/showReceiveNoteStage.fxml"));
-            Stage editCustomerStage = new Stage();
-            editCustomerStage.setScene(new Scene(root));
-            Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
-            editCustomerStage.getIcons().add(icon);
-            editCustomerStage.initStyle(StageStyle.UNDECORATED);
-            editCustomerStage.show();
-
-            Stage stage = (Stage) invoiceTable.getScene().getWindow();
-            stage.close();
-        }
-    }
-
-    @FXML
     void openCustomer(MouseEvent event) throws IOException {
         Customer selectedcustomer = customerTable.getSelectionModel().getSelectedItem();
         customerId = selectedcustomer.Id;

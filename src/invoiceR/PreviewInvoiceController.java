@@ -97,9 +97,6 @@ public class PreviewInvoiceController implements Initializable {
     private TableColumn<InvoiceProduct, String> invoiceDiscountGrossPriceColumn;
 
     @FXML
-    private TableColumn<?, ?> invoiceProductQuantityColumn;
-
-    @FXML
     private TableColumn<InvoiceProduct, String> invoiceProductNumberColumn;
 
     @FXML
