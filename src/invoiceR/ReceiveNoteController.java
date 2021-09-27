@@ -208,6 +208,7 @@ public class ReceiveNoteController implements Initializable {
     @FXML
     void changePaymentMethod(ActionEvent event) {
         String paymentString = (String) selectPaymentMethod.getSelectionModel().getSelectedItem();
+        Calculator.receiveNotePayment = calculator.calculateComboboxIndex(paymentString);
         paymentDate.setValue(calculator.calculateDays(calculator.calculateDaysToAdd(paymentString)));
     }
 
@@ -231,6 +232,8 @@ public class ReceiveNoteController implements Initializable {
 
             Stage stage = (Stage) doneReceiveNoteButton.getScene().getWindow();
             stage.close();
+
+            alertController.newReceiveNoteAdded();
 
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage returnToMain = new Stage();
@@ -289,6 +292,7 @@ public class ReceiveNoteController implements Initializable {
         receiveNotePhoneField.setText(Seller.defaultSeller.sellerPhone);
         receiveNoteBankNumberField.setText(Seller.defaultSeller.sellerBankAccount);
         selectPaymentMethod.setItems(paymentMethodList);
+        selectPaymentMethod.getSelectionModel().select(Calculator.receiveNotePayment);
         currentDate.setValue(LocalDate.now());
         paymentDate.setValue(calculator.calculateDays(0));
         fulfilmentDate.setValue(LocalDate.now());

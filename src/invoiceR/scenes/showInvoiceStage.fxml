@@ -80,7 +80,7 @@
                                         <Insets right="3.0" />
                                     </HBox.margin>
                                 </TextField>
-                                <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textField" text="Fizetési dátum:" textAlignment="CENTER" wrappingWidth="60.3466796875">
+                                <Text fill="#4c93d7" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textField" text="Fizetési dátuma:" textAlignment="CENTER" wrappingWidth="60.3466796875">
                                     <font>
                                         <Font size="10.0" />
                                     </font>

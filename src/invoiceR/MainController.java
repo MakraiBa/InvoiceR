@@ -72,6 +72,9 @@ public class MainController implements Initializable {
 
     public static String invoiceId;
 
+    public static String receiveNoteCustomerId;
+    public static String receiveNoteId;
+
     ObservableList<Product> product = FXCollections.observableArrayList();
     ObservableList<Customer> customer = FXCollections.observableArrayList();
     ObservableList<Invoice> invoice = FXCollections.observableArrayList();
@@ -447,6 +450,25 @@ public class MainController implements Initializable {
         invoiceId = selectedInvoice.invoiceId;
         if (event.getClickCount() == 2) {
             Parent root = FXMLLoader.load(getClass().getResource("scenes/showInvoiceStage.fxml"));
+            Stage editCustomerStage = new Stage();
+            editCustomerStage.setScene(new Scene(root));
+            Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
+            editCustomerStage.getIcons().add(icon);
+            editCustomerStage.initStyle(StageStyle.UNDECORATED);
+            editCustomerStage.show();
+
+            Stage stage = (Stage) invoiceTable.getScene().getWindow();
+            stage.close();
+        }
+    }
+
+    @FXML
+    void openReceiveNote(MouseEvent event) throws IOException {
+        ReceiveNote selectedReceiveNote = receiveNoteTable.getSelectionModel().getSelectedItem();
+        receiveNoteCustomerId = selectedReceiveNote.sellerId;
+        receiveNoteId = selectedReceiveNote.getReceiveNoteId();
+        if (event.getClickCount() == 2) {
+            Parent root = FXMLLoader.load(getClass().getResource("scenes/showReceiveNoteStage.fxml"));
             Stage editCustomerStage = new Stage();
             editCustomerStage.setScene(new Scene(root));
             Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));

@@ -13,7 +13,8 @@ import java.util.Calendar;
 public class Calculator {
     String formatter = "#.##";
     DecimalFormat df = new DecimalFormat(formatter);
-    public static int payment = 0;
+    public static int invoicePayment = 0;
+    public static int receiveNotePayment = 0;
 
     public Calculator() {
     }

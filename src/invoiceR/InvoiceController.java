@@ -217,7 +217,7 @@ public class InvoiceController implements Initializable {
     @FXML
     void changePaymentMethod(ActionEvent event) {
         String paymentString = (String) selectPaymentMethod.getSelectionModel().getSelectedItem();
-        Calculator.payment = calculator.calculateComboboxIndex(paymentString);
+        Calculator.invoicePayment = calculator.calculateComboboxIndex(paymentString);
         paymentDate.setValue(calculator.calculateDays(calculator.calculateDaysToAdd(paymentString)));
     }
 
@@ -279,7 +279,7 @@ public class InvoiceController implements Initializable {
         sellerPhoneField.setText(Seller.defaultSeller.sellerPhone);
         sellerInvoiceBankNumberField.setText(Seller.defaultSeller.sellerBankAccount);
         selectPaymentMethod.getItems().addAll(paymentMethodList);
-        selectPaymentMethod.getSelectionModel().select(Calculator.payment);
+        selectPaymentMethod.getSelectionModel().select(Calculator.invoicePayment);
         currentDate.setValue(LocalDate.now());
         paymentDate.setValue(calculator.calculateDays(0));
         fulfilmentDate.setValue(LocalDate.now());

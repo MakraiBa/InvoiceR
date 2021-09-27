@@ -153,5 +153,15 @@ public class AlertController {
         }
     }
 
+    public void newReceiveNoteAdded() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Siker!");
+        alert.setHeaderText("A bevételi bizonylat sikeresen hozzáadva!");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
+
 }
 
