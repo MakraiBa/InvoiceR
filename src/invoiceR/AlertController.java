@@ -59,17 +59,6 @@ public class AlertController {
         }
     }
 
-    public void stockAlert() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Raktárkészlet hiba");
-        alert.setHeaderText("A vásárolni kívánt mennyiség nagyobb, mint a raktárkészleten lévő mennyiség!");
-        alert.setContentText("Folytathatjuk?");
-        alert.showAndWait();
-        if (alert.getResult() == ButtonType.OK) {
-            alert.close();
-        }
-    }
-
     public void emptyTextAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Hiba!");

@@ -317,7 +317,40 @@ public class InvoiceController implements Initializable {
         int boughtQuantity = selectedproduct.productQuantity;
         if (!selectedproduct.isService) {
             if (boughtQuantity > stock) {
-                alertController.stockAlert();
+                if (!selectedproduct.replacementID.isEmpty()) {
+                    for (int i = 0; i < Connect.productList.size(); i++) {
+                        if (Connect.productList.get(i).getId().equals(selectedproduct.getReplacementID())) {
+                            if (Connect.productList.get(i).getStock() > 0) {
+                                if (stockAlert()) {
+                                    SelectProductController.addedProducts.add(
+                                            new Product(
+                                                    Connect.productList.get(i).getStock(), Connect.productList.get(i).getId(),
+                                                    Connect.productList.get(i).isService, Connect.productList.get(i).getName(),
+                                                    Connect.productList.get(i).getProductNr(), Connect.productList.get(i).getProductNetPrice(),
+                                                    Connect.productList.get(i).getProductGrossPrice(),
+                                                    Connect.productList.get(i).getDiscountNetPrice(),
+                                                    Connect.productList.get(i).getDiscountGrossPrice(), Connect.productList.get(i).getProductQuantity(),
+                                                    Connect.productList.get(i).isDiscounted(), Connect.productList.get(i).getPurchaseNetPrice(),
+                                                    Connect.productList.get(i).getProductGrossPrice(), Connect.productList.get(i).getReplacementID())
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+                invoiceProductList.clear();
+                invoiceProductList.addAll(SelectProductController.addedProducts);
+                for (int i = 0; i < invoiceProductList.size(); i++) {
+                    if (invoiceProductList.get(i).getId().equals(selectedproduct.Id)) {
+                        if (stock > 0) {
+                            invoiceProductList.get(i).setProductQuantity(stock);
+                        } else {
+                            SelectProductController.addedProducts.remove(i);
+                            invoiceProductList.remove(i);
+                        }
+                    }
+                }
+                invoiceProductTable.setItems(invoiceProductList);
             }
         }
         sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
@@ -344,5 +377,18 @@ public class InvoiceController implements Initializable {
         returnToMain.initStyle(StageStyle.UNDECORATED);
         returnToMain.setMaximized(true);
         returnToMain.show();
+    }
+
+    private boolean stockAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Raktárkészlet hiba");
+        alert.setHeaderText("A vásárolni kívánt mennyiség nagyobb, mint a raktárkészleten lévő mennyiség!");
+        alert.setContentText("Adjunk hozzá helyettesítő terméket?");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+            return true;
+        }
+        return false;
     }
 }

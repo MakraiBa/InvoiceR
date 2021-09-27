@@ -181,8 +181,9 @@ public class SelectProductController implements Initializable {
                     Connect.productList.get(i).isService, Connect.productList.get(i).Name,
                     Connect.productList.get(i).ProductNr, Connect.productList.get(i).productNetPrice,
                     Connect.productList.get(i).productGrossPrice, Connect.productList.get(i).discountNetPrice,
-                    Connect.productList.get(i).discountGrossPrice, 1, Connect.productList.get(i).isDiscounted,
-                    Connect.productList.get(i).purchaseNetPrice, Connect.productList.get(i).purchaseGrossPrice));
+                    Connect.productList.get(i).discountGrossPrice, 0, Connect.productList.get(i).isDiscounted,
+                    Connect.productList.get(i).purchaseNetPrice, Connect.productList.get(i).purchaseGrossPrice,
+                    Connect.productList.get(i).replacementID));
         }
         return productsToAdd;
     }
