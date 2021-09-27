@@ -20,6 +20,7 @@ public class AlertController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == Confirm) {
             connect.deleteProduct(id);
+            deletedProduct();
         } else {
             alert.close();
         }
@@ -31,6 +32,7 @@ public class AlertController {
         alert.setHeaderText("A következő partner törlésére készülsz: " + name);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == Confirm) {
+            deletedCustomer();
             connect.deleteCustomer(id);
         } else {
             alert.close();
@@ -91,7 +93,7 @@ public class AlertController {
         }
     }
 
-    public void newProductAdded(){
+    public void newProductAdded() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Siker!");
         alert.setHeaderText("A termék sikeresen hozzáadva!");
@@ -101,7 +103,7 @@ public class AlertController {
         }
     }
 
-    public void deletedProduct(){
+    private void deletedProduct() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Siker!");
         alert.setHeaderText("A termék törlésre került!");
@@ -111,10 +113,40 @@ public class AlertController {
         }
     }
 
-    public void editDoneProduct(){
+    public void editDoneProduct() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Siker!");
         alert.setHeaderText("A termék sikeresen módosítva!");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
+
+    public void newCustomerAdded() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Siker!");
+        alert.setHeaderText("Az ügyfél sikeresen hozzáadva!");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
+
+    private void deletedCustomer() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Siker!");
+        alert.setHeaderText("Az ügyfél törlésre került!");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
+
+    public void editDoneCustomer() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Siker!");
+        alert.setHeaderText("Az ügyfél adatai sikeresen módosítva!");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             alert.close();

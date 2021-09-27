@@ -148,6 +148,8 @@ public class EditCustomerController implements Initializable {
             Stage stage = (Stage) editCustomerDoneButton.getScene().getWindow();
             stage.close();
 
+            alert.editDoneCustomer();
+
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));

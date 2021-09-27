@@ -132,6 +132,8 @@ public class CustomerController implements Initializable {
             Stage stage = (Stage) doneCustomerButton.getScene().getWindow();
             stage.close();
 
+            alert.newCustomerAdded();
+
             Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
             Stage mainStage = new Stage();
             mainStage.setScene(new Scene(root));

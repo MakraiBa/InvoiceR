@@ -120,10 +120,9 @@ public class EditProductController implements Initializable {
     @FXML
     void deleteProduct(ActionEvent event) throws IOException {
         alertController.deleteProductConfirmAlert(MainController.productID, MainController.productName);
+
         Stage stage = (Stage) deleteProductButton.getScene().getWindow();
         stage.close();
-
-        alertController.deletedProduct();
 
         Parent root = FXMLLoader.load(getClass().getResource("scenes/mainStage.fxml"));
         Stage mainStage = new Stage();
@@ -252,7 +251,6 @@ public class EditProductController implements Initializable {
             editDiscountPriceHBox.setDisable(false);
         }
         fillReplacementList();
-        System.out.println(replecementProduct.getSelectionModel().getSelectedIndex() + "   feewewefef");
     }
 
     private int getServiceValue(boolean isItService) {
