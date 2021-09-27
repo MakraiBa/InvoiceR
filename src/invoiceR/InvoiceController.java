@@ -333,24 +333,24 @@ public class InvoiceController implements Initializable {
                                                     Connect.productList.get(i).isDiscounted(), Connect.productList.get(i).getPurchaseNetPrice(),
                                                     Connect.productList.get(i).getProductGrossPrice(), Connect.productList.get(i).getReplacementID())
                                     );
+                                    invoiceProductList.clear();
+                                    invoiceProductList.addAll(SelectProductController.addedProducts);
+                                    for (int j = 0; j < invoiceProductList.size(); j++) {
+                                        if (invoiceProductList.get(j).getId().equals(selectedproduct.Id)) {
+                                            if (stock > 0) {
+                                                invoiceProductList.get(j).setProductQuantity(stock);
+                                            } else {
+                                                SelectProductController.addedProducts.remove(j);
+                                                invoiceProductList.remove(j);
+                                            }
+                                        }
+                                    }
+                                    invoiceProductTable.setItems(invoiceProductList);
                                 }
                             }
                         }
                     }
                 }
-                invoiceProductList.clear();
-                invoiceProductList.addAll(SelectProductController.addedProducts);
-                for (int i = 0; i < invoiceProductList.size(); i++) {
-                    if (invoiceProductList.get(i).getId().equals(selectedproduct.Id)) {
-                        if (stock > 0) {
-                            invoiceProductList.get(i).setProductQuantity(stock);
-                        } else {
-                            SelectProductController.addedProducts.remove(i);
-                            invoiceProductList.remove(i);
-                        }
-                    }
-                }
-                invoiceProductTable.setItems(invoiceProductList);
             }
         }
         sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
@@ -388,7 +388,13 @@ public class InvoiceController implements Initializable {
         if (alert.getResult() == ButtonType.OK) {
             alert.close();
             return true;
+        } else {
+            Alert removedProductAlert = new Alert(Alert.AlertType.WARNING);
+            removedProductAlert.setTitle("Raktárkészlet hiba");
+            removedProductAlert.setHeaderText("A raktáron lévő termékek száma kisebb, mint a vásárolni kívánt mennyiség!");
+            removedProductAlert.setContentText("A raktárkészlet mínuszba megy át!");
+            removedProductAlert.showAndWait();
+            return false;
         }
-        return false;
     }
 }
