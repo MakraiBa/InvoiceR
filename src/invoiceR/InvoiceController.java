@@ -316,11 +316,12 @@ public class InvoiceController implements Initializable {
         int stock = selectedproduct.getStock();
         int boughtQuantity = selectedproduct.productQuantity;
         if (!selectedproduct.isService) {
-            if (boughtQuantity > stock) {
+            if (boughtQuantity > stock) {//todo: else ág - ha nincs helyettesítő termék. Ha 0 készlet, akkor visszautasítjuk a termék hozzáadását
                 if (!selectedproduct.replacementID.isEmpty()) {
                     for (int i = 0; i < Connect.productList.size(); i++) {
                         if (Connect.productList.get(i).getId().equals(selectedproduct.getReplacementID())) {
-                            if (Connect.productList.get(i).getStock() > 0) {
+                            Product replacementProduct = Connect.productList.get(i);
+                            if (replacementProduct.getStock() > 0) {
                                 if (stockAlert()) {
                                     SelectProductController.addedProducts.add(
                                             new Product(
@@ -345,14 +346,19 @@ public class InvoiceController implements Initializable {
                                             }
                                         }
                                     }
-                                    invoiceProductTable.setItems(invoiceProductList);
+
+                                } else {
+                                    //System
                                 }
+                            } else {
+                                System.out.println("a helyettesítő termék darabszáma 0");
                             }
                         }
                     }
                 }
             }
         }
+        invoiceProductTable.setItems(invoiceProductList);
         sumNetPriceField.setText(String.valueOf(calculator.setSumNetPrice(invoiceProductList)));
         sumGrossPriceField.setText(String.valueOf(calculator.setSumGrossPrice(invoiceProductList)));
     }
@@ -381,6 +387,8 @@ public class InvoiceController implements Initializable {
 
     private boolean stockAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Mégse");
+
         alert.setTitle("Raktárkészlet hiba");
         alert.setHeaderText("A vásárolni kívánt mennyiség nagyobb, mint a raktárkészleten lévő mennyiség!");
         alert.setContentText("Adjunk hozzá helyettesítő terméket?");

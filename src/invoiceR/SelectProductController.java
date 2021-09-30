@@ -28,14 +28,12 @@ import java.util.function.Predicate;
 
 public class SelectProductController implements Initializable {
 
-    private String stageToOpen;
-
+    public static ArrayList<Product> addedProducts = new ArrayList<>();
     Connect connect = new Connect();
     AlertController alertController = new AlertController();
 
     ObservableList<Product> productsToAdd = FXCollections.observableArrayList();
-    public static ArrayList<Product> addedProducts = new ArrayList<>();
-
+    private String stageToOpen;
     @FXML
     private TextField productSearchField;
 
@@ -131,6 +129,13 @@ public class SelectProductController implements Initializable {
                 if (addedProducts.get(i).Id.equals(selectedproduct.Id)) {
                     addProduct = false;
                 }
+            }
+            if (selectedproduct.getStock() == 0) {
+                if (selectedproduct.getReplacementID().trim().isEmpty()) {
+                    System.out.println("nincs helyettesítő");
+                    alertController.noStockNoReplacementAlert();
+                }
+                addProduct = false;
             }
             if (addProduct) {
                 addedProducts.add(selectedproduct);

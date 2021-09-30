@@ -10,11 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c96ce97b-4699-4db6-b534-044c8ff107ba" name="Default Changelist" comment="hozzáadva a producttable">
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/PreviewInvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/PreviewInvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/PreviewReceiveNoteController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/mainStage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/scenes/mainStage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/scenes/showReceiveNoteStage.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/AlertController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/AlertController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/AlertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/AlertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/invoiceR/SelectProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/SelectProductController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
