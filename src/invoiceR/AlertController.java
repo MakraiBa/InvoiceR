@@ -167,7 +167,7 @@ public class AlertController {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Hiba!");
         alert.setHeaderText("Sajnos a vásárlás nem teljesíthető");
-        alert.setContentText("Nincs elég termék, és helyettesítő termék sincs");
+        alert.setContentText("Nincs termék raktáron, és helyettesítő termék sincs");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             alert.close();

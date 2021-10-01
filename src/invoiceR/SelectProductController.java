@@ -132,10 +132,17 @@ public class SelectProductController implements Initializable {
             }
             if (selectedproduct.getStock() == 0) {
                 if (selectedproduct.getReplacementID().trim().isEmpty()) {
-                    System.out.println("nincs helyettesítő");
                     alertController.noStockNoReplacementAlert();
+                    addProduct = false;
+                } else {
+                    System.out.println(selectedproduct.getReplacementID());
+                    for (int i = 0; i < Connect.productList.size(); i++) {
+                        if (selectedproduct.getReplacementID().equals(Connect.productList.get(i).getId())) {
+                            selectedproduct = Connect.productList.get(i);
+                        }
+                    }
                 }
-                addProduct = false;
+
             }
             if (addProduct) {
                 addedProducts.add(selectedproduct);

@@ -317,7 +317,8 @@ public class InvoiceController implements Initializable {
         int boughtQuantity = selectedproduct.productQuantity;
         if (!selectedproduct.isService) {
             if (boughtQuantity > stock) {//todo: else ág - ha nincs helyettesítő termék. Ha 0 készlet, akkor visszautasítjuk a termék hozzáadását
-                if (!selectedproduct.replacementID.isEmpty()) {
+             System.out.println("többet akar venni");
+                if (!selectedproduct.replacementID.trim().isEmpty()) {
                     for (int i = 0; i < Connect.productList.size(); i++) {
                         if (Connect.productList.get(i).getId().equals(selectedproduct.getReplacementID())) {
                             Product replacementProduct = Connect.productList.get(i);
