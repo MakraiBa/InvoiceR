@@ -1,6 +1,7 @@
 package invoiceR;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 
@@ -166,7 +167,7 @@ public class AlertController {
     public void noStockNoReplacementAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Hiba!");
-        alert.setHeaderText("Sajnos a vásárlás nem teljesíthető");
+        alert.setHeaderText("A vásárlás nem teljesíthető");
         alert.setContentText("Nincs termék raktáron, és helyettesítő termék sincs");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
@@ -174,5 +175,51 @@ public class AlertController {
         }
     }
 
+    public void alreadyAddedProductAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Figyelem!");
+        alert.setHeaderText("A termék már hozzá lett adva a számlához");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
+
+    public boolean stockAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Mégse");
+
+        alert.setTitle("Raktárkészlet hiba");
+        alert.setHeaderText("A vásárolni kívánt mennyiség nagyobb, mint a raktárkészleten lévő mennyiség!");
+        alert.setContentText("Adjunk hozzá helyettesítő terméket?");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+            return true;
+        } else {
+            Alert removedProductAlert = new Alert(Alert.AlertType.WARNING);
+            removedProductAlert.setTitle("Raktárkészlet hiba");
+            removedProductAlert.setHeaderText("A raktáron lévő termékek száma kisebb, mint a vásárolni kívánt mennyiség!");
+            removedProductAlert.showAndWait();
+            return false;
+        }
+    }
+
+    public boolean stockReplacementAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Mégse");
+
+        alert.setTitle("Raktárkészlet hiba");
+        alert.setHeaderText("A vásárolni kívánt mennyiség nagyobb, mint a raktárkészleten lévő mennyiség!");
+        alert.setContentText("Adjunk hozzá helyettesítő terméket?");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+            return true;
+        }
+        return false;
+    }
 }
+
+
 

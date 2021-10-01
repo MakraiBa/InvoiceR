@@ -125,24 +125,29 @@ public class SelectProductController implements Initializable {
         if (event.getClickCount() == 2) {
             Stage stage = (Stage) productSearchField.getScene().getWindow();
             stage.close();
-            for (int i = 0; i < addedProducts.size(); i++) {
-                if (addedProducts.get(i).Id.equals(selectedproduct.Id)) {
-                    addProduct = false;
-                }
-            }
             if (selectedproduct.getStock() == 0) {
                 if (selectedproduct.getReplacementID().trim().isEmpty()) {
                     alertController.noStockNoReplacementAlert();
                     addProduct = false;
                 } else {
-                    System.out.println(selectedproduct.getReplacementID());
-                    for (int i = 0; i < Connect.productList.size(); i++) {
-                        if (selectedproduct.getReplacementID().equals(Connect.productList.get(i).getId())) {
-                            selectedproduct = Connect.productList.get(i);
+                    Product helperProduct = getHelperProduct(selectedproduct);
+                    if (helperProduct.getStock() == 0) {
+                        alertController.noStockNoReplacementAlert();
+                        addProduct = false;
+                    } else {
+                        if (alertController.stockReplacementAlert()) {
+                            selectedproduct = helperProduct;
+                        } else {
+                            addProduct = false;
                         }
                     }
                 }
-
+            }
+            for (int i = 0; i < addedProducts.size(); i++) {
+                if (addedProducts.get(i).Id.equals(selectedproduct.Id)) {
+                    addProduct = false;
+                    alertController.alreadyAddedProductAlert();
+                }
             }
             if (addProduct) {
                 addedProducts.add(selectedproduct);
@@ -163,6 +168,7 @@ public class SelectProductController implements Initializable {
             invoiceStage.show();
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -212,5 +218,15 @@ public class SelectProductController implements Initializable {
                 product.getName().toLowerCase().contains(searchText.toLowerCase()) ||
                         product.getProductNetPrice().toLowerCase().contains(searchText.toLowerCase()) ||
                         product.getProductGrossPrice().toLowerCase().contains(searchText.toLowerCase());
+    }
+
+    private Product getHelperProduct(Product product) {
+        Product replacementProduct = null;
+        for (int i = 0; i < Connect.productList.size(); i++) {
+            if (product.getReplacementID().equals(Connect.productList.get(i).getId())) {
+                replacementProduct = Connect.productList.get(i);
+            }
+        }
+        return replacementProduct;
     }
 }

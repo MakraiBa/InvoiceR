@@ -317,13 +317,12 @@ public class InvoiceController implements Initializable {
         int boughtQuantity = selectedproduct.productQuantity;
         if (!selectedproduct.isService) {
             if (boughtQuantity > stock) {//todo: else ág - ha nincs helyettesítő termék. Ha 0 készlet, akkor visszautasítjuk a termék hozzáadását
-             System.out.println("többet akar venni");
                 if (!selectedproduct.replacementID.trim().isEmpty()) {
                     for (int i = 0; i < Connect.productList.size(); i++) {
                         if (Connect.productList.get(i).getId().equals(selectedproduct.getReplacementID())) {
                             Product replacementProduct = Connect.productList.get(i);
                             if (replacementProduct.getStock() > 0) {
-                                if (stockAlert()) {
+                                if (alertController.stockAlert()) {
                                     SelectProductController.addedProducts.add(
                                             new Product(
                                                     Connect.productList.get(i).getStock(), Connect.productList.get(i).getId(),
@@ -384,26 +383,5 @@ public class InvoiceController implements Initializable {
         returnToMain.initStyle(StageStyle.UNDECORATED);
         returnToMain.setMaximized(true);
         returnToMain.show();
-    }
-
-    private boolean stockAlert() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Mégse");
-
-        alert.setTitle("Raktárkészlet hiba");
-        alert.setHeaderText("A vásárolni kívánt mennyiség nagyobb, mint a raktárkészleten lévő mennyiség!");
-        alert.setContentText("Adjunk hozzá helyettesítő terméket?");
-        alert.showAndWait();
-        if (alert.getResult() == ButtonType.OK) {
-            alert.close();
-            return true;
-        } else {
-            Alert removedProductAlert = new Alert(Alert.AlertType.WARNING);
-            removedProductAlert.setTitle("Raktárkészlet hiba");
-            removedProductAlert.setHeaderText("A raktáron lévő termékek száma kisebb, mint a vásárolni kívánt mennyiség!");
-            removedProductAlert.setContentText("A raktárkészlet mínuszba megy át!");
-            removedProductAlert.showAndWait();
-            return false;
-        }
     }
 }
