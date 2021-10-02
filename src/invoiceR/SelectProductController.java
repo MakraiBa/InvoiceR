@@ -85,38 +85,48 @@ public class SelectProductController implements Initializable {
     void selectProductViaButton(ActionEvent event) throws IOException {
         boolean addProduct = true;
         Product selectedproduct = productTable.getSelectionModel().getSelectedItem();
-        try {
-            for (int i = 0; i < addedProducts.size(); i++) {
-                if (addedProducts.get(i).Id.equals(selectedproduct.Id)) {
+        if (selectedproduct.getStock() == 0) {
+            if (selectedproduct.getReplacementID().trim().isEmpty()) {
+                alertController.noStockNoReplacementAlert();
+                addProduct = false;
+            } else {
+                Product helperProduct = getHelperProduct(selectedproduct);
+                if (helperProduct.getStock() == 0) {
+                    alertController.noStockNoReplacementAlert();
                     addProduct = false;
+                } else {
+                    if (alertController.stockReplacementAlert()) {
+                        selectedproduct = helperProduct;
+                    } else {
+                        addProduct = false;
+                    }
                 }
             }
-            if (addProduct) {
-                addedProducts.add(selectedproduct);
-            }
-
-            if (MainController.isItInvoice) {
-                stageToOpen = "scenes/invoiceStage.fxml";
-            } else {
-                stageToOpen = "scenes/receiveNoteStage.fxml";
-            }
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(stageToOpen));
-            Parent root = loader.load();
-            Stage invoiceStage = new Stage();
-            invoiceStage.setScene(new Scene(root));
-            Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
-            invoiceStage.getIcons().add(icon);
-            invoiceStage.initStyle(StageStyle.UNDECORATED);
-            invoiceStage.show();
-
-            Stage stage = (Stage) productSearchField.getScene().getWindow();
-            stage.close();
-
-        } catch (Exception e) {
-            alertController.noProductSelectedAlert();
         }
-    }
+        for (int i = 0; i < addedProducts.size(); i++) {
+            if (addedProducts.get(i).Id.equals(selectedproduct.Id)) {
+                addProduct = false;
+                alertController.alreadyAddedProductAlert();
+            }
+        }
+        if (addProduct) {
+            addedProducts.add(selectedproduct);
+        }
 
+        if (MainController.isItInvoice) {
+            stageToOpen = "scenes/invoiceStage.fxml";
+        } else {
+            stageToOpen = "scenes/receiveNoteStage.fxml";
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(stageToOpen));
+        Parent root = loader.load();
+        Stage invoiceStage = new Stage();
+        invoiceStage.setScene(new Scene(root));
+        Image icon = new Image(getClass().getResourceAsStream("images/invoice.png"));
+        invoiceStage.getIcons().add(icon);
+        invoiceStage.initStyle(StageStyle.UNDECORATED);
+        invoiceStage.show();
+    }
 
     @FXML
     void addProduct(MouseEvent event) throws IOException {
