@@ -191,7 +191,6 @@ public class InvoiceController implements Initializable {
                         SelectProductController.addedProducts.get(i).getProductNetPrice(), SelectProductController.addedProducts.get(i).getProductGrossPrice(),
                         SelectProductController.addedProducts.get(i).getDiscountNetPrice(), SelectProductController.addedProducts.get(i).getDiscountGrossPrice(),
                         SelectProductController.addedProducts.get(i).getProductNr(), invoiceProductList.get(i).getProductQuantity());
-                System.out.println();
             }
 
             Stage stage = (Stage) doneInvoiceButton.getScene().getWindow();
@@ -318,6 +317,8 @@ public class InvoiceController implements Initializable {
         if (!selectedproduct.isService) {
             if (boughtQuantity > stock) {//todo: else ág - ha nincs helyettesítő termék. Ha 0 készlet, akkor visszautasítjuk a termék hozzáadását
                 if (!selectedproduct.replacementID.trim().isEmpty()) {
+                    int productQuantityWantToBuy = selectedproduct.getProductQuantity();
+                    int remainingQuantity = productQuantityWantToBuy - stock;
                     for (int i = 0; i < Connect.productList.size(); i++) {
                         if (Connect.productList.get(i).getId().equals(selectedproduct.getReplacementID())) {
                             Product replacementProduct = Connect.productList.get(i);
@@ -330,30 +331,16 @@ public class InvoiceController implements Initializable {
                                                     Connect.productList.get(i).getProductNr(), Connect.productList.get(i).getProductNetPrice(),
                                                     Connect.productList.get(i).getProductGrossPrice(),
                                                     Connect.productList.get(i).getDiscountNetPrice(),
-                                                    Connect.productList.get(i).getDiscountGrossPrice(), Connect.productList.get(i).getProductQuantity(),
+                                                    Connect.productList.get(i).getDiscountGrossPrice(), /*Connect.productList.get(i).getProductQuantity()*/48,
                                                     Connect.productList.get(i).isDiscounted(), Connect.productList.get(i).getPurchaseNetPrice(),
                                                     Connect.productList.get(i).getProductGrossPrice(), Connect.productList.get(i).getReplacementID())
                                     );
-                                    invoiceProductList.clear();
-                                    invoiceProductList.addAll(SelectProductController.addedProducts);
-                                    for (int j = 0; j < invoiceProductList.size(); j++) {
-                                        if (invoiceProductList.get(j).getId().equals(selectedproduct.Id)) {
-                                            if (stock > 0) {
-                                                invoiceProductList.get(j).setProductQuantity(stock);
-                                            } else {
-                                                SelectProductController.addedProducts.remove(j);
-                                                invoiceProductList.remove(j);
-                                            }
-                                        }
-                                    }
-
-                                } else {
-                                    //System
                                 }
                             } else {
-                                System.out.println("a helyettesítő termék darabszáma 0");
+                              alertController.notEnoughProductAlert(stock);
                             }
                         }
+                        fillList(selectedproduct, stock);
                     }
                 }
             }
@@ -383,5 +370,20 @@ public class InvoiceController implements Initializable {
         returnToMain.initStyle(StageStyle.UNDECORATED);
         returnToMain.setMaximized(true);
         returnToMain.show();
+    }
+
+    private void fillList(Product selectedproduct, int stock) {
+        invoiceProductList.clear();
+        invoiceProductList.addAll(SelectProductController.addedProducts);
+        for (int j = 0; j < invoiceProductList.size(); j++) {
+            if (invoiceProductList.get(j).getId().equals(selectedproduct.Id)) {
+                if (stock > 0) {
+                    invoiceProductList.get(j).setProductQuantity(stock);
+                } else {
+                    SelectProductController.addedProducts.remove(j);
+                    invoiceProductList.remove(j);
+                }
+            }
+        }
     }
 }

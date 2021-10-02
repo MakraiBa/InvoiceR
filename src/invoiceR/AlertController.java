@@ -208,9 +208,8 @@ public class AlertController {
     public boolean stockReplacementAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Mégse");
-
         alert.setTitle("Raktárkészlet hiba");
-        alert.setHeaderText("A vásárolni kívánt mennyiség nagyobb, mint a raktárkészleten lévő mennyiség!");
+        alert.setHeaderText("A vásárolni kívánt termék nem elérhető.");
         alert.setContentText("Adjunk hozzá helyettesítő terméket?");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
@@ -218,6 +217,17 @@ public class AlertController {
             return true;
         }
         return false;
+    }
+
+    public void notEnoughProductAlert(int stock) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Hiba!");
+        alert.setHeaderText("A vásárlás részben teljesíthető");
+        alert.setContentText("Csak " + stock + " darab termék érhető el, és helyettesítő termék sincs");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
     }
 }
 

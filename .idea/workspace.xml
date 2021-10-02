@@ -15,7 +15,6 @@
       <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/SelectProductController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/AlertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/AlertController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/SelectProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/SelectProductController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
