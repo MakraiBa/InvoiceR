@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class Calculator {
+    AlertController alertController = new AlertController();
     String formatter = "#.##";
     DecimalFormat df = new DecimalFormat(formatter);
     public static int invoicePayment = 0;
@@ -188,5 +189,13 @@ public class Calculator {
                 index = 0;
         }
         return index;
+    }
+
+    public int remainingStock(int stock, int replacement) {
+        if (stock > replacement) {
+            return replacement;
+        }
+        alertController.remainderAlert(stock);
+        return stock;
     }
 }

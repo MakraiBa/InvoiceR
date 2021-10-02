@@ -321,6 +321,7 @@ public class InvoiceController implements Initializable {
                     int remainingQuantity = productQuantityWantToBuy - stock;
                     for (int i = 0; i < Connect.productList.size(); i++) {
                         if (Connect.productList.get(i).getId().equals(selectedproduct.getReplacementID())) {
+                            int replacementQuantity = Connect.productList.get(i).getStock();
                             Product replacementProduct = Connect.productList.get(i);
                             if (replacementProduct.getStock() > 0) {
                                 if (alertController.stockAlert()) {
@@ -331,18 +332,19 @@ public class InvoiceController implements Initializable {
                                                     Connect.productList.get(i).getProductNr(), Connect.productList.get(i).getProductNetPrice(),
                                                     Connect.productList.get(i).getProductGrossPrice(),
                                                     Connect.productList.get(i).getDiscountNetPrice(),
-                                                    Connect.productList.get(i).getDiscountGrossPrice(), /*Connect.productList.get(i).getProductQuantity()*/48,
+                                                    Connect.productList.get(i).getDiscountGrossPrice(), calculator.remainingStock(replacementQuantity, remainingQuantity),
                                                     Connect.productList.get(i).isDiscounted(), Connect.productList.get(i).getPurchaseNetPrice(),
                                                     Connect.productList.get(i).getProductGrossPrice(), Connect.productList.get(i).getReplacementID())
                                     );
                                 }
                             } else {
-                              alertController.notEnoughProductAlert(stock);
+                                alertController.notEnoughProductAlert(stock);
                             }
                         }
-                        fillList(selectedproduct, stock);
                     }
                 }
+                alertController.notEnoughProductAlert(stock);
+                fillList(selectedproduct, stock);
             }
         }
         invoiceProductTable.setItems(invoiceProductList);

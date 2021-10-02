@@ -223,7 +223,18 @@ public class AlertController {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Hiba!");
         alert.setHeaderText("A vásárlás részben teljesíthető");
-        alert.setContentText("Csak " + stock + " darab termék érhető el, és helyettesítő termék sincs");
+        alert.setContentText("Csak " + stock + " darab termék érhető el, és nincs helyettesítő termék.");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
+
+    public void remainderAlert(int stock) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Figyelem!");
+        alert.setHeaderText("Nincs elég raktárkészlet");
+        alert.setContentText("A helyettesítő termékből " + stock + " darab lesz hozzáadva.");
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             alert.close();
