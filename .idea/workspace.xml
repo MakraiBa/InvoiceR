@@ -9,13 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c96ce97b-4699-4db6-b534-044c8ff107ba" name="Default Changelist" comment="f">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/InvR/invoiceR/InvoiceController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/AlertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/AlertController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/Calculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/invoiceR/InvoiceController.java" afterDir="false" />
-    </list>
+    <list default="true" id="c96ce97b-4699-4db6-b534-044c8ff107ba" name="Default Changelist" comment="f" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

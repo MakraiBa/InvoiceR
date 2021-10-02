@@ -343,7 +343,7 @@ public class InvoiceController implements Initializable {
                         }
                     }
                 }
-                alertController.notEnoughProductAlert(stock);
+                alertController.notEnoughStock(stock);
                 fillList(selectedproduct, stock);
             }
         }

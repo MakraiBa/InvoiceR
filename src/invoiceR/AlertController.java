@@ -240,6 +240,17 @@ public class AlertController {
             alert.close();
         }
     }
+
+    public void notEnoughStock(int stock) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Figyelem!");
+        alert.setHeaderText("Nincs elég raktárkészlet");
+        alert.setContentText("Csa " + stock + " darab lesz hozzáadva a számlához");
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+    }
 }
 
 
